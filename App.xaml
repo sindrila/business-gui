@@ -1,0 +1,19 @@
+﻿<Application x:Class="bussiness_social_media.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:bussiness_social_media"
+             xmlns:viewModel="clr-namespace:bussiness_social_media.MVVM.ViewModel"
+             xmlns:view="clr-namespace:bussiness_social_media.MVVM.View">
+    <Application.Resources>
+        <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+            <view:HomeView/>
+
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:CreateNewBusinessViewModel}">
+            <view:CreateNewBusinessView/>
+
+        </DataTemplate>
+
+    </Application.Resources>
+</Application>
