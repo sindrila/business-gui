@@ -1,6 +1,6 @@
-﻿using bussiness_social_media.Core;
+﻿using bussiness_social_media.Services;
+using bussiness_social_media.Core;
 using bussiness_social_media.MVVM.ViewModel;
-using bussiness_social_media.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System.Configuration;
 using System.Data;
@@ -14,7 +14,9 @@ namespace bussiness_social_media
     public partial class App : Application
     {
         private readonly ServiceProvider _serviceProvider;
+        
 
+        
         public App()
         {
             IServiceCollection services = new ServiceCollection();
@@ -23,12 +25,16 @@ namespace bussiness_social_media
             {
                 DataContext = provider.GetRequiredService<MainViewModel>()
             }) ;
+
+            services.AddSingleton<IBusinessService, BusinessService>();
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<HomeViewModel>();
             services.AddSingleton<CreateNewBusinessViewModel>();
+            services.AddSingleton<UserManagedBusinessPagesViewModel>();
             services.AddSingleton<INavigationService, NavigationService>();
+            services.AddSingleton <BusinessProfileViewModel>();
 
-            // look into delagate
+            // TODO: this is delegation, find out what it is, or don't touch this code
             services.AddSingleton<Func<Type, ViewModel>>(serviceProvider => viewModelType => (ViewModel)serviceProvider.GetRequiredService(viewModelType));
 
             _serviceProvider = services.BuildServiceProvider();

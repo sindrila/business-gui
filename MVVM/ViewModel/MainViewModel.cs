@@ -30,6 +30,7 @@ namespace bussiness_social_media.MVVM.ViewModel
             Navigation = navigationService;
             NavigateToHomeCommand = new RelayCommand(o => { Navigation.NavigateTo<HomeViewModel>(); }, o => true);
             NavigateToCreateNewBusinessViewCommand = new RelayCommand(o => { Navigation.NavigateTo<CreateNewBusinessViewModel>(); }, o => true);
+            Navigation.NavigateTo<HomeViewModel>();
         }
     }
 }

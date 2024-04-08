@@ -6,17 +6,49 @@
              xmlns:view="clr-namespace:bussiness_social_media.MVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             Background="AliceBlue">
-    <Grid>
-        <StackPanel VerticalAlignment="Center"
-                    HorizontalAlignment="Center">
+             Background="White">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <TextBlock Text="Business Pages"
+                       FontSize="25" 
+                       Foreground="#3F3F3F"
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Top"
+                       Margin="0,10,0,0"
+                       FontWeight="Bold"/>
 
-            <TextBlock Text="Home"
-                       Foreground="Plum"
-                       FontSize="25"/>
-            <Button Content="Create business"
-                    Height="25"
-                    Command="{Binding NavigateToCreateNewBusinessViewCommand}"/>
-        </StackPanel>
-    </Grid>
+            <ItemsControl ItemsSource="{Binding Businesses}" Margin="0,60,0,0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" 
+                                   HorizontalAlignment="Center"></WrapPanel
+                                   >
+                    </ItemsPanelTemplate>
+                        
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="{x:Type ContentPresenter}">
+                        <Setter Property="Margin" Value="10"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button 
+                                Margin="10" BorderThickness="0" >
+                            <StackPanel>
+                                <Ellipse Width="50" Height="50">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{Binding Logo}"/>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+
+                                <TextBlock Text="{Binding Name}" FontSize="20" HorizontalAlignment="Center"/>
+                                <Image Source="{Binding Banner}" Height="100" />
+                            </StackPanel>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </ScrollViewer>
 </UserControl>
