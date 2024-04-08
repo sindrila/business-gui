@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Navigation;
 
 namespace bussiness_social_media.MVVM.ViewModel
 {
@@ -12,8 +13,9 @@ namespace bussiness_social_media.MVVM.ViewModel
     {
         private INavigationService _navigation;
         private IBusinessService _businessService;
-
+        
         public ObservableCollection<Business> Businesses { get; set; }
+        public Business currentBusiness;
 
         public INavigationService NavigationService
         {
@@ -27,9 +29,16 @@ namespace bussiness_social_media.MVVM.ViewModel
 
         public BusinessProfileViewModel(INavigationService navigationService, IBusinessService businessService)
         {
-            NavigationService = navigationService;
+            _navigation = navigationService;
             _businessService = businessService;
-           
+            changeCurrrentBusiness();
+            // In this class, you have the instance of the business in currentBusiness. You can access it in the BusinessProfileView.xaml but I'm not quite sure how. Ask chat gpt, I tried something and I do not know if it works. It is currently 00:47 and I want to go to sleep
         }
+
+        public void changeCurrrentBusiness()
+        {
+            currentBusiness = _businessService.GetBusinessById(_navigation.BusinessId);
+        }
+
     }
 }

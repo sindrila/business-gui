@@ -15,5 +15,15 @@
 
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModel:UserManagedBusinessPagesViewModel}">
+            <view:UserManagedBusinessPagesView/>
+
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:BusinessProfileViewModel}">
+            <view:BusinessProfileView/>
+
+        </DataTemplate>
+
     </Application.Resources>
 </Application>

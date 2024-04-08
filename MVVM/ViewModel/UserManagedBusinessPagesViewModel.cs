@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace bussiness_social_media.MVVM.ViewModel
 {
-    class UserManagedBusinessPagesViewModel
+    class UserManagedBusinessPagesViewModel : Core.ViewModel
     {
         private readonly IBusinessService _businessService;
 

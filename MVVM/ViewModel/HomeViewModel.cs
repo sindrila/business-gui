@@ -26,15 +26,36 @@ namespace bussiness_social_media.MVVM.ViewModel
         }
        
         public RelayCommand NavigateToCreateNewBusinessViewCommand { get; set; }
-        //public RelayCommand NavigateToBusinessProfileViewCommand { get; set; }
-       
+        public RelayCommand NavigateToBusinessProfileViewCommand { get; set; }
+
         public HomeViewModel(INavigationService navigationService, IBusinessService businessService)
         {
             NavigationService = navigationService;
             NavigateToCreateNewBusinessViewCommand = new RelayCommand(o => { NavigationService.NavigateTo<CreateNewBusinessViewModel>(); }, o => true);
+
             //NavigateToBusinessProfileViewCommand = new RelayCommand(o => { NavigationService.NavigateTo<BusinessProfileViewModel>(); }, o => true);
+            NavigateToBusinessProfileViewCommand = new RelayCommand(o =>
+            {
+                if (o is Business business)
+                {
+                    NavigationService.BusinessId = business.Id; // Assuming your Business model has an Id property
+                    NavigationService.NavigateTo<BusinessProfileViewModel>();
+                }
+            }, o => true);
             _businessService = businessService;
             Businesses = new ObservableCollection<Business>(businessService.GetAllBusinesses());
+        }
+
+        private void NavigateToBusinessProfile(object parameter)
+        {
+            if (parameter is int businessId )
+            {
+
+                NavigationService.NavigateTo<CreateNewBusinessViewModel>();
+                NavigationService.BusinessId = businessId;
+
+                NavigateToCreateNewBusinessViewCommand = new RelayCommand(o => { NavigationService.NavigateTo<CreateNewBusinessViewModel>(); }, o => true);
+            }
         }
     }
 }

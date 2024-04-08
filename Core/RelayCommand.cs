@@ -1,4 +1,5 @@
-﻿using System;
+﻿using bussiness_social_media.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace bussiness_social_media.Core
     {
         private readonly Predicate<object> _canExecute;
         private readonly Action<object> _execute;
-
+        public NavigationParameters Parameters { get; set; }
         public RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
             _canExecute = canExecute;
