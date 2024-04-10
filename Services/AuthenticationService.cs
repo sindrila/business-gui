@@ -1,3 +1,4 @@
+using bussiness_social_media.MVVM.Model.Repository;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -5,48 +6,47 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-/*
+
 namespace business_social_media.Services
 {
 
-    
 
-    public class AuthenticationService 
+
+    public class AuthenticationService
     {
-        private List<Account> users;
-        private Dictionary<string, DateTime> sessionTokens;
-        private bool isLoggedIn;
-        private Timer logoutTimer;
-        private int sessionDurationSeconds;
-        private string filePath = "acounts.json";
+        private IUserRepository _userRepository;
+        private Dictionary<string, DateTime> _sessionTokens;
+        private bool _isLoggedIn;
+        private Timer _logoutTimer;
+        private int _sessionDurationSeconds;
 
-        public AuthenticationService()
+
+        public AuthenticationService(IUserRepository userRepository)
         {
-            sessionTokens = new Dictionary<string, DateTime>();
-            isLoggedIn = false;
-            logoutTimer = new Timer(LogoutUser, null, Timeout.Infinite, Timeout.Infinite);
-            sessionDurationSeconds = 10;
-
+            _userRepository = userRepository;
+            _sessionTokens = new Dictionary<string, DateTime>();
+            _isLoggedIn = false;
+            _logoutTimer = new Timer(LogoutUser, null, Timeout.Infinite, Timeout.Infinite);
+            _sessionDurationSeconds = 10;
         }
 
         public bool getIsLoggedIn()
         {
-            return isLoggedIn;
+            return _isLoggedIn;
         }
-
 
         public bool AuthenticateUser(string username, string password)
         {
-            password = GetMd5Hash(password);
+            password = _userRepository.GetMd5Hash(password);
 
-            if (IsCredentialsValid(username, password))
+            if (_userRepository.IsCredentialsValid(username, password))
             {
                 string sessionToken = Guid.NewGuid().ToString();
-                sessionTokens.Add(sessionToken, DateTime.Now);
-                isLoggedIn = true;
+                _sessionTokens.Add(sessionToken, DateTime.Now);
+                _isLoggedIn = true;
 
                 // Start the logout timer
-                logoutTimer.Change(sessionDurationSeconds * 1000, Timeout.Infinite);
+                _logoutTimer.Change(_sessionDurationSeconds * 1000, Timeout.Infinite);
                 return true;
             }
             else
@@ -57,16 +57,15 @@ namespace business_social_media.Services
 
         private void LogoutUser(object state)
         {
-            isLoggedIn = false;
+            _isLoggedIn = false;
             Console.WriteLine("\nUser has been logged out automatically.");
         }
 
         public List<Account> GetAllUsers()
         {
-            return users;
+            return _userRepository.GetAllUsers();
         }
 
     }
-
 }
-*/
+
