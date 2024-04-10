@@ -15,7 +15,7 @@ namespace bussiness_social_media.MVVM.ViewModel
         private INavigationService _navigation;
         private IBusinessService _businessService;
         
-        public Business currentBusiness;
+        private Business _currentBusiness;
 
         public INavigationService Navigation
         {
@@ -24,6 +24,16 @@ namespace bussiness_social_media.MVVM.ViewModel
             {
                 _navigation = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public Business CurrentBusiness 
+        {
+            get => _currentBusiness;
+            set
+            {
+                _currentBusiness = value;
+                OnPropertyChanged(nameof(CurrentBusiness)); 
             }
         }
 
@@ -45,7 +55,7 @@ namespace bussiness_social_media.MVVM.ViewModel
 
         public void changeCurrrentBusiness()
         {
-            currentBusiness = _businessService.GetBusinessById(_navigation.BusinessId);
+            CurrentBusiness = _businessService.GetBusinessById(_navigation.BusinessId);
         }
 
     }
