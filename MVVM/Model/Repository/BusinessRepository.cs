@@ -119,6 +119,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
         {
             Business business = new Business(_getNextId(), name, description, category, logo, banner, phoneNumber, email, website, address, createdAt);
             _businesses.Add(business);
+            SaveBusinessesToXml();
         }
 
         public void UpdateBusiness(Business business)
@@ -135,6 +136,8 @@ namespace bussiness_social_media.MVVM.Model.Repository
                 existingBusiness.SetEmail(business.Email);
                 existingBusiness.SetWebsite(business.Website);
                 existingBusiness.SetAddress(business.Address);
+                SaveBusinessesToXml();
+
 
             }
         }
@@ -145,6 +148,8 @@ namespace bussiness_social_media.MVVM.Model.Repository
             if (businessToRemove != null)
             {
                 _businesses.Remove(businessToRemove);
+                SaveBusinessesToXml();
+
             }
         }
 
