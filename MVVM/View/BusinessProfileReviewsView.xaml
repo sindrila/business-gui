@@ -15,6 +15,25 @@
     </UserControl.Resources>
 
     <Grid>
+
+		<TabPanel>
+			<Label Content="{Binding currentBusiness.Name}"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Height="30"/>
+			<Button Content="Posts"
+					Height="25"
+					Command="{Binding Path=NavigateToPostsCommand}"/>
+			<Button Content="Reviews"
+					Height="25"
+					Command="{Binding Path=NavigateToReviewsCommand}"/>
+			<!--<Button Content="Contact"
+                        Height="25"
+                        Command="{Binding Path=NavigateToContactCommand}"/>-->
+			<Button Content="About"
+                        Height="25"
+                        Command="{Binding Path=NavigateToAboutCommand}"/>
+		</TabPanel>
         <StackPanel VerticalAlignment="Center"
                     HorizontalAlignment="Center">
             <Ellipse Width="100" Height="100">
