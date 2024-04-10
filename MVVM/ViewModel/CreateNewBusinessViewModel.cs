@@ -23,6 +23,8 @@ namespace bussiness_social_media.MVVM.ViewModel
         private string _emailAddress;
         private string _website;
         private string _address;
+        private string _logo;
+        private string _banner;
 
         public string BusinessName
         {
@@ -94,6 +96,26 @@ namespace bussiness_social_media.MVVM.ViewModel
             }
         }
 
+        public string Banner
+        {
+            get => _banner;
+            set
+            {
+                _banner = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Logo
+        {
+            get => _logo;
+            set
+            {
+                _logo = value;
+                OnPropertyChanged();
+            }
+        }
+
         public RelayCommand CreateBusinessCommand { get; set; }
 
         public INavigationService NavigationService
@@ -113,10 +135,14 @@ namespace bussiness_social_media.MVVM.ViewModel
         {
             NavigationService = navigationService;
             NavigateToHomeViewModelCommand = new RelayCommand(o => { NavigationService.NavigateTo<HomeViewModel>(); }, o => true);
-            AddLogoCommand = new RelayCommand(o => { ExecuteAddPicture(); } , o => true);
-            AddBannerCommand = new RelayCommand(o => { ExecuteAddPicture(); }, o => true);
+            AddLogoCommand = new RelayCommand(o => { ExecuteAddLogo(); } , o => true);
+            AddBannerCommand = new RelayCommand(o => { ExecuteAddBanner(); }, o => true);
+            _businessService = businessService;
+
+            NavigateToHomeViewModelCommand = new RelayCommand(o => { NavigationService.NavigateTo<HomeViewModel>(); }, o => true);
+            CreateBusinessCommand = new RelayCommand(CreateBusiness, CanCreateBusiness);
         }
-        private String ExecuteAddPicture()
+        private void ExecuteAddLogo()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image Files (*.jpg; *.jpeg; *.png;)|*.jpg; *.jpeg; *.png; |All Files (*.*)|*.*";
@@ -124,21 +150,28 @@ namespace bussiness_social_media.MVVM.ViewModel
             if (result == true)
             {
                 string filename = openFileDialog.FileName;
-                MessageBox.Show(filename);
-                return filename;
+                Logo = filename;
             }
-            else { return null; }
-
-            _businessService = businessService;
             
-            NavigateToHomeViewModelCommand = new RelayCommand(o => { NavigationService.NavigateTo<HomeViewModel>(); }, o => true);
-            CreateBusinessCommand = new RelayCommand(CreateBusiness, CanCreateBusiness);
+        }
+        private void ExecuteAddBanner()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files (*.jpg; *.jpeg; *.png;)|*.jpg; *.jpeg; *.png; |All Files (*.*)|*.*";
+            bool? result = openFileDialog.ShowDialog();
+            if (result == true)
+            {
+                string filename = openFileDialog.FileName;
+             
+                Banner =   filename;
+            }
         }
 
         private void CreateBusiness(object parameter)
         {
-            _businessService.AddBusiness(BusinessName, BusinessDescription, BusinessCategory, "", "", PhoneNumber, EmailAddress, Website, Address, DateTime.Now);
+            _businessService.AddBusiness(BusinessName, BusinessDescription, BusinessCategory, Logo, Banner, PhoneNumber, EmailAddress, Website, Address, DateTime.Now);
             _navigationService.NavigateTo<HomeViewModel>();
+            
         }
         
         private bool CanCreateBusiness(object parameter)
