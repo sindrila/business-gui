@@ -20,9 +20,22 @@
 
         </DataTemplate>
 
+
         <DataTemplate DataType="{x:Type viewModel:BusinessProfileViewModel}">
             <view:BusinessProfileView/>
 
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:BusinessProfileReviewsViewModel}">
+            <view:BusinessProfileReviewsView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:BusinessProfileAboutViewModel}">
+            <view:BusinessProfileAboutView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:BusinessProfileContactViewModel}">
+            <view:BusinessProfileContactView/>
         </DataTemplate>
 
     </Application.Resources>
