@@ -1,5 +1,6 @@
 
 using System;
+using System.IO;
 
 namespace bussiness_social_media.Services
 {
@@ -35,9 +36,18 @@ namespace bussiness_social_media.Services
                 string description = "A cool business doing cool things!";
                 string category = categories[_random.Next(categories.Length)];
 
+                string binDirectory = "\\bin";
+                string basePath = AppDomain.CurrentDomain.BaseDirectory;
+                string pathUntilBin;
+
+
+                int index = basePath.IndexOf(binDirectory);
+                pathUntilBin = basePath.Substring(0, index);
+
                 // Placeholder values for logo, banner, etc.
-                string logo = $"C:\\Users\\Alex\\source\\repos\\gui\\bussiness-social-media\\Assets\\Images\\scat{i + 1}.jpg";
-                string banner = $"C:\\Users\\Alex\\source\\repos\\gui\\bussiness-social-media\\Assets\\Images\\banner{i + 1}.jpg";
+                string logo = Path.Combine(pathUntilBin, $"Assets\\Images\\scat{i + 1}.jpg");
+                string banner = Path.Combine(pathUntilBin, $"Assets\\Images\\banner{i + 1}.jpg");
+
                 string phoneNumber = GenerateRandomPhoneNumber();
                 string email = $"business{i}@example.com";
                 string website = $"http://{name.Replace(' ', '-')}.com";
