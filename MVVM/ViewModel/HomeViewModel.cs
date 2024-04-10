@@ -14,7 +14,13 @@ namespace bussiness_social_media.MVVM.ViewModel
     {
         private INavigationService _navigation;
         private IBusinessService _businessService;
-        public ObservableCollection<Business> Businesses { get; set; }
+        public ObservableCollection<Business> Businesses
+        {
+            get
+            {
+                return new ObservableCollection<Business>(_businessService.GetAllBusinesses());
+            }
+        }
         public INavigationService NavigationService
         {
             get => _navigation;
@@ -24,7 +30,7 @@ namespace bussiness_social_media.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-       
+        
         public RelayCommand NavigateToCreateNewBusinessViewCommand { get; set; }
         public RelayCommand NavigateToBusinessProfileViewCommand { get; set; }
 
@@ -38,12 +44,12 @@ namespace bussiness_social_media.MVVM.ViewModel
             {
                 if (o is Business business)
                 {
-                    NavigationService.BusinessId = business.Id; // Assuming your Business model has an Id property
+                    NavigationService.BusinessId = business.Id; 
                     NavigationService.NavigateTo<BusinessProfileViewModel>();
                 }
             }, o => true);
             _businessService = businessService;
-            Businesses = new ObservableCollection<Business>(businessService.GetAllBusinesses());
+            
         }
 
         private void NavigateToBusinessProfile(object parameter)

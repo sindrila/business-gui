@@ -37,6 +37,12 @@ namespace bussiness_social_media
             // Pass xmlFilePath to your BusinessRepository constructor
             services.AddSingleton<IBusinessRepository>(provider => new BusinessRepository(xmlFilePath));
 
+            services.AddSingleton <BusinessProfileViewModel>();
+            services.AddSingleton<BusinessProfileReviewsViewModel>();
+            services.AddSingleton<BusinessProfileContactViewModel>();
+            services.AddSingleton<BusinessProfileAboutViewModel>();
+
+
             // Delegation
             services.AddSingleton<Func<Type, ViewModel>>(serviceProvider => viewModelType => (ViewModel)serviceProvider.GetRequiredService(viewModelType));
 
