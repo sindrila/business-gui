@@ -2,11 +2,12 @@
 using bussiness_social_media.Core;
 using bussiness_social_media.MVVM.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
-using System;
+using System.IO;
 using System.Configuration;
 using System.Data;
 using System.Windows;
 using bussiness_social_media.MVVM.Model.Repository;
+using System.Reflection.PortableExecutable;
 
 namespace bussiness_social_media
 {
@@ -20,6 +21,12 @@ namespace bussiness_social_media
 
             // Read XML file path from configuration
             string xmlFilePath = ConfigurationManager.AppSettings["XmlFilePath"];
+            string binDirectory = "\\bin";
+            string basePath = AppDomain.CurrentDomain.BaseDirectory;
+            string pathUntilBin;
+            int index = basePath.IndexOf(binDirectory);
+            pathUntilBin = basePath.Substring(0, index);
+            xmlFilePath = Path.Combine(pathUntilBin, xmlFilePath);
 
             services.AddSingleton<MainWindow>(provider => new MainWindow
             {
