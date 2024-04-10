@@ -23,6 +23,7 @@ namespace bussiness_social_media.MVVM.View
         public BusinessProfileAboutView()
         {
             InitializeComponent();
+            
         }
     }
 }

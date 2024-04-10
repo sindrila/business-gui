@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:bussiness_social_media.MVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             Background="Red">
+             Background="#FFC0AAAA">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -33,5 +33,17 @@
                         Height="25"
                         Command="{Binding Path=NavigateToAboutCommand}"/>
         </TabPanel>
+        <Label Content="Phone&#xD;&#xA;" HorizontalAlignment="Left" Margin="510,10,0,0" Grid.Row="1" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        <Label Content="Category&#xD;&#xA;" HorizontalAlignment="Left" Margin="510,65,0,0" Grid.Row="1" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        <Label Content="Address" HorizontalAlignment="Left" Margin="510,120,0,0" Grid.Row="1" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        <Label Content="Email&#xD;&#xA;" HorizontalAlignment="Left" Margin="510,175,0,0" Grid.Row="1" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        <Label Content="Website" HorizontalAlignment="Left" Margin="510,230,0,0" Grid.Row="1" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        <Label Content="Date of page creation" HorizontalAlignment="Left" Margin="510,285,0,0" Grid.Row="1" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
+        <Label Name="PhoneLable"  Content="" HorizontalAlignment="Left" Margin="560,35,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Name="CategoryLable" Content="" HorizontalAlignment="Left" Margin="560,90,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Name="AddressLable" Content="" HorizontalAlignment="Left" Margin="560,145,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Name="EmailLable" Content="" HorizontalAlignment="Left" Margin="560,200,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Name="WebsiteLable" Content="" HorizontalAlignment="Left" Margin="560,255,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Label Name="CreationDateLable" Content="" HorizontalAlignment="Left" Margin="560,310,0,0" Grid.Row="1" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>
