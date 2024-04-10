@@ -12,7 +12,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
     {
         List<Business> GetAllBusinesses();
         Business GetBusinessById(int id);
-        void AddBusiness(string name, string description, string category, string logo, string banner, string phoneNumber, string email, string website, string address, DateTime createdAt);
+        void AddBusiness(string name, string description, string category, string logo, string banner, string phoneNumber, string email, string website, string address, DateTime createdAt, List<string> managerUsernames);
         void UpdateBusiness(Business business);
         void DeleteBusiness(int id);
         List<Business> SearchBusinesses(string keyword);
@@ -68,8 +68,9 @@ namespace bussiness_social_media.MVVM.Model.Repository
                 string email = $"business{i}@example.com";
                 string website = $"http://{name.Replace(' ', '-')}.com";
                 string address = "123 Main St., Anytown, CA";
+                List<string> managerUsernames = new List<string> { "admin" };
 
-                AddBusiness(name, description, category, logo, banner, phoneNumber, email, website, address, DateTime.Now);
+                AddBusiness(name, description, category, logo, banner, phoneNumber, email, website, address, DateTime.Now, managerUsernames);
             }
         }
 
@@ -115,9 +116,9 @@ namespace bussiness_social_media.MVVM.Model.Repository
             return _businesses.FirstOrDefault(b => b.Id == id);
         }
 
-        public void AddBusiness(string name, string description, string category, string logo, string banner, string phoneNumber, string email, string website, string address, DateTime createdAt)
+        public void AddBusiness(string name, string description, string category, string logo, string banner, string phoneNumber, string email, string website, string address, DateTime createdAt, List<string> managerUsernames)
         {
-            Business business = new Business(_getNextId(), name, description, category, logo, banner, phoneNumber, email, website, address, createdAt);
+            Business business = new Business(_getNextId(), name, description, category, logo, banner, phoneNumber, email, website, address, createdAt, managerUsernames);
             _businesses.Add(business);
             SaveBusinessesToXml();
         }
@@ -136,9 +137,14 @@ namespace bussiness_social_media.MVVM.Model.Repository
                 existingBusiness.SetEmail(business.Email);
                 existingBusiness.SetWebsite(business.Website);
                 existingBusiness.SetAddress(business.Address);
+<<<<<<< Updated upstream
                 SaveBusinessesToXml();
 
 
+=======
+                existingBusiness.SetManagerUsernames(business.ManagerUsernames);
+                SaveBusinessesToXml();
+>>>>>>> Stashed changes
             }
         }
 
@@ -149,7 +155,10 @@ namespace bussiness_social_media.MVVM.Model.Repository
             {
                 _businesses.Remove(businessToRemove);
                 SaveBusinessesToXml();
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
             }
         }
 
