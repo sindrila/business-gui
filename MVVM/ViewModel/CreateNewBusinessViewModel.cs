@@ -163,15 +163,17 @@ namespace bussiness_social_media.MVVM.ViewModel
             {
                 string filename = openFileDialog.FileName;
              
-                Banner =   filename;
+                Banner = filename;
             }
         }
-
+        
         private void CreateBusiness(object parameter)
         {
-            _businessService.AddBusiness(BusinessName, BusinessDescription, BusinessCategory, Logo, Banner, PhoneNumber, EmailAddress, Website, Address, DateTime.Now);
+            //TO DO: ADD USERNAME OF THE USER THAT CREATED THE BUSINESS TO THE managerUsernames array in the bussines
+            List<string> managerUsernames = new List<string> { "admin" };
+            _businessService.AddBusiness(BusinessName, BusinessDescription, BusinessCategory, Logo, Banner, PhoneNumber, EmailAddress, Website, Address, DateTime.Now, managerUsernames);
             _navigationService.NavigateTo<HomeViewModel>();
-            
+          
         }
         
         private bool CanCreateBusiness(object parameter)

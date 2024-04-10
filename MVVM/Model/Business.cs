@@ -33,6 +33,8 @@ public class Business : IXmlSerializable
     private string _address;
     [XmlElement("_createdAt")]
     private DateTime _createdAt;
+    [XmlElement("_managerUsernames")]
+    private List<string> _managerUsernames = new List<string>();
 
     public int Id => _id;
     public string Name => _name;
@@ -46,11 +48,13 @@ public class Business : IXmlSerializable
     public string Address => _address;
     public DateTime CreatedAt => _createdAt;
 
+    public List<string> ManagerUsernames => _managerUsernames;
+
     public Business()
     {
 
     }
-    public Business(int id, string name, string description, string category, string logo, string banner, string phoneNumber, string email, string website, string address, DateTime createdAt)
+    public Business(int id, string name, string description, string category, string logo, string banner, string phoneNumber, string email, string website, string address, DateTime createdAt, List<string> managerUsernames)
     {
         _id = id;
         _name = name;
@@ -63,6 +67,7 @@ public class Business : IXmlSerializable
         _website = website;
         _address = address;
         _createdAt = createdAt;
+        _managerUsernames = managerUsernames;
     }
 
     public void SetName(string name) => _name = name;
@@ -75,6 +80,13 @@ public class Business : IXmlSerializable
     public void SetWebsite(string website) => _website = website;
     public void SetAddress(string address) => _address = address;
     public void SetCreatedAt(DateTime createdAt) => _createdAt = createdAt;
+
+    public void SetManagerUsernames(List<string> managerUsernames) => _managerUsernames = managerUsernames;
+
+    public void addManager(string managerUsername)
+    {
+        _managerUsernames.Add(managerUsername);
+    }
 
     public override string ToString()
     {
@@ -117,6 +129,19 @@ public class Business : IXmlSerializable
         _address = reader.ReadElementString("_address");
         _createdAt = DateTime.Parse(reader.ReadElementString("_createdAt"));
 
+        reader.ReadStartElement("_managerUsernames");
+        while (reader.NodeType != XmlNodeType.EndElement)
+        {
+            if (reader.NodeType == XmlNodeType.Element && reader.LocalName == "username")
+            {
+                _managerUsernames.Add(reader.ReadElementString("username"));
+            }
+            else
+            {
+                reader.Read();
+            }
+        }
+
         reader.ReadEndElement(); // Move past the </Business> element
     }
 
@@ -130,15 +155,21 @@ public class Business : IXmlSerializable
         writer.WriteElementString("_name", _name);
         writer.WriteElementString("_description", _description);
         writer.WriteElementString("_category", _category);
-        writer.WriteElementString("_logo", _logo);
-        writer.WriteElementString("_banner", _banner);
+        writer.WriteElementString("_logo", _logoShort);
+        writer.WriteElementString("_banner", _bannerShort);
         writer.WriteElementString("_phoneNumber", _phoneNumber);
         writer.WriteElementString("_email", _email);
         writer.WriteElementString("_website", _website);
         writer.WriteElementString("_address", _address);
         writer.WriteElementString("_createdAt", _createdAt.ToString());
+        writer.WriteStartElement("_managerUsernames");
+        foreach (string username in _managerUsernames)
+        {
+            writer.WriteElementString("username", username);
+        }
+        writer.WriteEndElement(); // End the _managerUsernames element
 
-      
+
     }
 
 }
