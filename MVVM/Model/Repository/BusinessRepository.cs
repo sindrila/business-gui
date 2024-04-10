@@ -33,9 +33,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
         {
             _xmlFilePath = xmlFilePath;
             _businesses = new List<Business>();
-            generate10RandomBusineses();
             LoadBusinessesFromXml();
-            SaveBusinessesToXml();
         }
 
         ~BusinessRepository()
