@@ -24,6 +24,7 @@ public class Review
 		_dateOfCreeation = dateOfCreeation;
 		_adminComment = adminComment;
 	}
+	public Review() { this._id = this.GetReviewId() + 1; }
 	public int GetRating() { return _rating; }
 	public int GetReviewId() { return _id; }
 	public string GetComment(){ return _comment; }
@@ -31,5 +32,7 @@ public class Review
 	public string GetImagePath() { return _iamgePath;}
 	public string GetDateOfCreation() { return _dateOfCreeation.ToString();}
 	public void SetAdminComment(Comment comment) { this._adminComment = comment; }
-
+	 public void SetBusinessId(int businessId) { _businessId = businessId;}
+	public void SetRating(int rating) {  _rating = rating; }
+	public void SetComment(string comment) { _comment = comment;}
 }
