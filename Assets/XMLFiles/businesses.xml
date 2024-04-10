@@ -5,8 +5,8 @@
     <_name>Super Solutions</_name>
     <_description>A cool business doing cool things!</_description>
     <_category>Retail</_category>
-    <_logo>C:\Users\Maric Razvan\OneDrive\Desktop\ISS\business-gui\Assets\Images\scat1.jpg</_logo>
-    <_banner>C:\Users\Maric Razvan\OneDrive\Desktop\ISS\business-gui\Assets\Images\banner1.jpg</_banner>
+    <_logo>Assets\Images\scat1.jpg</_logo>
+    <_banner>Assets\Images\banner1.jpg</_banner>
     <_phoneNumber>601-347-9728</_phoneNumber>
     <_email>business0@example.com</_email>
     <_website>http://Super-Solutions.com</_website>
@@ -18,8 +18,8 @@
     <_name>Super Inc.</_name>
     <_description>A cool business doing cool things!</_description>
     <_category>Food</_category>
-    <_logo>C:\Users\Alex\source\repos\gui\bussiness-social-media\Assets\Images\scat2.jpg</_logo>
-    <_banner>C:\Users\Alex\source\repos\gui\bussiness-social-media\Assets\Images\banner2.jpg</_banner>
+    <_logo>Assets\Images\scat2.jpg</_logo>
+    <_banner>Assets\Images\banner2.jpg</_banner>
     <_phoneNumber>620-312-7380</_phoneNumber>
     <_email>business1@example.com</_email>
     <_website>http://Super-Inc..com</_website>
@@ -31,8 +31,8 @@
     <_name>Awesome Co.</_name>
     <_description>A cool business doing cool things!</_description>
     <_category>Food</_category>
-    <_logo>C:\Users\Alex\source\repos\gui\bussiness-social-media\Assets\Images\scat3.jpg</_logo>
-    <_banner>C:\Users\Alex\source\repos\gui\bussiness-social-media\Assets\Images\banner3.jpg</_banner>
+    <_logo>Assets\Images\scat3.jpg</_logo>
+    <_banner>Assets\Images\banner3.jpg</_banner>
     <_phoneNumber>745-585-8537</_phoneNumber>
     <_email>business2@example.com</_email>
     <_website>http://Awesome-Co..com</_website>
@@ -44,8 +44,8 @@
     <_name>The Inc.</_name>
     <_description>A cool business doing cool things!</_description>
     <_category>Services</_category>
-    <_logo>C:\Users\Alex\source\repos\gui\bussiness-social-media\Assets\Images\scat4.jpg</_logo>
-    <_banner>C:\Users\Alex\source\repos\gui\bussiness-social-media\Assets\Images\banner4.jpg</_banner>
+    <_logo>Assets\Images\scat4.jpg</_logo>
+    <_banner>Assets\Images\banner4.jpg</_banner>
     <_phoneNumber>765-679-4786</_phoneNumber>
     <_email>business3@example.com</_email>
     <_website>http://The-Inc..com</_website>
@@ -57,8 +57,8 @@
     <_name>Awesome Co.</_name>
     <_description>A cool business doing cool things!</_description>
     <_category>Food</_category>
-    <_logo>C:\Users\Alex\source\repos\gui\bussiness-social-media\Assets\Images\scat5.jpg</_logo>
-    <_banner>C:\Users\Alex\source\repos\gui\bussiness-social-media\Assets\Images\banner5.jpg</_banner>
+    <_logo>Assets\Images\scat5.jpg</_logo>
+    <_banner>Assets\Images\banner5.jpg</_banner>
     <_phoneNumber>112-401-3651</_phoneNumber>
     <_email>business4@example.com</_email>
     <_website>http://Awesome-Co..com</_website>
@@ -70,8 +70,8 @@
     <_name>Awesome Hub</_name>
     <_description>A cool business doing cool things!</_description>
     <_category>Tech</_category>
-    <_logo>C:\Users\Alex\source\repos\gui\bussiness-social-media\Assets\Images\scat6.jpg</_logo>
-    <_banner>C:\Users\Alex\source\repos\gui\bussiness-social-media\Assets\Images\banner6.jpg</_banner>
+    <_logo>Assets\Images\scat6.jpg</_logo>
+    <_banner>Assets\Images\banner6.jpg</_banner>
     <_phoneNumber>267-254-4562</_phoneNumber>
     <_email>business5@example.com</_email>
     <_website>http://Awesome-Hub.com</_website>
@@ -83,8 +83,8 @@
     <_name>Super Solutions</_name>
     <_description>A cool business doing cool things!</_description>
     <_category>Tech</_category>
-    <_logo>C:\Users\Alex\source\repos\gui\bussiness-social-media\Assets\Images\scat7.jpg</_logo>
-    <_banner>C:\Users\Alex\source\repos\gui\bussiness-social-media\Assets\Images\banner7.jpg</_banner>
+    <_logo>Assets\Images\scat7.jpg</_logo>
+    <_banner>Assets\Images\banner7.jpg</_banner>
     <_phoneNumber>126-831-7303</_phoneNumber>
     <_email>business6@example.com</_email>
     <_website>http://Super-Solutions.com</_website>
@@ -96,8 +96,8 @@
     <_name>The Hub</_name>
     <_description>A cool business doing cool things!</_description>
     <_category>Tech</_category>
-    <_logo>C:\Users\Alex\source\repos\gui\bussiness-social-media\Assets\Images\scat8.jpg</_logo>
-    <_banner>C:\Users\Alex\source\repos\gui\bussiness-social-media\Assets\Images\banner8.jpg</_banner>
+    <_logo>Images\scat8.jpg</_logo>
+    <_banner>Assets\Images\banner8.jpg</_banner>
     <_phoneNumber>295-532-9661</_phoneNumber>
     <_email>business7@example.com</_email>
     <_website>http://The-Hub.com</_website>
@@ -109,8 +109,8 @@
     <_name>Modern Hub</_name>
     <_description>A cool business doing cool things!</_description>
     <_category>Food</_category>
-    <_logo>C:\Users\Alex\source\repos\gui\bussiness-social-media\Assets\Images\scat9.jpg</_logo>
-    <_banner>C:\Users\Alex\source\repos\gui\bussiness-social-media\Assets\Images\banner9.jpg</_banner>
+    <_logo>Assets\Images\scat9.jpg</_logo>
+    <_banner>Assets\Images\banner9.jpg</_banner>
     <_phoneNumber>287-244-6368</_phoneNumber>
     <_email>business8@example.com</_email>
     <_website>http://Modern-Hub.com</_website>
@@ -122,8 +122,8 @@
     <_name>Awesome Co.</_name>
     <_description>A cool business doing cool things!</_description>
     <_category>Services</_category>
-    <_logo>C:\Users\Alex\source\repos\gui\bussiness-social-media\Assets\Images\scat10.jpg</_logo>
-    <_banner>C:\Users\Alex\source\repos\gui\bussiness-social-media\Assets\Images\banner10.jpg</_banner>
+    <_logo>Assets\Images\scat10.jpg</_logo>
+    <_banner>Assets\Images\banner10.jpg</_banner>
     <_phoneNumber>161-349-9872</_phoneNumber>
     <_email>business9@example.com</_email>
     <_website>http://Awesome-Co..com</_website>
