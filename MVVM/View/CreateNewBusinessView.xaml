@@ -196,12 +196,16 @@
                 <Button Content="Add logo"
              Grid.Row="3"
              Grid.Column="0"
-             Width="100"/>
+             Width="100"
+             Command="{Binding AddLogoCommand}"
+                        />
 
                 <Button Content="Add banner"
              Grid.Row="3"
              Grid.Column="1"
-             Width="100"/>
+             Width="100"
+             Command="{Binding AddBannerCommand}"
+                        />
             </Grid>
             <Button Content="Create" Height="25" Margin="0,15,0,0" 
                     Command="{Binding CreateBusinessCommand}"/>

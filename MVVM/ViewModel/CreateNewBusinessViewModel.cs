@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Input;
+using Microsoft.Win32;
+using System.Windows;
 namespace bussiness_social_media.MVVM.ViewModel
 {
     public class CreateNewBusinessViewModel : Core.ViewModel
@@ -104,10 +106,29 @@ namespace bussiness_social_media.MVVM.ViewModel
             }
         }
 
+        public ICommand AddLogoCommand { get; private set; }
+        public ICommand AddBannerCommand {  get; private set; }
         public RelayCommand NavigateToHomeViewModelCommand { get; set; }
         public CreateNewBusinessViewModel(INavigationService navigationService, IBusinessService businessService)
         {
             NavigationService = navigationService;
+            NavigateToHomeViewModelCommand = new RelayCommand(o => { NavigationService.NavigateTo<HomeViewModel>(); }, o => true);
+            AddLogoCommand = new RelayCommand(o => { ExecuteAddPicture(); } , o => true);
+            AddBannerCommand = new RelayCommand(o => { ExecuteAddPicture(); }, o => true);
+        }
+        private String ExecuteAddPicture()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files (*.jpg; *.jpeg; *.png;)|*.jpg; *.jpeg; *.png; |All Files (*.*)|*.*";
+            bool? result = openFileDialog.ShowDialog();
+            if (result == true)
+            {
+                string filename = openFileDialog.FileName;
+                MessageBox.Show(filename);
+                return filename;
+            }
+            else { return null; }
+
             _businessService = businessService;
             
             NavigateToHomeViewModelCommand = new RelayCommand(o => { NavigationService.NavigateTo<HomeViewModel>(); }, o => true);
@@ -118,7 +139,6 @@ namespace bussiness_social_media.MVVM.ViewModel
         {
             _businessService.AddBusiness(BusinessName, BusinessDescription, BusinessCategory, "", "", PhoneNumber, EmailAddress, Website, Address, DateTime.Now);
             _navigationService.NavigateTo<HomeViewModel>();
-            
         }
         
         private bool CanCreateBusiness(object parameter)
