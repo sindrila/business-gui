@@ -11,12 +11,13 @@
 	
     <Grid>
 
-        <!--<Grid.RowDefinitions>
+        <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition/>
-        </Grid.RowDefinitions>-->
+        </Grid.RowDefinitions>
 
-        <TabPanel>
+        <TabPanel
+            Grid.Row="0">
             <Label Content="{Binding currentBusiness.Name}" 
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Top"
@@ -27,15 +28,16 @@
                 <Button Content="Reviews"
                         Height="25"
                         Command="{Binding Path=NavigateToReviewsCommand}"/>
-            <Button Content="Contact"
+            <!--<Button Content="Contact"
                         Height="25"
-                        Command="{Binding Path=NavigateToContactCommand}"/>
+                        Command="{Binding Path=NavigateToContactCommand}"/>-->
             <Button Content="About"
                         Height="25"
                         Command="{Binding Path=NavigateToAboutCommand}"/>
         </TabPanel>
 
-		<Grid>
+		<Grid
+            Grid.Row="1">
 
 			<Grid.RowDefinitions>
 				<RowDefinition Height="200"/>
