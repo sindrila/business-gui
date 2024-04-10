@@ -33,6 +33,9 @@ namespace bussiness_social_media
             services.AddSingleton<UserManagedBusinessPagesViewModel>();
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton <BusinessProfileViewModel>();
+            services.AddSingleton<BusinessProfileReviewsViewModel>();
+            services.AddSingleton<BusinessProfileContactViewModel>();
+            services.AddSingleton<BusinessProfileAboutViewModel>();
 
             // TODO: this is delegation, find out what it is, or don't touch this code
             services.AddSingleton<Func<Type, ViewModel>>(serviceProvider => viewModelType => (ViewModel)serviceProvider.GetRequiredService(viewModelType));
