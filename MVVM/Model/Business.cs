@@ -2,6 +2,7 @@ using System;
 using System.Xml.Schema;
 using System.Xml;
 using System.Xml.Serialization;
+using System.IO;
 
 [Serializable]
 public class Business : IXmlSerializable
@@ -18,6 +19,10 @@ public class Business : IXmlSerializable
     private string _logo;
     [XmlElement("_banner")]
     private string _banner;
+    [XmlElement("_logoFullPath")]
+    private string _logoShort;
+    [XmlElement("_bannerFullPath")]
+    private string _bannerShort;
     [XmlElement("_phoneNumber")]
     private string _phoneNumber;
     [XmlElement("_email")]
@@ -90,8 +95,22 @@ public class Business : IXmlSerializable
         _name = reader.ReadElementString("_name");
         _description = reader.ReadElementString("_description");
         _category = reader.ReadElementString("_category");
-        _logo = reader.ReadElementString("_logo");
-        _banner = reader.ReadElementString("_banner");
+
+        string binDirectory = "\\bin";
+        string basePath = AppDomain.CurrentDomain.BaseDirectory;
+        string pathUntilBin;
+
+
+        int index = basePath.IndexOf(binDirectory);
+        pathUntilBin = basePath.Substring(0, index);
+
+        // Placeholder values for logo, banner, etc.
+        _logoShort = reader.ReadElementString("_logo");
+        _bannerShort = reader.ReadElementString("_banner");
+
+         _logo = Path.Combine(pathUntilBin, _logoShort);
+        _banner = Path.Combine(pathUntilBin, _bannerShort);
+
         _phoneNumber = reader.ReadElementString("_phoneNumber");
         _email = reader.ReadElementString("_email");
         _website = reader.ReadElementString("_website");
