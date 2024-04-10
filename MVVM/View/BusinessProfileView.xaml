@@ -11,6 +11,9 @@
         <Image HorizontalAlignment="Left" Height="100" Margin="322,192,0,0" VerticalAlignment="Top" Width="100" Source="C:\Users\Alex\source\repos\gui\bussiness-social-media\Assets\Images\scat8.jpg"/>
         <Label Content="{Binding currentBusiness.Name}" 
                HorizontalAlignment="Left" 
-               VerticalAlignment="Top"/>
+               VerticalAlignment="Top"
+               Background="Black"
+               Foreground="AntiqueWhite"
+               Height="30"/>
     </Grid>
 </UserControl>
