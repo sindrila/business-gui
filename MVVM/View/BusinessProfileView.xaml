@@ -8,17 +8,18 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="white">
-	
-    <Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+        <Grid>
 
-        <TabPanel
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TabPanel
             Grid.Row="0">
-            <Label Content="{Binding currentBusiness.Name}" 
+                <Label Content="{Binding currentBusiness.Name}" 
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Top"
                     Height="30"/>
@@ -28,33 +29,70 @@
                 <Button Content="Reviews"
                         Height="25"
                         Command="{Binding Path=NavigateToReviewsCommand}"/>
-            <Button Content="Contact"
+                <Button Content="Contact"
                         Height="25"
                         Command="{Binding Path=NavigateToContactCommand}"/>
-            <Button Content="About"
+                <Button Content="About"
                         Height="25"
                         Command="{Binding Path=NavigateToAboutCommand}"/>
-        </TabPanel>
+            </TabPanel>
 
-		<Grid
+            <Grid
             Grid.Row="1">
 
-			<Grid.RowDefinitions>
-				<RowDefinition Height="200"/>
-				<RowDefinition Height="*"/>
-			</Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-			<Image Grid.Row="0" Source="{Binding CurrentBusiness.Banner}" Stretch="Fill"/>
-			<Image Grid.Row="0" Margin="20,20,0,0" Source="{Binding CurrentBusiness.Logo}" Width="100" Height="100" VerticalAlignment="Top"/>
-			<Grid Grid.Row="1" Margin="20,20,20,20">
-				<Label Content="{Binding CurrentBusiness.Name}"
+                <Image Grid.Row="0" Source="{Binding CurrentBusiness.Banner}" Stretch="Fill"/>
+                <Image Grid.Row="0" Margin="20,20,0,0" Source="{Binding CurrentBusiness.Logo}" Width="100" Height="100" VerticalAlignment="Top"/>
+                <Grid Grid.Row="1" Margin="20,20,20,20">
+                    <Label Content="{Binding CurrentBusiness.Name}"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
 					   FontSize="30"
-		          > 
-				</Label>
-			</Grid>
-		</Grid>
-    </Grid>
-	
+		          >
+                    </Label>
+                </Grid>
+                <Grid>
+                    <ItemsControl ItemsSource="{Binding Businesses}" Margin="0,60,0,0">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Center"></WrapPanel
+                        >
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                            
+                        <ItemsControl.ItemContainerStyle>
+                            <Style TargetType="{x:Type ContentPresenter}">
+                                <Setter Property="Margin" Value="10"/>
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Margin="10" BorderThickness="0" 
+                     Command="{Binding DataContext.NavigateToBusinessProfileViewCommand, 
+                               RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                     CommandParameter="{Binding}">
+                                    <StackPanel>
+                                        <Ellipse Width="50" Height="50">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="{Binding Logo}"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+
+                                        <TextBlock Text="{Binding Name}" FontSize="20" HorizontalAlignment="Center"/>
+                                        <Image Source="{Binding Banner}" Height="100" />
+                                    </StackPanel>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+
 </UserControl>
