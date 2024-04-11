@@ -50,6 +50,7 @@ namespace bussiness_social_media
             services.AddSingleton<BusinessProfileReviewsViewModel>();
             services.AddSingleton<BusinessProfileContactViewModel>();
             services.AddSingleton<BusinessProfileAboutViewModel>();
+            services.AddSingleton<RegisterViewModel>();
 
 
             // Delegation
