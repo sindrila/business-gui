@@ -31,13 +31,19 @@ namespace bussiness_social_media.MVVM.ViewModel
         }
         public ImageSource BusinessImage
         {
-            get { return _businessImage; }
+            get { return new BitmapImage(new Uri(CurrentBusiness.Logo)); }
             set
             {
                 _businessImage = value;
                 OnPropertyChanged(nameof(BusinessImage));
             }
         }
+
+        public Business CurrentBusiness
+        {
+            get { return ChangeCurrentBusiness(); }
+        }
+
 
         public INavigationService Navigation
         {
@@ -64,10 +70,9 @@ namespace bussiness_social_media.MVVM.ViewModel
             NavigateToContactCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileContactViewModel>(); }, o => true);
             NavigateToAboutCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileAboutViewModel>(); }, o => true);
             LeaveReviewCommand = new RelayCommand(o => { LeaveReview(); }, o => true);
-            ChangeCurrentBusiness();
+            _currentBusiness = ChangeCurrentBusiness();
             ImageSource img = new BitmapImage(new Uri(_currentBusiness.Logo));
-            // Set the BusinessImage property with the image source of the current business
-            BusinessImage = img; // Assuming Business class has an ImageSource property
+            BusinessImage = img; 
             
         }
         private void LeaveReview()
@@ -77,9 +82,9 @@ namespace bussiness_social_media.MVVM.ViewModel
             review.SetComment(ReviewDescription);
 
         }
-        public void ChangeCurrentBusiness()
+        public Business ChangeCurrentBusiness()
         {
-            _currentBusiness = _businessService.GetBusinessById(_navigation.BusinessId);
+            return _businessService.GetBusinessById(_navigation.BusinessId);
         }
     }
 }

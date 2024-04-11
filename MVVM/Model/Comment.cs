@@ -28,4 +28,5 @@ public class Comment
     public void SetDateOfCreation(string creation) => _dateOfCreation = DateOfCreation;
     public void SetDateOfUpdate(string update) => _dateOfUpdate = DateOfUpdate;
 
+
 }
