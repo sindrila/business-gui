@@ -91,7 +91,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
 
         public FAQ GetFAQById(int id)
         {
-            return _faqs.FirstOrDefault(f => f.GetId() == id);
+            return _faqs.FirstOrDefault(f => f.Id == id);
         }
 
         public int AddFAQ(string faqQuestion, string faqAnswer)
@@ -105,7 +105,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
 
         public void UpdateFAQ(int faqID, string newFaqQuestion, string newFaqAnswer)
         {
-            var existingFAQ = _faqs.FirstOrDefault(f => f.GetId() ==faqID);
+            var existingFAQ = _faqs.FirstOrDefault(f => f.Id ==faqID);
             if (existingFAQ != null)
             {
                 existingFAQ.SetQuestion(newFaqQuestion);
@@ -116,7 +116,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
 
         public void DeleteFAQ(int id)
         {
-            var faqToRemove = _faqs.FirstOrDefault(f => f.GetId() == id);
+            var faqToRemove = _faqs.FirstOrDefault(f => f.Id == id);
             if (faqToRemove != null)
             {
                 _faqs.Remove(faqToRemove);
@@ -126,7 +126,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
 
         private int _getNextId()
         {
-            return _faqs.Count > 0 ? _faqs.Max(f => f.GetId()) + 1 : 1;
+            return _faqs.Count > 0 ? _faqs.Max(f => f.Id) + 1 : 1;
         }
     }
 }

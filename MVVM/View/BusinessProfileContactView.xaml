@@ -71,9 +71,19 @@
 		   FontSize="20"
 >
                 </Label>
+
                 <ItemsControl ItemsSource="{Binding FAQs}" Margin="30,350,0,0" Width="360" Grid.ColumnSpan="3" HorizontalAlignment="Left">
-                
-                
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Height="20"
+                                    Command="{Binding DataContext.FAQCommand, 
+                                      RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                   CommandParameter="{Binding}"
+                                    Content ="{Binding Question}">
+                                
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </Grid>
             <Grid >
