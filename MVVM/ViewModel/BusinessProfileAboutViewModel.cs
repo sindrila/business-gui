@@ -29,7 +29,10 @@ namespace bussiness_social_media.MVVM.ViewModel
 
         public Business CurrentBusiness 
         {
-            get => _currentBusiness;
+            get
+            {
+                return changeCurrrentBusiness();
+            }
             set
             {
                 _currentBusiness = value;
@@ -54,9 +57,9 @@ namespace bussiness_social_media.MVVM.ViewModel
 
         }
 
-        public void changeCurrrentBusiness()
+        public Business changeCurrrentBusiness()
         {
-            CurrentBusiness = _businessService.GetBusinessById(_navigation.BusinessId);
+            return  _businessService.GetBusinessById(_navigation.BusinessId);
         }
     }
 }
