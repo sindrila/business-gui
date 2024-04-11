@@ -23,6 +23,18 @@ namespace bussiness_social_media.MVVM.ViewModel
 
         private string _username;
         private string _password;
+        private string _errorMessage;
+
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged();
+            }
+        }
+
         public INavigationService NavigationService
         {
             get => _navigation;
@@ -57,9 +69,13 @@ namespace bussiness_social_media.MVVM.ViewModel
         private void LogIn()
         {
             if(authenticationService.AuthenticateUser(Username, Password)) {
+                ErrorMessage = "";
                 _navigation.NavigateTo<HomeViewModel>();
             }
-            
+            else
+            {
+                ErrorMessage = "Invalid username or password.";
+            }
         }
 
         public LoginViewModel(INavigationService navigationService, AuthenticationService authentication)

@@ -33,8 +33,8 @@ namespace bussiness_social_media.MVVM.Model.Repository
             _users = new List<Account>();
             _xmlFilePath = xmlFilePATH;
             populateRepository();
-            SaveUsersToXml();
-            LoadUsersFromXml();
+            //SaveUsersToXml();
+            //LoadUsersFromXml();
         }
 
         // Some hard coded users
@@ -140,6 +140,10 @@ namespace bussiness_social_media.MVVM.Model.Repository
         {
             using (MD5 md5Hash = MD5.Create())
             {
+                if (input is null)
+                {
+                    return "";
+                }
                 byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
 
                 StringBuilder sb = new StringBuilder();

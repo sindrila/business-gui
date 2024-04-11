@@ -1,4 +1,5 @@
-﻿using System;
+﻿using bussiness_social_media.MVVM.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,17 @@ namespace bussiness_social_media.MVVM.View
         public LoginView()
         {
             InitializeComponent();
+        }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is LoginViewModel viewModel)
+            {
+                if (sender is PasswordBox passwordBox)
+                {
+                    viewModel.Password = passwordBox.Password;
+                }
+            }
         }
     }
 }

@@ -33,7 +33,7 @@ public class PostService
         var existingPost = _posts.FirstOrDefault(p => p.Id == post.Id);
         if (existingPost != null)
         {
-            existingPost.SetBusinessId(post.BusinessId);
+            //existingPost.SetBusinessId(post.BusinessId);
             existingPost.SetNumberOfLikes(post.NumberOfLikes);
             existingPost.SetCreationDate(post.CreationDate);
             existingPost.SetImagePath(post.ImagePath);

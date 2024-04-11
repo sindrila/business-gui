@@ -53,8 +53,10 @@ namespace business_social_media.Services
                 _sessionTokens.Add(sessionToken, DateTime.Now);
                 _isLoggedIn = true;
 
+                CurrentUser = new Account(username, password);
+
                 // Start the logout timer
-                _logoutTimer.Change(_sessionDurationSeconds * 1000, Timeout.Infinite);
+                //_logoutTimer.Change(_sessionDurationSeconds * 1000, Timeout.Infinite);
                 return true;
             }
             else
