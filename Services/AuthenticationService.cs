@@ -34,7 +34,7 @@ namespace business_social_media.Services
             _userRepository = userRepository;
             _sessionTokens = new Dictionary<string, DateTime>();
             _isLoggedIn = false;
-            _logoutTimer = new Timer(LogoutUser, null, Timeout.Infinite, Timeout.Infinite);
+            //_logoutTimer = new Timer(LogoutUser, null, Timeout.Infinite, Timeout.Infinite);
             _sessionDurationSeconds = 10;
         }
 
