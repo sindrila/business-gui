@@ -60,6 +60,7 @@ namespace bussiness_social_media.MVVM.ViewModel
             {
                 Account newAccount = new Account(Username, Password);
                 _userRepository.AddAccount(newAccount);
+                NavigationService.NavigateTo<HomeViewModel>();
 
             }
 
