@@ -12,19 +12,72 @@ public class Account : IXmlSerializable
     private string _firstname;
     private string _lastname;
     private string _email;
-    private string _day;
-    private string _month;
-    private string _year;
     private string _gender;
     private DateTime _birthday;
-    public string Username => _username;
-    public string Password => _password;
-    public string Firstname => _firstname;
-    public string Lastname => _lastname;
-    public string Email => _email;
 
-    public DateTime Birhda => _birthday;
-    public string Gender => _gender;
+    public string Username
+    {
+        get => _username;
+        set
+        {
+            _username = value;
+        }
+    }
+
+    public string Password
+    {
+        get => _password;
+        set
+        {
+            _password = value;
+        }
+    }
+
+    public string Firstname
+    {
+        get => _firstname;
+        set
+        {
+            _firstname = value;
+        }
+    }
+
+    public string Lastname
+    {
+        get => _lastname;
+        set
+        {
+            _lastname = value;
+        }
+    }
+
+    public string Email
+    {
+        get => _email;
+        set
+        {
+            _email = value;
+        }
+    }
+
+    public DateTime Birthday
+    {
+        get => _birthday;
+        set
+        {
+            _birthday = value;
+        }
+    }
+
+    public string Gender
+    {
+        get => _gender;
+        private set
+        {
+            _gender = value;
+        }
+    }
+
     public Account(string username, string password)
     {
         _username = username;
@@ -38,10 +91,7 @@ public class Account : IXmlSerializable
         _firstname = firstname;
         _lastname = lastname;
         _email = email;
-        int dayy = int.Parse(_day);
-        int monthh = int.Parse(_month);
-        int yearr = int.Parse(_year);
-        _birthday = new DateTime(yearr, monthh, dayy);
+        _birthday = new DateTime(int.Parse(year), int.Parse(month), int.Parse(day));
         _gender = gender;
     }
 
