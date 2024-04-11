@@ -83,6 +83,61 @@ namespace bussiness_social_media.Services
             Business business = _businessRepository.GetBusinessById(businessId);
             return business != null && business.ManagerUsernames.Contains(username);
         }
+
+        public void AddFAQToBusiness(int businessID, string faqQuestion, string faqAnswer)
+        {
+            Business business = GetBusinessById(businessID);
+            int faqID = _faqService.AddFAQ(faqQuestion, faqAnswer);
+            business.FaqIds.Add(faqID);
+
+        }
+
+        public List<FAQ> GetAllFAQsOfBusiness(int businessID)
+        {
+            Business business = GetBusinessById(businessID);
+            List<FAQ> givenBusinessFAQs = [];
+            foreach (int faqID in business.FaqIds)
+            {
+                givenBusinessFAQs.Add(_faqService.GetFAQById(faqID));
+            }
+            return givenBusinessFAQs;
+        }
+
+        public void AddPostToBusiness(int businessID, DateTime postCreationDate, string postImagePath, string postCaption)
+        {
+            Business business = GetBusinessById(businessID);
+            int postID = _postService.AddPost(postCreationDate, postImagePath, postCaption);
+            business.PostIds.Add(postID);
+        }
+
+        public List<Post> GetAllPostsOfBusiness(int businessID)
+        {
+            Business business = GetBusinessById(businessID);
+            List<Post> givenBusinessPosts = [];
+            foreach (int postID in business.PostIds)
+            {
+                givenBusinessPosts.Add(_postService.GetPostById(postID));
+            }
+            return givenBusinessPosts;
+        }
+
+        public void AddReviewToBusiness(int businessID, string userName, int rating, string comment, string title, string imagePath)
+        {
+            Business business = GetBusinessById(businessID);
+            int reviewID = _reviewService.AddReview(userName, rating, comment, title, imagePath);
+            business.ReviewIds.Add(reviewID);
+        }
+
+        public List<Review> GetAllReviewsForBusiness(int businessID)
+        {
+            Business business = GetBusinessById(businessID);
+            List<Review> givenBusinessReviews = [];
+            foreach (int reviewID in business.ReviewIds)
+            {
+                givenBusinessReviews.Add(_reviewService.GetReviewById(reviewID));
+            }
+            return givenBusinessReviews;
+        }
     }
 
 }
