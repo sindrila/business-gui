@@ -104,6 +104,13 @@
                     </StackPanel>
                 </Border>
             </Grid>
+            <Grid>
+                <ItemsControl ItemsSource="{Binding FAQs}" Margin="0,60,0,0">
+
+                    <TextBlock Text="{Binding GetQuestion}" FontSize="20" HorizontalAlignment="Center"/>
+
+                </ItemsControl>
+            </Grid>
         </Grid>
     </ScrollViewer>
 

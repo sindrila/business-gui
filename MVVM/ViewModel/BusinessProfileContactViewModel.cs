@@ -2,6 +2,7 @@
 using bussiness_social_media.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,16 @@ namespace bussiness_social_media.MVVM.ViewModel
         private IBusinessService _businessService;
 
         public Business _currentBusiness;
+
+        public ObservableCollection<FAQ> FAQs
+        {
+            get
+            {
+
+                return new ObservableCollection<FAQ>(_businessService.GetFAQsForBusiness(CurrentBusiness.Id));
+
+            }
+        }
 
         public INavigationService Navigation
         {
