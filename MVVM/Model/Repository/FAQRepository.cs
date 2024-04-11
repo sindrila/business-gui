@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace bussiness_social_media.MVVM.Model.Repository
@@ -12,7 +13,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
     {
         List<FAQ> GetAllFAQs();
         FAQ GetFAQById(int id);
-        void AddFAQ(int businessId, string question, string answer);
+        void AddFAQ(string question, string answer);
         void UpdateFAQ(FAQ faq);
         void DeleteFAQ(int id);
     }
@@ -36,20 +37,32 @@ namespace bussiness_social_media.MVVM.Model.Repository
 
         private void LoadFAQsFromXml()
         {
-            if (File.Exists(_xmlFilePath))
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<FAQ>), new XmlRootAttribute("ArrayOfFAQ"));
-
-                using (FileStream fileStream = new FileStream(_xmlFilePath, FileMode.Open))
+            try {
+                if (File.Exists(_xmlFilePath))
                 {
-                    _faqs = (List<FAQ>)serializer.Deserialize(fileStream);
+                    XmlSerializer serializer = new XmlSerializer(typeof(FAQ), new XmlRootAttribute("FAQ"));
+
+                    _faqs = new List<FAQ>();
+
+                    using (FileStream fileStream = new FileStream(_xmlFilePath, FileMode.Open))
+                    using (XmlReader reader = XmlReader.Create(fileStream))
+                    {
+                        // Move to the first FAQ element
+                        while (reader.ReadToFollowing("FAQ"))
+                        {
+                            // Deserialize each FAQ element and add it to the list
+                            FAQ faq = (FAQ)serializer.Deserialize(reader);
+                            _faqs.Add(faq);
+                        }
+                    }
+                }
+                else
+                {
+                    // Handle the case where the XML file doesn't exist
+                    _faqs = new List<FAQ>();
                 }
             }
-            else
-            {
-                // Handle the case where the XML file doesn't exist
-                _faqs = new List<FAQ>();
-            }
+            catch { }
         }
 
         private void SaveFAQsToXml()
@@ -72,9 +85,9 @@ namespace bussiness_social_media.MVVM.Model.Repository
             return _faqs.FirstOrDefault(f => f.GetId() == id);
         }
 
-        public void AddFAQ(int businessId, string question, string answer)
+        public void AddFAQ(string question, string answer)
         {
-            FAQ faq = new FAQ(_getNextId(), businessId, question, answer);
+            FAQ faq = new FAQ(_getNextId(), question, answer);
             _faqs.Add(faq);
             SaveFAQsToXml();
         }

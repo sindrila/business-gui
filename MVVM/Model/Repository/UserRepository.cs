@@ -38,6 +38,10 @@ namespace bussiness_social_media.MVVM.Model.Repository
             LoadUsersFromXml();
         }
 
+        ~UserRepository() {
+            SaveUsersToXml();
+        }
+
         // Some hard coded users
         public void populateRepository()
         {
@@ -120,6 +124,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
         public void AddAccount(Account user)
         {
             _users.Add(user);
+            SaveUsersToXml();
         }
 
         public void DeleteUser(string username)

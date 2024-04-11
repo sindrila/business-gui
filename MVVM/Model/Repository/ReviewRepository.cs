@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -37,31 +38,55 @@ namespace bussiness_social_media.MVVM.Model.Repository
 
         private void LoadReviewsFromXml()
         {
+<<<<<<< Updated upstream
             if (File.Exists(_xmlFilePath))
+=======
+            try
+>>>>>>> Stashed changes
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<Review>), new XmlRootAttribute("ArrayOfReview"));
-
-                _reviews = new List<Review>();
-
-                using (FileStream fileStream = new FileStream(_xmlFilePath, FileMode.Open))
+                if (File.Exists(_xmlFilePath))
                 {
+<<<<<<< Updated upstream
                     using (XmlReader reader = XmlReader.Create(fileStream))
                     {
                         // Move to the first Review element
                         while (reader.ReadToFollowing("Review"))
+=======
+                    XmlSerializer serializer = new XmlSerializer(typeof(List<Review>), new XmlRootAttribute("ArrayOfReview"));
+
+                    _reviews = new List<Review>();
+
+                    using (FileStream fileStream = new FileStream(_xmlFilePath, FileMode.Open))
+                    {
+                        using (XmlReader reader = XmlReader.Create(fileStream))
+>>>>>>> Stashed changes
                         {
-                            // Deserialize each Review element and add it to the list
-                            Review review = (Review)serializer.Deserialize(reader);
-                            _reviews.Add(review);
+                            // Move to the first Review element
+                            while (reader.ReadToFollowing("Review"))
+                            {
+                                // Deserialize each Review element and add it to the list
+                                Review review = (Review)serializer.Deserialize(reader);
+                                _reviews.Add(review);
+                            }
                         }
                     }
                 }
+                else
+                {
+                    // Handle the case where the XML file doesn't exist
+                    _reviews = new List<Review>();
+                }
             }
+<<<<<<< Updated upstream
             else
             {
                 // Handle the case where the XML file doesn't exist
                 _reviews = new List<Review>();
             }
+=======
+            catch { }
+            
+>>>>>>> Stashed changes
         }
 
         private void SaveReviewsToXml()
