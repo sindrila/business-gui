@@ -22,6 +22,8 @@ namespace bussiness_social_media.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
+        public RelayCommand NavigateToRegisterViewCommand { get; set; }
+
 
         public RelayCommand NavigateToHomeCommand { get; set; }
         public RelayCommand NavigateToCreateNewBusinessViewCommand{ get; set; }
@@ -30,6 +32,7 @@ namespace bussiness_social_media.MVVM.ViewModel
             Navigation = navigationService;
             NavigateToHomeCommand = new RelayCommand(o => { Navigation.NavigateTo<HomeViewModel>(); }, o => true);
             NavigateToCreateNewBusinessViewCommand = new RelayCommand(o => { Navigation.NavigateTo<CreateNewBusinessViewModel>(); }, o => true);
+            NavigateToRegisterViewCommand = new RelayCommand(o => { Navigation.NavigateTo<RegisterViewModel>(); }, o => true);
             Navigation.NavigateTo<HomeViewModel>();
         }
     }
