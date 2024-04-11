@@ -17,6 +17,8 @@ namespace bussiness_social_media.MVVM.ViewModel
         private AuthenticationService _authenticationService;
 
         public Business _currentBusiness;
+        public FAQ _currentFAQ;
+
 
         private bool _isCurrentUserManager;
 
@@ -24,6 +26,7 @@ namespace bussiness_social_media.MVVM.ViewModel
         {
             get
             {
+
                 return new ObservableCollection<FAQ>(_businessService.GetAllFAQsOfBusiness(CurrentBusiness.Id));
             }
         }
@@ -73,10 +76,26 @@ namespace bussiness_social_media.MVVM.ViewModel
             }
         }
 
+        public FAQ CurrentFAQ
+        {
+            get
+            {
+                return changeCurrrentFAQ();
+            }
+            set
+            {
+                _currentFAQ = value;
+                OnPropertyChanged(nameof(CurrentFAQ));
+            }
+        }
+
         public RelayCommand NavigateToPostsCommand { get; set; }
         public RelayCommand NavigateToReviewsCommand { get; set; }
         public RelayCommand NavigateToContactCommand { get; set; }
         public RelayCommand NavigateToAboutCommand { get; set; }
+
+        public RelayCommand FAQCommand { get; set; }
+
         public BusinessProfileContactViewModel(INavigationService navigationService, IBusinessService businessService, AuthenticationService authenticationService)
         {
             Navigation = navigationService;
@@ -87,12 +106,19 @@ namespace bussiness_social_media.MVVM.ViewModel
             NavigateToContactCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileContactViewModel>(); }, o => true);
             NavigateToAboutCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileAboutViewModel>(); }, o => true);
             changeCurrrentBusiness();
+
+            FAQCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileAboutViewModel>(); }, o => true);
             // In this class, you have the instance of the business in currentBusiness. You can access it in the BusinessProfileView.xaml but I'm not quite sure how. Ask chat gpt, I tried something and I do not know if it works. It is currently 00:47 and I want to go to sleep
         }
 
         public Business changeCurrrentBusiness()
         {
             return _businessService.GetBusinessById(_navigation.BusinessId);
+        }
+
+        public FAQ changeCurrrentFAQ()
+        {
+            return new FAQ();
         }
     }
 }
