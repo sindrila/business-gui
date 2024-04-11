@@ -22,6 +22,9 @@
                     Height="25"
                     Command="{Binding Path=NavigateToCreateNewBusinessViewCommand}"/>
 
+            <Button Content="Register"
+                    Height="25"
+                    Command="{Binding Path=NavigateToRegisterViewCommand}"/>
 
             <Button Content="Login"
                     Height="25"
