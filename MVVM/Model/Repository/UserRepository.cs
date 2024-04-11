@@ -6,10 +6,24 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-/*
+using System.Xml.Serialization;
+
 namespace bussiness_social_media.MVVM.Model.Repository
 {
-    public class UserRepository
+    public interface IUserRepository
+    {
+        public void AddAccount(Account user);
+        public void DeleteUser(string username);
+
+        public bool UsernameExists(string username);
+
+        public bool IsCredentialsValid(string username, string password);
+        public List<Account> GetAllUsers();
+
+        // Method to compute MD5 hash
+        public string GetMd5Hash(string input);
+    }
+    public class UserRepository : IUserRepository
     {
         private string _xmlFilePath;
         private List<Account> _users;
@@ -18,7 +32,9 @@ namespace bussiness_social_media.MVVM.Model.Repository
         {
             _users = new List<Account>();
             _xmlFilePath = xmlFilePATH;
-            LoadUsersFromJson();
+            populateRepository();
+            SaveUsersToXml();
+            LoadUsersFromXml();
         }
 
         // Some hard coded users
@@ -26,7 +42,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
         {
             Account Account1 = new Account
             (
-                "john_doe",
+                "admin",
                 GetMd5Hash("password123")
             );
             _users.Add(Account1);
@@ -61,6 +77,34 @@ namespace bussiness_social_media.MVVM.Model.Repository
 
         }
 
+        private void LoadUsersFromXml()
+        {
+            if (File.Exists(_xmlFilePath))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Business>), new XmlRootAttribute("ArrayOfUsers"));
+
+                using (FileStream fileStream = new FileStream(_xmlFilePath, FileMode.Open))
+                {
+                    _users = (List<Account>)serializer.Deserialize(fileStream);
+                }
+            }
+            else
+            {
+                // Handle the case where the XML file doesn't exist
+                _users = new List<Account>();
+            }
+        }
+
+        private void SaveUsersToXml()
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Business>), new XmlRootAttribute("ArrayOfUsers"));
+
+            using (FileStream fileStream = new FileStream(_xmlFilePath, FileMode.Create))
+            {
+                serializer.Serialize(fileStream, _users);
+            }
+        }
+
         public void AddAccount(Account user)
         {
             _users.Add(user);
@@ -72,7 +116,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
             if (userToRemove != null)
             {
                 _users.Remove(userToRemove);
-                SaveUsersToJson();
+                SaveUsersToXml();
             }
         }
 
@@ -109,4 +153,3 @@ namespace bussiness_social_media.MVVM.Model.Repository
         }
     }
 }
-*/
