@@ -25,6 +25,11 @@ public class Account : IXmlSerializable
 
     public DateTime Birhda => _birthday;
     public string Gender => _gender;
+    public Account(string username, string password)
+    {
+        _username = username;
+        _password = password;
+    }
 
     public Account(string username, string password,string firstname,string lastname,string email,string day,string month,string year,string gender)
     {
