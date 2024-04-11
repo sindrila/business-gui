@@ -22,6 +22,7 @@ namespace bussiness_social_media
             // Read XML file path from configuration
             string businessesXmlFilePath = ConfigurationManager.AppSettings["BusinessesXmlFilePath"];
             string usersXmlFilePath = ConfigurationManager.AppSettings["UsersXmlFilePath"];
+            string postsXmlFilePath = ConfigurationManager.AppSettings["PostsXmlFilePath"];
             string binDirectory = "\\bin";
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
             string pathUntilBin;
@@ -29,6 +30,7 @@ namespace bussiness_social_media
             pathUntilBin = basePath.Substring(0, index);
             businessesXmlFilePath = Path.Combine(pathUntilBin, businessesXmlFilePath);
             usersXmlFilePath = Path.Combine(pathUntilBin, usersXmlFilePath);
+            postsXmlFilePath = Path.Combine(pathUntilBin, postsXmlFilePath);
 
             services.AddSingleton<MainWindow>(provider => new MainWindow
             {
@@ -45,6 +47,8 @@ namespace bussiness_social_media
 
             // Pass xmlFilePath to your BusinessRepository constructor
             services.AddSingleton<IBusinessRepository>(provider => new BusinessRepository(businessesXmlFilePath));
+            services.AddSingleton<IUserRepository>(provider => new UserRepository(usersXmlFilePath));
+            services.AddSingleton<IPostRepository>(provider => new PostRepository(postsXmlFilePath));
 
             services.AddSingleton <BusinessProfileViewModel>();
             services.AddSingleton<BusinessProfileReviewsViewModel>();
