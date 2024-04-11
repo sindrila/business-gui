@@ -6,16 +6,14 @@ using System.Xml.Serialization;
 public class FAQ : IXmlSerializable
 {
     private int _id;
-    private int _businessId;
     private string _question;
     private string _answer;
 
     public FAQ() { }
 
-    public FAQ(int id, int businessId, string question, string answer)
+    public FAQ(int id, string question, string answer)
     {
         _id = id;
-        _businessId = businessId;
         _question = question;
         _answer = answer;
     }
@@ -41,7 +39,6 @@ public class FAQ : IXmlSerializable
         if (!isEmptyElement)
         {
             _id = int.Parse(reader.ReadElementContentAsString("Id", ""));
-            _businessId = int.Parse(reader.ReadElementContentAsString("BusinessId", ""));
             _question = reader.ReadElementContentAsString("Question", "");
             _answer = reader.ReadElementContentAsString("Answer", "");
             reader.ReadEndElement();
@@ -51,7 +48,6 @@ public class FAQ : IXmlSerializable
     public void WriteXml(XmlWriter writer)
     {
         writer.WriteElementString("Id", _id.ToString());
-        writer.WriteElementString("BusinessId", _businessId.ToString());
         writer.WriteElementString("Question", _question);
         writer.WriteElementString("Answer", _answer);
     }

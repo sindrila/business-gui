@@ -36,6 +36,10 @@ namespace bussiness_social_media.MVVM.Model.Repository
             LoadUsersFromXml();
         }
 
+        ~UserRepository() {
+            SaveUsersToXml();
+        }
+
         // Some hard coded users
         public void populateRepository()
         {

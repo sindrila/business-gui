@@ -25,6 +25,7 @@ namespace bussiness_social_media
             string usersXmlFilePath = ConfigurationManager.AppSettings["UsersXmlFilePath"];
             string postsXmlFilePath = ConfigurationManager.AppSettings["PostsXmlFilePath"];
             string reviewsXmlFilePath = ConfigurationManager.AppSettings["ReviewsXmlFilePath"];
+            string faqsXmlFilePath = ConfigurationManager.AppSettings["FAQsXmlFilePath"];
             string binDirectory = "\\bin";
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
             string pathUntilBin;
@@ -34,6 +35,7 @@ namespace bussiness_social_media
             usersXmlFilePath = Path.Combine(pathUntilBin, usersXmlFilePath);
             postsXmlFilePath = Path.Combine(pathUntilBin, postsXmlFilePath);
             reviewsXmlFilePath = Path.Combine(pathUntilBin, reviewsXmlFilePath);
+            faqsXmlFilePath = Path.Combine(pathUntilBin, faqsXmlFilePath);
 
             services.AddSingleton<MainWindow>(provider => new MainWindow
             {
@@ -53,6 +55,7 @@ namespace bussiness_social_media
             services.AddSingleton<IUserRepository>(provider => new UserRepository(usersXmlFilePath));
             services.AddSingleton<IPostRepository>(provider => new PostRepository(postsXmlFilePath));
             services.AddSingleton<IReviewRepository>(provider => new ReviewRepository(reviewsXmlFilePath));
+            services.AddSingleton<IFAQRepository>(provider => new FAQRepository(faqsXmlFilePath));
 
             services.AddSingleton <BusinessProfileViewModel>();
             services.AddSingleton<BusinessProfileReviewsViewModel>();

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -37,14 +38,8 @@ namespace bussiness_social_media.MVVM.Model.Repository
 
         private void LoadReviewsFromXml()
         {
-            FileInfo fileInfo = new FileInfo(_xmlFilePath);
-            if (fileInfo.Exists && fileInfo.Length > 0)
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<Review>), new XmlRootAttribute("ArrayOfReview"));
-
-                _reviews = new List<Review>();
-
-                using (FileStream fileStream = new FileStream(_xmlFilePath, FileMode.Open))
+            try{
+                if (File.Exists(_xmlFilePath))
                 {
                     using (XmlReader reader = XmlReader.Create(fileStream))
                     {
@@ -55,22 +50,27 @@ namespace bussiness_social_media.MVVM.Model.Repository
                             _reviews = new List<Review>();
                             return;
                         }
-
-                        // Move to the first Review element
-                        while (reader.ReadToFollowing("Review"))
+                      
                         {
-                            // Deserialize each Review element and add it to the list
-                            Review review = (Review)serializer.Deserialize(reader);
-                            _reviews.Add(review);
+                            // Move to the first Review element
+                            while (reader.ReadToFollowing("Review"))
+                            {
+                                // Deserialize each Review element and add it to the list
+                                Review review = (Review)serializer.Deserialize(reader);
+                                _reviews.Add(review);
+                            }
                         }
                     }
                 }
+                else
+                {
+                    // Handle the case where the XML file doesn't exist
+                    _reviews = new List<Review>();
+                }
             }
-            else
-            {
-                // Handle the case where the XML file doesn't exist or is empty
-                _reviews = new List<Review>();
-            }
+
+            catch { }
+            
         }
 
         private void SaveReviewsToXml()
