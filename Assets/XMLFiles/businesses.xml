@@ -169,7 +169,10 @@
     </_managerUsernames>
     <_postIds />
     <_reviewIds />
-    <_faqIds />
+	  <_faqIds >
+		  <faqId>4</faqId>
+		  <faqId>5</faqId>
+	  </_faqIds>
   </Business>
   <Business>
     <_id>10</_id>
@@ -188,6 +191,10 @@
     </_managerUsernames>
     <_postIds />
     <_reviewIds />
-    <_faqIds />
+	  <_faqIds>
+		  <faqId>1</faqId>
+		  <faqId>2</faqId>
+		  <faqId>3</faqId>
+	  </_faqIds>
   </Business>
 </ArrayOfBusiness>

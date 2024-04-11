@@ -218,7 +218,7 @@ public class Business : IXmlSerializable
                 {
                     if (reader.NodeType == XmlNodeType.Element && reader.LocalName == "faqId")
                     {
-                        _reviewIds.Add(int.Parse(reader.ReadElementString("faqId")));
+                        _faqIds.Add(int.Parse(reader.ReadElementString("faqId")));
                     }
                     else
                     {
