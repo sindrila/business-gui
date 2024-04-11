@@ -16,15 +16,6 @@ namespace bussiness_social_media.MVVM.ViewModel
 
         public Business _currentBusiness;
 
-        public ObservableCollection<FAQ> FAQs
-        {
-            get
-            {
-                return new ObservableCollection<FAQ>();
-                //return new ObservableCollection<FAQ>(_businessService.GetFAQsForBusiness(CurrentBusiness.Id));
-
-            }
-        }
 
         public INavigationService Navigation
         {
