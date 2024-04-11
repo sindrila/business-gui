@@ -73,8 +73,8 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Content="Email:" VerticalAlignment="Center"/>
-            <TextBox x:Name="EmailBox" Grid.Column="1" Width="200" Margin="5" Text="{Binding Email, Mode=TwoWay}"/>
+            <Label Content="Username:" VerticalAlignment="Center"/>
+            <TextBox x:Name="UsernameBox" Grid.Column="1" Width="200" Margin="5" Text="{Binding Username, Mode=TwoWay}"/>
         </Grid>
 
         <Grid Grid.Row="5" Margin="10">
