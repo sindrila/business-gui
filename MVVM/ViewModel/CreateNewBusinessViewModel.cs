@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Win32;
 using System.Windows;
+using System.IO;
 namespace bussiness_social_media.MVVM.ViewModel
 {
     public class CreateNewBusinessViewModel : Core.ViewModel
@@ -116,9 +117,11 @@ namespace bussiness_social_media.MVVM.ViewModel
             }
         }
 
-        public RelayCommand CreateBusinessCommand { get; set; }
+        public RelayCommand CreateBusinessCommand { get; set;
 
-        public INavigationService NavigationService
+        }
+
+    public INavigationService NavigationService
         {
             get => _navigationService;
             set
@@ -149,8 +152,19 @@ namespace bussiness_social_media.MVVM.ViewModel
             bool? result = openFileDialog.ShowDialog();
             if (result == true)
             {
-                string filename = openFileDialog.FileName;
-                Logo = filename;
+                string sourceFilePath = openFileDialog.FileName;
+                string fileName = Path.GetFileName(openFileDialog.FileName);
+                string binDirectory = "\\bin";
+                string basePath = AppDomain.CurrentDomain.BaseDirectory;
+                int index = basePath.IndexOf(binDirectory);
+                string pathUntilBin = basePath.Substring(0, index);
+                string destinationFilePath = Path.Combine(pathUntilBin, $"Assets\\Images\\" + fileName);
+
+
+                File.Copy(sourceFilePath, destinationFilePath, true);
+                // Placeholder values for logo, banner, etc.
+
+                Logo = destinationFilePath;
             }
             
         }
@@ -161,9 +175,19 @@ namespace bussiness_social_media.MVVM.ViewModel
             bool? result = openFileDialog.ShowDialog();
             if (result == true)
             {
-                string filename = openFileDialog.FileName;
-             
-                Banner =   filename;
+                string sourceFilePath = openFileDialog.FileName;
+                string fileName = Path.GetFileName(openFileDialog.FileName);
+                string binDirectory = "\\bin";
+                string basePath = AppDomain.CurrentDomain.BaseDirectory;
+                int index = basePath.IndexOf(binDirectory);
+                string pathUntilBin = basePath.Substring(0, index);
+                string destinationFilePath = Path.Combine(pathUntilBin, $"Assets\\Images\\" + fileName);
+
+
+                File.Copy(sourceFilePath, destinationFilePath, true);
+                // Placeholder values for logo, banner, etc.
+
+                Logo = destinationFilePath;
             }
         }
 
