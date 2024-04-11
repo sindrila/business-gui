@@ -7,39 +7,67 @@
 			
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             Background="white">
+             Background="#3A3A3A">
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+      <!-- Style for Label -->
+      <Style TargetType="Label">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Margin" Value="0,10,0,0"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+      </Style>
+
+      <!-- Style for TextBox -->
+      <Style TargetType="TextBox">
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Margin" Value="0,0,0,10"/>
+      </Style>
+
+      <!-- Style for Button -->
+      <Style TargetType="Button">
+        <Setter Property="Height" Value="20"/>
+        <Setter Property="Margin" Value="0,10,0,0"/>
+        <Setter Property="Background" Value="#65B1C1"/>
+        <Setter Property="Foreground" Value="White"/>
+      </Style>
+
+      <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TabPanel
-            Grid.Row="0">
-                <Label Content="{Binding currentBusiness.Name}" 
-                    HorizontalAlignment="Left" 
-                    VerticalAlignment="Top"
-                    Height="30"/>
-                <Button Content="Posts"
-                        Height="25"
-                        Command="{Binding Path=NavigateToPostsCommand}"/>
-                <Button Content="Reviews"
-                        Height="25"
-                        Command="{Binding Path=NavigateToReviewsCommand}"/>
-                <Button Content="Contact"
-                        Height="25"
-                        Command="{Binding Path=NavigateToContactCommand}"/>
-                <Button Content="About"
-                        Height="25"
-                        Command="{Binding Path=NavigateToAboutCommand}"/>
-            </TabPanel>
+          <TabPanel
+          Grid.Row="0">
+            <Label Content="{Binding currentBusiness.Name}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Height="40"/>
+            <Button Content="Posts"
+                Height="20"
+                Width="80"
+                Command="{Binding Path=NavigateToPostsCommand}"/>
+            <Button Content="Reviews"
+                Height="20"
+                Width="80"
+                Command="{Binding Path=NavigateToReviewsCommand}"/>
+            <Button Content="Contact"
+                Height="20"
+                Width="80"
+                Command="{Binding Path=NavigateToContactCommand}"/>
+            <Button Content="About"
+                    Height="20"
+                    Width="80"
+                    Command="{Binding Path=NavigateToAboutCommand}"/>
+          </TabPanel>
 
-            <Grid
+
+          <Grid
             Grid.Row="1">
 
                 <Grid.RowDefinitions>
