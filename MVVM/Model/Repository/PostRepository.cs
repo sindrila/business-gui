@@ -60,13 +60,25 @@ namespace bussiness_social_media.MVVM.Model.Repository
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(List<Post>), new XmlRootAttribute("ArrayOfPost"));
 
+                _posts = new List<Post>();
+
                 using (FileStream fileStream = new FileStream(_xmlFilePath, FileMode.Open))
                 {
-                    _posts = (List<Post>)serializer.Deserialize(fileStream);
+                    using (XmlReader reader = XmlReader.Create(fileStream))
+                    {
+                        // Move to the first Post element
+                        while (reader.ReadToFollowing("Post"))
+                        {
+                            // Deserialize each Post element and add it to the list
+                            Post post = (Post)serializer.Deserialize(reader);
+                            _posts.Add(post);
+                        }
+                    }
                 }
             }
             else
             {
+                // Handle the case where the XML file doesn't exist
                 _posts = new List<Post>();
             }
         }
@@ -108,7 +120,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
                 existingPost.SetCreationDate(post.CreationDate);
                 existingPost.SetImagePath(post.ImagePath);
                 existingPost.SetCaption(post.Caption);
-                existingPost.SetComments(post.Comments);
+                existingPost.SetComments(post.CommentIds);
                 SavePostsToXml();
             }
         }
