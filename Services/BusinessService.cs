@@ -1,4 +1,5 @@
 
+using business_social_media.Services;
 using bussiness_social_media.MVVM.Model.Repository;
 using System;
 using System.IO;
@@ -20,16 +21,16 @@ namespace bussiness_social_media.Services
     public class BusinessService : IBusinessService
     {
         private IBusinessRepository _businessRepository;
-        private IFAQRepository _faqRepository;
-        private IPostRepository _postRepository;
-        private IReviewRepository _reviewRepository;
+        private IFAQService _faqService;
+        private IPostService _postService;
+        private IReviewService _reviewService;
 
-        public BusinessService(IBusinessRepository businessRepository, IFAQRepository faqRepository, IPostRepository postRepository, IReviewRepository reviewRepository)
+        public BusinessService(IBusinessRepository businessRepository, IFAQService FAQService, IPostService postService, IReviewService reviewService)
         {
             _businessRepository = businessRepository;
-            _faqRepository = faqRepository;
-            _postRepository = postRepository;
-            _reviewRepository = reviewRepository;
+            _faqService = FAQService;
+            _postService = postService;
+            _reviewService = reviewService;
         }
 
         public List<Business> GetAllBusinesses()

@@ -14,8 +14,8 @@ namespace bussiness_social_media.MVVM.Model.Repository
     {
         List<Review> GetAllReviews();
         Review GetReviewById(int id);
-        void AddReview(string userName, int rating, string comment, string title, string imagePath, DateTime dateOfCreation, string adminComment);
-        void UpdateReview(Review review);
+        int AddReview(string userName, int rating, string comment, string title, string imagePath, DateTime dateOfCreation);
+        void UpdateReview(int id, int newRating, string newComment, string newTitle, string newImagePath);
         void DeleteReview(int id);
     }
 
@@ -90,24 +90,25 @@ namespace bussiness_social_media.MVVM.Model.Repository
             return _reviews.FirstOrDefault(r => r.GetReviewId() == id);
         }
 
-        public void AddReview(string userName, int rating, string comment, string title, string imagePath, DateTime dateOfCreation, string adminComment)
+        public int AddReview(string userName, int rating, string comment, string title, string imagePath, DateTime dateOfCreation)
         {
-            Review review = new Review(_getNextId(), userName, rating, comment, title, imagePath, dateOfCreation, adminComment);
+            int newId = _getNextId();
+            Review review = new Review(newId, userName, rating, comment, title, imagePath, dateOfCreation);
             _reviews.Add(review);
             SaveReviewsToXml();
+            return newId;
         }
 
-        public void UpdateReview(Review review)
+        public void UpdateReview(int id, int newRating, string newComment, string newTitle, string newImagePath)
         {
-            var existingReview = _reviews.FirstOrDefault(r => r.GetReviewId() == review.GetReviewId());
+            var existingReview = GetReviewById(id);
             if (existingReview != null)
             {
-                existingReview.SetUserName(review.GetUserName());
-                existingReview.SetRating(review.GetRating());
-                existingReview.SetComment(review.GetComment());
-                existingReview.SetTitle(review.GetTitle());
-                existingReview.SetImagePath(review.GetImagePath());
-                existingReview.SetAdminComment(review.GetAdminComment());
+                existingReview.SetUserName(newComment);
+                existingReview.SetRating(newRating);
+                existingReview.SetComment(newComment);
+                existingReview.SetTitle(newTitle);
+                existingReview.SetImagePath(newImagePath);
                 SaveReviewsToXml();
             }
         }

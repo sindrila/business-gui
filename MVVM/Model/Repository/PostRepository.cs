@@ -13,7 +13,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
     {
         List<Post> GetAllPosts();
         Post GetPostById(int id);
-        void AddPost(DateTime creationDate, string imagePath, string caption);
+        int AddPost(DateTime creationDate, string imagePath, string caption);
         void UpdatePost(Post post);
         void DeletePost(int id);
     }
@@ -109,12 +109,13 @@ namespace bussiness_social_media.MVVM.Model.Repository
             return _posts.FirstOrDefault(p => p.Id == id);
         }
 
-        public void AddPost(DateTime creationDate, string imagePath, string caption)
+        public int AddPost(DateTime creationDate, string imagePath, string caption)
         {
-            int id = _getNextId();
-            Post post = new Post(id, creationDate, imagePath, caption);
+            int newID = _getNextId();
+            Post post = new Post(newID, creationDate, imagePath, caption);
             _posts.Add(post);
             SavePostsToXml();
+            return newID;
         }
 
         public void UpdatePost(Post post)

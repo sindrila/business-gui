@@ -2,7 +2,7 @@
 <ArrayOfBusiness xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Business>
     <_id>1</_id>
-    <_name>The Place</_name>
+    <_name>Cla's place</_name>
     <_description>A cool business doing cool things!</_description>
     <_category>Food</_category>
     <_logo>Assets\Images\scat1.jpg</_logo>

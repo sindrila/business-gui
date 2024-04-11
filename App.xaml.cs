@@ -9,6 +9,7 @@ using System.Windows;
 using bussiness_social_media.MVVM.Model.Repository;
 using System.Reflection.PortableExecutable;
 using business_social_media.Services;
+using System.Xml.Serialization;
 
 namespace bussiness_social_media
 {
@@ -49,6 +50,9 @@ namespace bussiness_social_media
             services.AddSingleton<UserManagedBusinessPagesViewModel>();
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<BusinessProfileViewModel>();
+            services.AddSingleton<IFAQService, FAQService>();
+            services.AddSingleton<IPostService, PostService>();
+            services.AddSingleton<IReviewService, ReviewService>();
 
             // Pass xmlFilePath to your BusinessRepository constructor
             services.AddSingleton<IBusinessRepository>(provider => new BusinessRepository(businessesXmlFilePath));
@@ -76,6 +80,7 @@ namespace bussiness_social_media
         {
             var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
             mainWindow.Show();
+           
             base.OnStartup(e);
         }
     }
