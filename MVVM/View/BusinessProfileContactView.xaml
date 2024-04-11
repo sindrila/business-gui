@@ -71,7 +71,10 @@
 		   FontSize="20"
 >
                 </Label>
+                <ItemsControl ItemsSource="{Binding FAQs}" Margin="30,350,0,0" Width="360" Grid.ColumnSpan="3" HorizontalAlignment="Left">
                 
+                
+                </ItemsControl>
             </Grid>
             <Grid >
                

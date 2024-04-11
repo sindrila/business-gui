@@ -70,6 +70,7 @@ namespace bussiness_social_media.MVVM.ViewModel
         {
             if(authenticationService.AuthenticateUser(Username, Password)) {
                 ErrorMessage = "";
+                //authenticationService.
                 _navigation.NavigateTo<HomeViewModel>();
             }
             else
