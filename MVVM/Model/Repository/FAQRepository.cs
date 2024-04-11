@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -28,7 +29,6 @@ namespace bussiness_social_media.MVVM.Model.Repository
             _xmlFilePath = xmlFilePath;
             _faqs = new List<FAQ>();
             LoadFAQsFromXml();
-            //SaveFAQsToXml();
         }
 
         ~FAQRepository()
@@ -71,7 +71,11 @@ namespace bussiness_social_media.MVVM.Model.Repository
                     _faqs = new List<FAQ>();
                 }
             }
-            catch { }
+            catch (Exception ex) 
+            {
+                MessageBox.Show("Something terrible, terrible has happened during the execution of the program. Show this to your local IT guy. FAQRepository.LoadFAQsFromXml():" + ex.Message);
+
+            }
         }
 
         private void SaveFAQsToXml()

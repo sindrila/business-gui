@@ -50,7 +50,7 @@ public class Post : IXmlSerializable
         // Read private fields from XML
         _id = int.Parse(reader.ReadElementString("_id"));
         _numberOfLikes = int.Parse(reader.ReadElementString("_numberOfLikes"));
-        _creationDate = DateTime.Parse(reader.ReadElementString("_creationDate"));
+        _creationDate = DateTime.ParseExact(reader.ReadElementString("_creationDate"), "dd-MM-yyyy HH:mm", null);
         _imagePath = reader.ReadElementString("_imagePath");
         _caption = reader.ReadElementString("_caption");
 
@@ -79,7 +79,7 @@ public class Post : IXmlSerializable
     {
         writer.WriteElementString("_id", _id.ToString());
         writer.WriteElementString("_numberOfLikes", _numberOfLikes.ToString());
-        writer.WriteElementString("_creationDate", _creationDate.ToString());
+        writer.WriteElementString("_creationDate", _creationDate.ToString("dd-MM-yyyy HH:mm"));
         writer.WriteElementString("_imagePath", _imagePath);
         writer.WriteElementString("_caption", _caption);
 

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -110,7 +111,11 @@ namespace bussiness_social_media.MVVM.Model.Repository
                     _users = new List<Account>();
                 }
             }
-            catch { }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something terrible, terrible has happened during the execution of the program. Show this to your local IT guy. UserRepository.LoadUsersFromXml():" + ex.Message);
+            }
         }
 
         private void SaveUsersToXml()

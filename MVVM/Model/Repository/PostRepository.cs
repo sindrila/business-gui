@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -25,18 +26,11 @@ namespace bussiness_social_media.MVVM.Model.Repository
 
         private static Random _random = new Random();
 
-        public PostRepository()
-        {
-            _posts = new List<Post>();
-            generate10RandomPosts();
-        }
 
         public PostRepository(string xmlFilePath)
         {
             _xmlFilePath = xmlFilePath;
             _posts = new List<Post>();
-            generate10RandomPosts();
-            SavePostsToXml();
             LoadPostsFromXml();
         }
 
@@ -45,24 +39,13 @@ namespace bussiness_social_media.MVVM.Model.Repository
             SavePostsToXml();
         }
 
-        private void generate10RandomPosts()
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                DateTime creationDate = DateTime.Now.AddDays(-_random.Next(1, 30));
-                string imagePath = $"Assets\\Images\\scat{i + 1}.jpg";
-                string caption = $"This is post number {i + 1}";
-                AddPost(creationDate, imagePath, caption);
-            }
-        }
-
         private void LoadPostsFromXml()
         {
             try
             {
                 if (File.Exists(_xmlFilePath))
                 {
-                    XmlSerializer serializer = new XmlSerializer(typeof(List<Post>), new XmlRootAttribute("ArrayOfPost"));
+                    XmlSerializer serializer = new XmlSerializer(typeof(Post), new XmlRootAttribute("Post"));
 
                     _posts = new List<Post>();
 
@@ -70,10 +53,8 @@ namespace bussiness_social_media.MVVM.Model.Repository
                     {
                         using (XmlReader reader = XmlReader.Create(fileStream))
                         {
-                            // Move to the first Post element
                             while (reader.ReadToFollowing("Post"))
                             {
-                                // Deserialize each Post element and add it to the list
                                 Post post = (Post)serializer.Deserialize(reader);
                                 _posts.Add(post);
                             }
@@ -82,11 +63,13 @@ namespace bussiness_social_media.MVVM.Model.Repository
                 }
                 else
                 {
-                    // Handle the case where the XML file doesn't exist
                     _posts = new List<Post>();
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something terrible, terrible has happened during the execution of the program. Show this to your local IT guy. PostRepository.LoadPostsFromXml():" + ex.Message);
+            }
         }
 
         private void SavePostsToXml()
