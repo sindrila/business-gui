@@ -14,7 +14,7 @@ public class Review : IXmlSerializable
     private DateTime _dateOfCreation;
     private string _adminComment;
 
-    public Review(int id, string userName, int rating, string comment, string title, string imagePath, DateTime dateOfCreation, string adminComment)
+    public Review(int id, string userName, int rating, string comment, string title, string imagePath, DateTime dateOfCreation)
     {
         _id = id;
         _userName = userName;
@@ -23,7 +23,6 @@ public class Review : IXmlSerializable
         _title = title;
         _imagePath = imagePath;
         _dateOfCreation = dateOfCreation;
-        _adminComment = adminComment;
     }
 
     public Review() { }

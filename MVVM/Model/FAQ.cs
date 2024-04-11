@@ -23,9 +23,6 @@ public class FAQ : IXmlSerializable
     public int GetId() { return _id; }
     public void SetQuestion(string question) { _question = question; }
     public void SetAnswer(string answer) { _answer = answer; }
-
-    // Implement IXmlSerializable interface
-
     public XmlSchema GetSchema()
     {
         return null;
@@ -38,20 +35,9 @@ public class FAQ : IXmlSerializable
         reader.ReadStartElement();
         if (!isEmptyElement)
         {
-
-            //_id = int.Parse(reader.ReadElementString("_id"));
-            //_numberOfLikes = int.Parse(reader.ReadElementString("_numberOfLikes"));
-            //_creationDate = DateTime.Parse(reader.ReadElementString("_creationDate"));
-            //_imagePath = reader.ReadElementString("_imagePath");
-            //_caption = reader.ReadElementString("_caption");
-
             _id = int.Parse(reader.ReadElementString("_id"));
             _question = reader.ReadElementString("_question");
             _answer = reader.ReadElementString("_answer");
-
-            //_id = int.Parse(reader.ReadElementContentAsString("Id", ""));
-            //_question = reader.ReadElementContentAsString("Question", "");
-            //_answer = reader.ReadElementContentAsString("Answer", "");
             reader.ReadEndElement();
         }
     }

@@ -13,8 +13,8 @@ namespace bussiness_social_media.MVVM.Model.Repository
     {
         List<FAQ> GetAllFAQs();
         FAQ GetFAQById(int id);
-        void AddFAQ(string question, string answer);
-        void UpdateFAQ(FAQ faq);
+        int AddFAQ(string faqQuestion, string faqAnswer);
+        void UpdateFAQ(int faqID, string newFaqQuestion, string newFaqAnswer);
         void DeleteFAQ(int id);
     }
 
@@ -86,20 +86,22 @@ namespace bussiness_social_media.MVVM.Model.Repository
             return _faqs.FirstOrDefault(f => f.GetId() == id);
         }
 
-        public void AddFAQ(string question, string answer)
+        public int AddFAQ(string faqQuestion, string faqAnswer)
         {
-            FAQ faq = new FAQ(_getNextId(), question, answer);
+            int newID = _getNextId();
+            FAQ faq = new FAQ(newID, faqQuestion, faqAnswer);
             _faqs.Add(faq);
             SaveFAQsToXml();
+            return newID;
         }
 
-        public void UpdateFAQ(FAQ faq)
+        public void UpdateFAQ(int faqID, string newFaqQuestion, string newFaqAnswer)
         {
-            var existingFAQ = _faqs.FirstOrDefault(f => f.GetId() == faq.GetId());
+            var existingFAQ = _faqs.FirstOrDefault(f => f.GetId() ==faqID);
             if (existingFAQ != null)
             {
-                existingFAQ.SetQuestion(faq.GetQuestion());
-                existingFAQ.SetAnswer(faq.GetAnswer());
+                existingFAQ.SetQuestion(newFaqQuestion);
+                existingFAQ.SetAnswer(newFaqAnswer);
                 SaveFAQsToXml();
             }
         }

@@ -7,11 +7,11 @@ namespace business_social_media.Services
     {
         List<Post> GetAllPosts();
         Post GetPostById(int id);
-        void AddPost(DateTime creationDate, string imagePath, string caption);
-        void UpdatePost(Post post);
+        int AddPost(DateTime creationDate, string imagePath, string caption);
+        void UpdatePost(int id, DateTime newCreationDate, string newImagePath, string newCaption);
         void DeletePost(int id);
     }
-    public class PostService
+    public class PostService : IPostService 
     {
         private IPostRepository _postRepository;
 
@@ -30,20 +30,22 @@ namespace business_social_media.Services
             return _postRepository.GetPostById(id);
         }
 
-        public void AddPost(DateTime creationDate, string imagePath, string caption)
+        public int AddPost(DateTime creationDate, string imagePath, string caption)
 
         {
-            _postRepository.AddPost(creationDate, imagePath, caption);
+            return _postRepository.AddPost(creationDate, imagePath, caption);
         }
 
-        public void UpdatePost(Post post)
+        public void UpdatePost(int id, DateTime newCreationDate, string newImagePath, string newCaption)
         {
-            _postRepository.UpdatePost(post);
+            Post postToUpdate = GetPostById(id);
+            _postRepository.UpdatePost(postToUpdate);
         }
 
         public void DeletePost(int id)
         {
             _postRepository.DeletePost(id);
         }
+
     }
 }

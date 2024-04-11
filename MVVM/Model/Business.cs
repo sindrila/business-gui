@@ -7,39 +7,22 @@ using System.IO;
 [Serializable]
 public class Business : IXmlSerializable
 {
-    [XmlElement ("_id")]
     private int _id;
-    [XmlElement("_name")]
     private string _name;
-    [XmlElement("_description")]
     private string _description;
-    [XmlElement("_category")]
     private string _category;
-    [XmlElement("_logo")]
     private string _logo;
-    [XmlElement("_banner")]
     private string _banner;
-    [XmlElement("_logoFullPath")]
-    private string _logoShort;
-    [XmlElement("_bannerFullPath")]
+    private string _logoFileName;
     private string _bannerShort;
-    [XmlElement("_phoneNumber")]
     private string _phoneNumber;
-    [XmlElement("_email")]
     private string _email;
-    [XmlElement("_website")]
     private string _website;
-    [XmlElement("_address")]
     private string _address;
-    [XmlElement("_createdAt")]
     private DateTime _createdAt;
-    [XmlElement("_managerUsernames")]
     private List<string> _managerUsernames = new List<string>();
-    [XmlElement("_postIds")]
     private List<int> _postIds = new List<int>();
-    [XmlElement("_reviewIds")]
     private List<int> _reviewIds = new List<int>();
-    [XmlElement("_faqIds")]
     private List<int> _faqIds = new List<int>();
 
     public int Id => _id;
@@ -82,13 +65,13 @@ public class Business : IXmlSerializable
         _faqIds = faqIds;
     }
 
-    public Business(int id, string name, string description, string category, string logoShort, string logo, string bannerShort, string banner, string phoneNumber, string email, string website, string address, DateTime createdAt, List<string> managerUsernames, List<int> postIds, List<int> reviewIds, List<int> faqIds)
+    public Business(int id, string name, string description, string category, string logoFileName, string logo, string bannerShort, string banner, string phoneNumber, string email, string website, string address, DateTime createdAt, List<string> managerUsernames, List<int> postIds, List<int> reviewIds, List<int> faqIds)
     {
         _id = id;
         _name = name;
         _description = description;
         _category = category;
-        _logoShort = logoShort;
+        _logoFileName = logoFileName;
         _logo = logo;
         _bannerShort = bannerShort;
         _banner = banner;
@@ -113,15 +96,12 @@ public class Business : IXmlSerializable
     public void SetWebsite(string website) => _website = website;
     public void SetAddress(string address) => _address = address;
     public void SetCreatedAt(DateTime createdAt) => _createdAt = createdAt;
-    public void SetLogoShort(string logoShort) => _logoShort = logoShort;
+    public void SetLogoFileName(string logoFileName) => _logoFileName = logoFileName;
     public void SetBannerShort(string bannerShort) => _bannerShort = bannerShort;
     public void SetManagerUsernames(List<string> usernames) => _managerUsernames = usernames;
     public void SetPostIds(List<int> postIds) => _postIds = postIds;
     public void SetReviewIds(List<int> reviewIds) => _reviewIds = reviewIds;
     public void SetFaqIds(List<int> faqIds) => _faqIds = faqIds;
-    public void AddPostId(int postId) => _postIds.Add(postId);
-    public void AddReviewId(int reviewId) => _reviewIds.Add(reviewId);
-    public void AddFaqId(int faqId) => _faqIds.Add(faqId);
 
     public void AddManager(string managerUsername)
     {
@@ -135,14 +115,13 @@ public class Business : IXmlSerializable
 
     public XmlSchema GetSchema()
     {
-        return null; // Not needed
+        return null;
     }
 
     public void ReadXml(XmlReader reader)
     {
-        reader.ReadStartElement("Business"); // Move to the <Business> element
+        reader.ReadStartElement("Business"); 
 
-        // Read private fields from XML
         _id = int.Parse(reader.ReadElementString("_id"));
         _name = reader.ReadElementString("_name");
         _description = reader.ReadElementString("_description");
@@ -156,11 +135,10 @@ public class Business : IXmlSerializable
         int index = basePath.IndexOf(binDirectory);
         pathUntilBin = basePath.Substring(0, index);
 
-        // Placeholder values for logo, banner, etc.
-        _logoShort = reader.ReadElementString("_logo");
+        _logoFileName = reader.ReadElementString("_logo");
         _bannerShort = reader.ReadElementString("_banner");
 
-         _logo = Path.Combine(pathUntilBin, _logoShort);
+         _logo = Path.Combine(pathUntilBin, _logoFileName);
         _banner = Path.Combine(pathUntilBin, _bannerShort);
 
         _phoneNumber = reader.ReadElementString("_phoneNumber");
@@ -185,7 +163,7 @@ public class Business : IXmlSerializable
 
         if (reader.IsStartElement("_postIds"))
         {
-            if (!reader.IsEmptyElement) // Check if the element is empty
+            if (!reader.IsEmptyElement) 
             {
                 reader.ReadStartElement("_postIds");
                 while (reader.NodeType != XmlNodeType.EndElement)
@@ -199,18 +177,17 @@ public class Business : IXmlSerializable
                         reader.Read();
                     }
                 }
-                reader.ReadEndElement(); // End _postIds element
+                reader.ReadEndElement(); 
             }
             else
             {
-                reader.Read(); // Skip reading the empty element
+                reader.Read(); 
             }
         }
 
-        // Read _reviewIds if it exists
         if (reader.IsStartElement("_reviewIds"))
         {
-            if (!reader.IsEmptyElement) // Check if the element is empty
+            if (!reader.IsEmptyElement)
             {
                 reader.ReadStartElement("_reviewIds");
                 while (reader.NodeType != XmlNodeType.EndElement)
@@ -224,17 +201,17 @@ public class Business : IXmlSerializable
                         reader.Read();
                     }
                 }
-                reader.ReadEndElement(); // End _reviewIds element
+                reader.ReadEndElement();
             }
             else
             {
-                reader.Read(); // Skip reading the empty element
+                reader.Read(); 
             }
         }
 
         if (reader.IsStartElement("_faqIds"))
         {
-            if (!reader.IsEmptyElement) // Check if the element is empty
+            if (!reader.IsEmptyElement) 
             {
                 reader.ReadStartElement("_faqIds");
                 while (reader.NodeType != XmlNodeType.EndElement)
@@ -248,16 +225,16 @@ public class Business : IXmlSerializable
                         reader.Read();
                     }
                 }
-                reader.ReadEndElement(); // End _reviewIds element
+                reader.ReadEndElement();
             }
             else
             {
-                reader.Read(); // Skip reading the empty element
+                reader.Read(); 
             }
         }
 
 
-        reader.ReadEndElement(); // Move past the </Business> element
+        reader.ReadEndElement();
     }
 
     public void WriteXml(XmlWriter writer)
@@ -266,7 +243,7 @@ public class Business : IXmlSerializable
         writer.WriteElementString("_name", _name);
         writer.WriteElementString("_description", _description);
         writer.WriteElementString("_category", _category);
-        writer.WriteElementString("_logo", _logoShort);
+        writer.WriteElementString("_logo", _logoFileName);
         writer.WriteElementString("_banner", _bannerShort);
         writer.WriteElementString("_phoneNumber", _phoneNumber);
         writer.WriteElementString("_email", _email);
@@ -274,23 +251,20 @@ public class Business : IXmlSerializable
         writer.WriteElementString("_address", _address);
         writer.WriteElementString("_createdAt", _createdAt.ToString());
 
-        // Write _managerUsernames
         writer.WriteStartElement("_managerUsernames");
         foreach (string username in _managerUsernames)
         {
             writer.WriteElementString("username", username);
         }
-        writer.WriteEndElement(); // End _managerUsernames element
+        writer.WriteEndElement(); 
 
-        // Write _postIds
         writer.WriteStartElement("_postIds");
         foreach (int postId in _postIds)
         {
             writer.WriteElementString("postId", postId.ToString());
         }
-        writer.WriteEndElement(); // End _postIds element
+        writer.WriteEndElement(); 
 
-        // Write _reviewIds
         writer.WriteStartElement("_reviewIds");
         foreach (int reviewId in _reviewIds)
         {
