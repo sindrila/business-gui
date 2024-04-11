@@ -1,18 +1,25 @@
-﻿using bussiness_social_media.Core;
+﻿using business_social_media.Services;
+using bussiness_social_media.Core;
+using bussiness_social_media.MVVM.Model.Repository;
 using bussiness_social_media.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace bussiness_social_media.MVVM.ViewModel
 {
     public class RegisterViewModel : Core.ViewModel
     {
+        private IUserRepository _userRepository;
         private INavigationService _navigation;
+        private AuthenticationService authenticationService;
 
-        public INavigationService Navigation
+        private string _username;
+        private string _password;
+        public INavigationService NavigationService
         {
             get => _navigation;
             set
@@ -22,14 +29,48 @@ namespace bussiness_social_media.MVVM.ViewModel
             }
         }
 
-        public RelayCommand NavigateToHomeCommand { get; set; }
-        public RelayCommand NavigateToCreateNewBusinessViewCommand { get; set; }
-        public RegisterViewModel(INavigationService navigationService)
+        public string Username
         {
-            Navigation = navigationService;
-            NavigateToHomeCommand = new RelayCommand(o => { Navigation.NavigateTo<HomeViewModel>(); }, o => true);
-            NavigateToCreateNewBusinessViewCommand = new RelayCommand(o => { Navigation.NavigateTo<CreateNewBusinessViewModel>(); }, o => true);
-            Navigation.NavigateTo<HomeViewModel>();
+            get => _username;
+            set
+            {
+                _username = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Password
+        {
+            get => _password;
+            set
+            {
+                _password = value;
+                OnPropertyChanged();
+            }
+        }
+       
+        public RelayCommand RegisterCommand { get; set; }
+        private void Register()
+        {
+            if (authenticationService.AuthenticateUser(Username, Password))
+            {
+                MessageBox.Show("User already registered!", "Alert", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            else
+            {
+                Account newAccount = new Account(Username, Password);
+                _userRepository.AddAccount(newAccount);
+
+            }
+
+        }
+        public RegisterViewModel(INavigationService navigationService, AuthenticationService authentication,IUserRepository userRepository)
+        {
+            NavigationService = navigationService;
+            authenticationService = authentication;
+            _userRepository = userRepository;
+            RegisterCommand = new RelayCommand(o => { Register(); }, o => true);
+
         }
     }
 }
