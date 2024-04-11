@@ -12,7 +12,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
     {
         List<Review> GetAllReviews();
         Review GetReviewById(int id);
-        void AddReview(int businessId, int userId, int rating, string comment, string title, string imagePath, DateTime dateOfCreation, string adminComment);
+        void AddReview(string userName, int rating, string comment, string title, string imagePath, DateTime dateOfCreation, string adminComment);
         void UpdateReview(Review review);
         void DeleteReview(int id);
     }
@@ -72,9 +72,9 @@ namespace bussiness_social_media.MVVM.Model.Repository
             return _reviews.FirstOrDefault(r => r.GetReviewId() == id);
         }
 
-        public void AddReview(int businessId, int userId, int rating, string comment, string title, string imagePath, DateTime dateOfCreation, string adminComment)
+        public void AddReview(string userName, int rating, string comment, string title, string imagePath, DateTime dateOfCreation, string adminComment)
         {
-            Review review = new Review(_getNextId(), businessId, userId, rating, comment, title, imagePath, dateOfCreation, adminComment);
+            Review review = new Review(_getNextId(), userName, rating, comment, title, imagePath, dateOfCreation, adminComment);
             _reviews.Add(review);
             SaveReviewsToXml();
         }
@@ -84,8 +84,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
             var existingReview = _reviews.FirstOrDefault(r => r.GetReviewId() == review.GetReviewId());
             if (existingReview != null)
             {
-                existingReview.SetBusinessId(review.GetBusinessId());
-                existingReview.SetUserId(review.GetUserId());
+                existingReview.SetUserName(review.GetUserName());
                 existingReview.SetRating(review.GetRating());
                 existingReview.SetComment(review.GetComment());
                 existingReview.SetTitle(review.GetTitle());

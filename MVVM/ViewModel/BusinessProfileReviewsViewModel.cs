@@ -78,7 +78,6 @@ namespace bussiness_social_media.MVVM.ViewModel
         private void LeaveReview()
         {
             Review review = new Review();
-            review.SetBusinessId(_currentBusiness.Id);
             review.SetComment(ReviewDescription);
 
         }
