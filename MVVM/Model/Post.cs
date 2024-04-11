@@ -20,7 +20,7 @@ public class Post : IXmlSerializable
     public string Caption => _caption;
     public List<int> CommentIds => _commentIds;
 
-
+    public Post() { }
     public Post(int id, DateTime creationDate, string imagePath, string caption)
     {
         _id = id;

@@ -1,23 +1,73 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ArrayOfUsers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Account>
-    <_username>admin</_username>
-    <_password>482c811da5d5b4bc6d497ffa98491e38</_password>
-  </Account>
-  <Account>
-    <_username>alice_smith</_username>
-    <_password>9fcc06d1c2909ca627807ad8030d787d</_password>
-  </Account>
-  <Account>
-    <_username>bob_jackson</_username>
-    <_password>e99a18c428cb38d5f260853678922e03</_password>
-  </Account>
-  <Account>
-    <_username>ana_maria</_username>
-    <_password>971326019cdc54a74376d7067d3b5a79</_password>
-  </Account>
-  <Account>
-    <_username>kevin_smith</_username>
-    <_password>101fe98fb8973c4306dd9eee973a4c0b</_password>
-  </Account>
-</ArrayOfUsers>
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPost xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Post>
+    <_id>1</_id>
+    <_numberOfLikes>0</_numberOfLikes>
+    <_creationDate>3/31/2024 5:35:26 PM</_creationDate>
+    <_imagePath>Assets\Images\scat1.jpg</_imagePath>
+    <_caption>This is post number 1</_caption>
+  </Post>
+  <Post>
+    <_id>2</_id>
+    <_numberOfLikes>0</_numberOfLikes>
+    <_creationDate>3/23/2024 5:35:27 PM</_creationDate>
+    <_imagePath>Assets\Images\scat2.jpg</_imagePath>
+    <_caption>This is post number 2</_caption>
+  </Post>
+  <Post>
+    <_id>3</_id>
+    <_numberOfLikes>0</_numberOfLikes>
+    <_creationDate>3/31/2024 5:35:27 PM</_creationDate>
+    <_imagePath>Assets\Images\scat3.jpg</_imagePath>
+    <_caption>This is post number 3</_caption>
+  </Post>
+  <Post>
+    <_id>4</_id>
+    <_numberOfLikes>0</_numberOfLikes>
+    <_creationDate>4/7/2024 5:35:27 PM</_creationDate>
+    <_imagePath>Assets\Images\scat4.jpg</_imagePath>
+    <_caption>This is post number 4</_caption>
+  </Post>
+  <Post>
+    <_id>5</_id>
+    <_numberOfLikes>0</_numberOfLikes>
+    <_creationDate>3/25/2024 5:35:27 PM</_creationDate>
+    <_imagePath>Assets\Images\scat5.jpg</_imagePath>
+    <_caption>This is post number 5</_caption>
+  </Post>
+  <Post>
+    <_id>6</_id>
+    <_numberOfLikes>0</_numberOfLikes>
+    <_creationDate>3/25/2024 5:35:27 PM</_creationDate>
+    <_imagePath>Assets\Images\scat6.jpg</_imagePath>
+    <_caption>This is post number 6</_caption>
+  </Post>
+  <Post>
+    <_id>7</_id>
+    <_numberOfLikes>0</_numberOfLikes>
+    <_creationDate>4/4/2024 5:35:27 PM</_creationDate>
+    <_imagePath>Assets\Images\scat7.jpg</_imagePath>
+    <_caption>This is post number 7</_caption>
+  </Post>
+  <Post>
+    <_id>8</_id>
+    <_numberOfLikes>0</_numberOfLikes>
+    <_creationDate>4/2/2024 5:35:27 PM</_creationDate>
+    <_imagePath>Assets\Images\scat8.jpg</_imagePath>
+    <_caption>This is post number 8</_caption>
+  </Post>
+  <Post>
+    <_id>9</_id>
+    <_numberOfLikes>0</_numberOfLikes>
+    <_creationDate>3/19/2024 5:35:27 PM</_creationDate>
+    <_imagePath>Assets\Images\scat9.jpg</_imagePath>
+    <_caption>This is post number 9</_caption>
+  </Post>
+  <Post>
+    <_id>10</_id>
+    <_numberOfLikes>0</_numberOfLikes>
+    <_creationDate>3/18/2024 5:35:27 PM</_creationDate>
+    <_imagePath>Assets\Images\scat10.jpg</_imagePath>
+    <_caption>This is post number 10</_caption>
+  </Post>
+</ArrayOfPost>

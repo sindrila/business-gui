@@ -26,7 +26,7 @@ public class Review : IXmlSerializable
         _adminComment = adminComment;
     }
 
-    public Review() { this._id = this.GetReviewId() + 1; }
+    public Review() { }
     public int GetRating() { return _rating; }
     public int GetReviewId() { return _id; }
     public string GetComment() { return _comment; }
