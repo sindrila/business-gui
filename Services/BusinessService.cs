@@ -9,7 +9,7 @@ namespace bussiness_social_media.Services
     {
         List<Business> GetAllBusinesses();
         Business GetBusinessById(int id);
-        void AddBusiness(string name, string description, string category, string logo, string banner, string phoneNumber, string email, string website, string address, DateTime createdAt, List<string> managerUsernames, List<int> postIds, List<int> reviewIds);
+        void AddBusiness(string name, string description, string category, string logo, string banner, string phoneNumber, string email, string website, string address, DateTime createdAt, List<string> managerUsernames, List<int> postIds, List<int> reviewIds, List<int> faqIds);
         void UpdateBusiness(Business business);
         void DeleteBusiness(int id);
         List<Business> SearchBusinesses(string keyword);
@@ -39,9 +39,9 @@ namespace bussiness_social_media.Services
             return _businessRepository.GetBusinessById(id);
         }
 
-        public void AddBusiness(string name, string description, string category, string logo, string banner, string phoneNumber, string email, string website, string address, DateTime createdAt, List<string> managerUsernames, List<int> postIds, List<int> reviewIds)
+        public void AddBusiness(string name, string description, string category, string logo, string banner, string phoneNumber, string email, string website, string address, DateTime createdAt, List<string> managerUsernames, List<int> postIds, List<int> reviewIds, List<int> faqIds)
         {
-            _businessRepository.AddBusiness(name, description, category, logo, banner, phoneNumber, email, website, address, createdAt, managerUsernames, postIds, reviewIds);
+            _businessRepository.AddBusiness(name, description, category, logo, banner, phoneNumber, email, website, address, createdAt, managerUsernames, postIds, reviewIds, faqIds);
         }
 
         public void UpdateBusiness(Business business)

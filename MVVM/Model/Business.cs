@@ -39,6 +39,8 @@ public class Business : IXmlSerializable
     private List<int> _postIds = new List<int>();
     [XmlElement("_reviewIds")]
     private List<int> _reviewIds = new List<int>();
+    [XmlElement("_faqIds")]
+    private List<int> _faqIds = new List<int>();
 
     public int Id => _id;
     public string Name => _name;
@@ -55,11 +57,13 @@ public class Business : IXmlSerializable
     public List<int> PostIds => _postIds;
     public List<int> ReviewIds => _reviewIds;
 
+    public List<int> FaqIds => _faqIds;
+
     public Business()
     {
 
     }
-    public Business(int id, string name, string description, string category, string logo, string banner, string phoneNumber, string email, string website, string address, DateTime createdAt, List<string> managerUsernames, List<int> postIds, List<int> reviewIds)
+    public Business(int id, string name, string description, string category, string logo, string banner, string phoneNumber, string email, string website, string address, DateTime createdAt, List<string> managerUsernames, List<int> postIds, List<int> reviewIds, List<int> faqIds)
     {
         _id = id;
         _name = name;
@@ -75,9 +79,10 @@ public class Business : IXmlSerializable
         _managerUsernames = managerUsernames;
         _postIds = postIds;
         _reviewIds = reviewIds;
+        _faqIds = faqIds;
     }
 
-    public Business(int id, string name, string description, string category, string logoShort, string logo, string bannerShort, string banner, string phoneNumber, string email, string website, string address, DateTime createdAt, List<string> managerUsernames, List<int> postIds, List<int> reviewIds)
+    public Business(int id, string name, string description, string category, string logoShort, string logo, string bannerShort, string banner, string phoneNumber, string email, string website, string address, DateTime createdAt, List<string> managerUsernames, List<int> postIds, List<int> reviewIds, List<int> faqIds)
     {
         _id = id;
         _name = name;
@@ -95,6 +100,7 @@ public class Business : IXmlSerializable
         _managerUsernames = managerUsernames;
         _postIds = postIds;
         _reviewIds = reviewIds;
+        _faqIds = faqIds;
     }
 
     public void SetName(string name) => _name = name;
@@ -112,8 +118,10 @@ public class Business : IXmlSerializable
     public void SetManagerUsernames(List<string> usernames) => _managerUsernames = usernames;
     public void SetPostIds(List<int> postIds) => _postIds = postIds;
     public void SetReviewIds(List<int> reviewIds) => _reviewIds = reviewIds;
+    public void SetFaqIds(List<int> faqIds) => _faqIds = faqIds;
     public void AddPostId(int postId) => _postIds.Add(postId);
     public void AddReviewId(int reviewId) => _reviewIds.Add(reviewId);
+    public void AddFaqId(int faqId) => _faqIds.Add(faqId);
 
     public void AddManager(string managerUsername)
     {
@@ -224,6 +232,30 @@ public class Business : IXmlSerializable
             }
         }
 
+        if (reader.IsStartElement("_faqIds"))
+        {
+            if (!reader.IsEmptyElement) // Check if the element is empty
+            {
+                reader.ReadStartElement("_faqIds");
+                while (reader.NodeType != XmlNodeType.EndElement)
+                {
+                    if (reader.NodeType == XmlNodeType.Element && reader.LocalName == "faqId")
+                    {
+                        _reviewIds.Add(int.Parse(reader.ReadElementString("faqId")));
+                    }
+                    else
+                    {
+                        reader.Read();
+                    }
+                }
+                reader.ReadEndElement(); // End _reviewIds element
+            }
+            else
+            {
+                reader.Read(); // Skip reading the empty element
+            }
+        }
+
 
         reader.ReadEndElement(); // Move past the </Business> element
     }
@@ -263,6 +295,13 @@ public class Business : IXmlSerializable
         foreach (int reviewId in _reviewIds)
         {
             writer.WriteElementString("reviewId", reviewId.ToString());
+        }
+        writer.WriteEndElement();
+
+        writer.WriteStartElement("_faqIds");
+        foreach (int reviewId in _reviewIds)
+        {
+            writer.WriteElementString("faqId", reviewId.ToString());
         }
         writer.WriteEndElement();
 
