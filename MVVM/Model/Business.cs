@@ -35,6 +35,10 @@ public class Business : IXmlSerializable
     private DateTime _createdAt;
     [XmlElement("_managerUsernames")]
     private List<string> _managerUsernames = new List<string>();
+    [XmlElement("_postIds")]
+    private List<int> _postIds = new List<int>();
+    [XmlElement("_reviewIds")]
+    private List<int> _reviewIds = new List<int>();
 
     public int Id => _id;
     public string Name => _name;
@@ -47,14 +51,15 @@ public class Business : IXmlSerializable
     public string Website => _website;
     public string Address => _address;
     public DateTime CreatedAt => _createdAt;
-
     public List<string> ManagerUsernames => _managerUsernames;
+    public List<int> PostIds => _postIds;
+    public List<int> ReviewIds => _reviewIds;
 
     public Business()
     {
 
     }
-    public Business(int id, string name, string description, string category, string logo, string banner, string phoneNumber, string email, string website, string address, DateTime createdAt, List<string> managerUsernames)
+    public Business(int id, string name, string description, string category, string logo, string banner, string phoneNumber, string email, string website, string address, DateTime createdAt, List<string> managerUsernames, List<int> postIds, List<int> reviewIds)
     {
         _id = id;
         _name = name;
@@ -68,6 +73,28 @@ public class Business : IXmlSerializable
         _address = address;
         _createdAt = createdAt;
         _managerUsernames = managerUsernames;
+        _postIds = postIds;
+        _reviewIds = reviewIds;
+    }
+
+    public Business(int id, string name, string description, string category, string logoShort, string logo, string bannerShort, string banner, string phoneNumber, string email, string website, string address, DateTime createdAt, List<string> managerUsernames, List<int> postIds, List<int> reviewIds)
+    {
+        _id = id;
+        _name = name;
+        _description = description;
+        _category = category;
+        _logoShort = logoShort;
+        _logo = logo;
+        _bannerShort = bannerShort;
+        _banner = banner;
+        _phoneNumber = phoneNumber;
+        _email = email;
+        _website = website;
+        _address = address;
+        _createdAt = createdAt;
+        _managerUsernames = managerUsernames;
+        _postIds = postIds;
+        _reviewIds = reviewIds;
     }
 
     public void SetName(string name) => _name = name;
@@ -80,10 +107,15 @@ public class Business : IXmlSerializable
     public void SetWebsite(string website) => _website = website;
     public void SetAddress(string address) => _address = address;
     public void SetCreatedAt(DateTime createdAt) => _createdAt = createdAt;
+    public void SetLogoShort(string logoShort) => _logoShort = logoShort;
+    public void SetBannerShort(string bannerShort) => _bannerShort = bannerShort;
+    public void SetManagerUsernames(List<string> usernames) => _managerUsernames = usernames;
+    public void SetPostIds(List<int> postIds) => _postIds = postIds;
+    public void SetReviewIds(List<int> reviewIds) => _reviewIds = reviewIds;
+    public void AddPostId(int postId) => _postIds.Add(postId);
+    public void AddReviewId(int reviewId) => _reviewIds.Add(reviewId);
 
-    public void SetManagerUsernames(List<string> managerUsernames) => _managerUsernames = managerUsernames;
-
-    public void addManager(string managerUsername)
+    public void AddManager(string managerUsername)
     {
         _managerUsernames.Add(managerUsername);
     }
@@ -141,16 +173,63 @@ public class Business : IXmlSerializable
                 reader.Read();
             }
         }
+        reader.ReadEndElement();
+
+        if (reader.IsStartElement("_postIds"))
+        {
+            if (!reader.IsEmptyElement) // Check if the element is empty
+            {
+                reader.ReadStartElement("_postIds");
+                while (reader.NodeType != XmlNodeType.EndElement)
+                {
+                    if (reader.NodeType == XmlNodeType.Element && reader.LocalName == "postId")
+                    {
+                        _postIds.Add(int.Parse(reader.ReadElementString("postId")));
+                    }
+                    else
+                    {
+                        reader.Read();
+                    }
+                }
+                reader.ReadEndElement(); // End _postIds element
+            }
+            else
+            {
+                reader.Read(); // Skip reading the empty element
+            }
+        }
+
+        // Read _reviewIds if it exists
+        if (reader.IsStartElement("_reviewIds"))
+        {
+            if (!reader.IsEmptyElement) // Check if the element is empty
+            {
+                reader.ReadStartElement("_reviewIds");
+                while (reader.NodeType != XmlNodeType.EndElement)
+                {
+                    if (reader.NodeType == XmlNodeType.Element && reader.LocalName == "reviewId")
+                    {
+                        _reviewIds.Add(int.Parse(reader.ReadElementString("reviewId")));
+                    }
+                    else
+                    {
+                        reader.Read();
+                    }
+                }
+                reader.ReadEndElement(); // End _reviewIds element
+            }
+            else
+            {
+                reader.Read(); // Skip reading the empty element
+            }
+        }
+
 
         reader.ReadEndElement(); // Move past the </Business> element
     }
 
     public void WriteXml(XmlWriter writer)
     {
-        // Write the <Business> element
-      
-
-        // Write private fields to XML
         writer.WriteElementString("_id", _id.ToString());
         writer.WriteElementString("_name", _name);
         writer.WriteElementString("_description", _description);
@@ -162,13 +241,30 @@ public class Business : IXmlSerializable
         writer.WriteElementString("_website", _website);
         writer.WriteElementString("_address", _address);
         writer.WriteElementString("_createdAt", _createdAt.ToString());
+
+        // Write _managerUsernames
         writer.WriteStartElement("_managerUsernames");
         foreach (string username in _managerUsernames)
         {
             writer.WriteElementString("username", username);
         }
-        writer.WriteEndElement(); // End the _managerUsernames element
+        writer.WriteEndElement(); // End _managerUsernames element
 
+        // Write _postIds
+        writer.WriteStartElement("_postIds");
+        foreach (int postId in _postIds)
+        {
+            writer.WriteElementString("postId", postId.ToString());
+        }
+        writer.WriteEndElement(); // End _postIds element
+
+        // Write _reviewIds
+        writer.WriteStartElement("_reviewIds");
+        foreach (int reviewId in _reviewIds)
+        {
+            writer.WriteElementString("reviewId", reviewId.ToString());
+        }
+        writer.WriteEndElement();
 
     }
 
