@@ -79,8 +79,25 @@ namespace bussiness_social_media
         protected override void OnStartup(StartupEventArgs e)
         {
             var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-            mainWindow.Show();
-           
+            //mainWindow.Show();
+
+
+            Comment comment1 = new Comment(1, "alexbigdick", "ew",DateTime.Now);
+            Comment comment2 = new Comment(1, "clacla", "amazing1",DateTime.Now);
+
+
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Comment>), new XmlRootAttribute("ArrayOfComments"));
+            List<Comment> comments = new List<Comment>();   
+            comment2.DateOfUpdate= DateTime.Now;
+            comments.Add(comment1);
+            comments.Add(comment2);
+
+            using (FileStream fileStream = new FileStream("comments.xml", FileMode.Create))
+            {
+                serializer.Serialize(fileStream, comments);
+            }
+
+            comment2.DateOfUpdate = DateTime.Now;
             base.OnStartup(e);
         }
     }
