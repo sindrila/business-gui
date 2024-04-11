@@ -8,8 +8,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="white">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-
         <Grid>
 
             <Grid.RowDefinitions>
@@ -42,7 +44,8 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="200"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="80"/>
                 </Grid.RowDefinitions>
 
                 <Image Grid.Row="0" Source="{Binding CurrentBusiness.Banner}" Stretch="Fill"/>
@@ -55,44 +58,12 @@
 		          >
                     </Label>
                 </Grid>
-                <Grid>
-                    <ItemsControl ItemsSource="{Binding Businesses}" Margin="0,60,0,0">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel Orientation="Horizontal" 
-                        HorizontalAlignment="Center"></WrapPanel
-                        >
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                            
-                        <ItemsControl.ItemContainerStyle>
-                            <Style TargetType="{x:Type ContentPresenter}">
-                                <Setter Property="Margin" Value="10"/>
-                            </Style>
-                        </ItemsControl.ItemContainerStyle>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Button Margin="10" BorderThickness="0" 
-                     Command="{Binding DataContext.NavigateToBusinessProfileViewCommand, 
-                               RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
-                     CommandParameter="{Binding}">
-                                    <StackPanel>
-                                        <Ellipse Width="50" Height="50">
-                                            <Ellipse.Fill>
-                                                <ImageBrush ImageSource="{Binding Logo}"/>
-                                            </Ellipse.Fill>
-                                        </Ellipse>
-
-                                        <TextBlock Text="{Binding Name}" FontSize="20" HorizontalAlignment="Center"/>
-                                        <Image Source="{Binding Banner}" Height="100" />
-                                    </StackPanel>
-                                </Button>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                <Grid Grid.Row ="2">
+                    <Button Content="Add post" Width="130"
+                        Visibility="{Binding IsCurrentUserManager, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 </Grid>
+
             </Grid>
         </Grid>
     </ScrollViewer>
-
 </UserControl>

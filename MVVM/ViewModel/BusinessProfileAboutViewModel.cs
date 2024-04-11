@@ -1,4 +1,5 @@
-﻿using bussiness_social_media.Core;
+﻿using business_social_media.Services;
+using bussiness_social_media.Core;
 using bussiness_social_media.MVVM.View;
 using bussiness_social_media.Services;
 using System;
@@ -14,8 +15,32 @@ namespace bussiness_social_media.MVVM.ViewModel
 
         private INavigationService _navigation;
         private IBusinessService _businessService;
+        private AuthenticationService _authenticationService;
 
         public Business _currentBusiness;
+
+        private bool _isCurrentUserManager;
+
+        public bool IsCurrentUserManager
+        {
+            get
+            {
+                if (_authenticationService.getIsLoggedIn())
+                {
+                    return _businessService.IsUserManagerOfBusiness(CurrentBusiness.Id,
+                        _authenticationService.CurrentUser.Username);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            set
+            {
+                _isCurrentUserManager = value;
+                OnPropertyChanged(nameof(IsCurrentUserManager));
+            }
+        }
 
         public INavigationService Navigation
         {
@@ -44,16 +69,17 @@ namespace bussiness_social_media.MVVM.ViewModel
         public RelayCommand NavigateToReviewsCommand { get; set; }
         public RelayCommand NavigateToContactCommand { get; set; }
         public RelayCommand NavigateToAboutCommand { get; set; }
-        public BusinessProfileAboutViewModel(INavigationService navigationService, IBusinessService businessService)
+        public BusinessProfileAboutViewModel(INavigationService navigationService, IBusinessService businessService, AuthenticationService authenticationService)
         {
             Navigation = navigationService;
             _businessService = businessService;
+            _authenticationService = authenticationService;
             NavigateToPostsCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileViewModel>(); }, o => true);
             NavigateToReviewsCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileReviewsViewModel>(); }, o => true);
             NavigateToContactCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileContactViewModel>(); }, o => true);
             NavigateToAboutCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileAboutViewModel>(); }, o => true);
             changeCurrrentBusiness();
-            // In this class, you have the instance of the business in currentBusiness. You can access it in the BusinessProfileView.xaml but I'm not quite sure how. Ask chat gpt, I tried something and I do not know if it works. It is currently 00:47 and I want to go to sleep
+            
 
         }
 
