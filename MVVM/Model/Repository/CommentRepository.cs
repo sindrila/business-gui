@@ -14,7 +14,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
     {
         List<Comment> GetAllComments();
         Comment GetCommentById(int id);
-        int AddComment(string username, string content, DateTime dateOfCreation, DateTime dateOfUpdate);
+        int AddComment(string username, string content, DateTime dateOfCreation);
         void UpdateComment(int id, string username, string content, DateTime dateOfCreation, DateTime dateOfUpdate);
         void DeleteComment(int id);
 
@@ -29,6 +29,8 @@ namespace bussiness_social_media.MVVM.Model.Repository
             _xmlFilePath = xmlFilePath;
             _comments = new List<Comment>();
             LoadCommentsFromXml();
+            //AddComment("cutiepie123", "Great work!", DateTime.Now);
+            //AddComment("blueskull", "i hate this lol", DateTime.Now);
             SaveCommentsToXml();
         }
 
@@ -67,7 +69,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something terrible, terrible has happened during the execution of the program. Show this to your local IT guy: " + ex.Message);
+                MessageBox.Show("Something terrible, terrible has happened during the execution of the program. Show this to your local IT guy. CommentRepository.LoadCommentsFromXml():" + ex.Message);
             }
         }
 
@@ -86,9 +88,13 @@ namespace bussiness_social_media.MVVM.Model.Repository
             return _comments.Count > 0 ? _comments.Max(comment => comment.Id) + 1 : 1;
         }
 
-        public int AddComment(string username, string content, DateTime dateOfCreation, DateTime dateOfUpdate)
+        public int AddComment(string username, string content, DateTime dateOfCreation)
         {
-            throw new NotImplementedException();
+            int newId = _getNextId();
+            Comment comment = new Comment(newId, username, content, dateOfCreation);
+            _comments.Add(comment);
+            SaveCommentsToXml();
+            return newId;
         }
 
         public void DeleteComment(int id)

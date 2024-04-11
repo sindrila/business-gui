@@ -114,7 +114,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
 
             catch (Exception ex)
             {
-                MessageBox.Show("Something terrible, terrible has happened during the execution of the program. Show this to your local IT guy: " + ex.Message);
+                MessageBox.Show("Something terrible, terrible has happened during the execution of the program. Show this to your local IT guy. UserRepository.LoadUsersFromXml():" + ex.Message);
             }
         }
 

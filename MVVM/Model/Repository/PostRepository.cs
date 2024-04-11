@@ -26,35 +26,17 @@ namespace bussiness_social_media.MVVM.Model.Repository
 
         private static Random _random = new Random();
 
-        public PostRepository()
-        {
-            _posts = new List<Post>();
-            generate10RandomPosts();
-        }
 
         public PostRepository(string xmlFilePath)
         {
             _xmlFilePath = xmlFilePath;
             _posts = new List<Post>();
-            //generate10RandomPosts();
-            //SavePostsToXml();
             LoadPostsFromXml();
         }
 
         ~PostRepository()
         {
             SavePostsToXml();
-        }
-
-        private void generate10RandomPosts()
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                DateTime creationDate = DateTime.Now.AddDays(-_random.Next(1, 30));
-                string imagePath = $"Assets\\Images\\scat{i + 1}.jpg";
-                string caption = $"This is post number {i + 1}";
-                AddPost(creationDate, imagePath, caption);
-            }
         }
 
         private void LoadPostsFromXml()
@@ -86,7 +68,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something terrible, terrible has happened during the execution of the program. Show this to your local IT guy: " + ex.Message);
+                MessageBox.Show("Something terrible, terrible has happened during the execution of the program. Show this to your local IT guy. PostRepository.LoadPostsFromXml():" + ex.Message);
             }
         }
 
