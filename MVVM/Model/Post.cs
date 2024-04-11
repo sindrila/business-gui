@@ -3,7 +3,6 @@
 public class Post
 {
     private int _id;
-    private int _businessId;
     private int _numberOfLikes;
     private DateTime _creationDate;
     private string _imagePath;
@@ -11,7 +10,6 @@ public class Post
     private List<Comment> _comments;
 
     public int Id => _id;
-    public int BusinessId => _businessId;
     public int NumberOfLikes => _numberOfLikes;
     public DateTime CreationDate => _creationDate;
     public string ImagePath => _imagePath;
