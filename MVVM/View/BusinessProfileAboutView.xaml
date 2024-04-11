@@ -6,16 +6,39 @@
              xmlns:local="clr-namespace:bussiness_social_media.MVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             Background="#FFFFFFFF">
+             Background="#3A3A3A">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <!-- Style for Label -->
+        <Style TargetType="Label">
+          <Setter Property="Foreground" Value="White"/>
+          <Setter Property="Margin" Value="0,10,0,0"/>
+          <Setter Property="VerticalAlignment" Value="Center"/>
+          <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+
+        <!-- Style for TextBox -->
+        <Style TargetType="TextBox">
+          <Setter Property="Width" Value="200"/>
+          <Setter Property="Height" Value="20"/>
+          <Setter Property="Margin" Value="0,0,0,10"/>
+        </Style>
+
+        <!-- Style for Button -->
+        <Style TargetType="Button">
+          <Setter Property="Height" Value="25"/>
+          <Setter Property="Margin" Value="0,15,0,0"/>
+          <Setter Property="Background" Value="#65B1C1"/>
+          <Setter Property="Foreground" Value="White"/>
+        </Style>
+
     </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
 
         <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="40"/>
             <RowDefinition/>
             <RowDefinition />
         </Grid.RowDefinitions>
