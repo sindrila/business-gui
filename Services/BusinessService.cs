@@ -58,6 +58,21 @@ namespace bussiness_social_media.Services
         {
            return _businessRepository.SearchBusinesses(keyword);
         }
+
+        public List<Business> GetBusinessesManagedBy(string username)
+        {
+            List<Business> businessesManagedByUser = new List<Business>();
+
+            foreach (Business business in _businessRepository.GetAllBusinesses())
+            {
+                if (business.ManagerUsernames.Contains(username))
+                {
+                    businessesManagedByUser.Add(business);
+                }
+            }
+
+            return businessesManagedByUser;
+        }
     }
 
 }
