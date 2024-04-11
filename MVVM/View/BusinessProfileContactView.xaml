@@ -7,6 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid>
         <Grid>
@@ -14,6 +17,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
                 <RowDefinition/>
+                
             </Grid.RowDefinitions>
 
 
@@ -38,7 +42,7 @@
             </TabPanel>
 
             <Grid
-    Grid.Row="1">
+                     Grid.Row="1">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="200"/>
@@ -103,6 +107,10 @@
                         </Label>
                     </StackPanel>
                 </Border>
+            </Grid>
+            <Grid>
+                <Button VerticalAlignment="Bottom" Content="Add a new FAQ" Height="80" Width="200"
+                        Visibility="{Binding IsCurrentUserManager, Converter={StaticResource BooleanToVisibilityConverter}}" />
             </Grid>
         </Grid>
     </ScrollViewer>

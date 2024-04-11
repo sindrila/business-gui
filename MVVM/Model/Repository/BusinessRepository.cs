@@ -195,6 +195,8 @@ namespace bussiness_social_media.MVVM.Model.Repository
 
         public List<Business> SearchBusinesses(string keyword)
         {
+            if(keyword == "")
+                return _businesses;
             var filteredBusinesses = _businesses.Where(b =>
             (string.IsNullOrEmpty(keyword) ||
             b.Name.Contains(keyword, StringComparison.OrdinalIgnoreCase) ||

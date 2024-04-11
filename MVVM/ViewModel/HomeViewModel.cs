@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace bussiness_social_media.MVVM.ViewModel
 {
@@ -14,13 +15,37 @@ namespace bussiness_social_media.MVVM.ViewModel
     {
         private INavigationService _navigation;
         private IBusinessService _businessService;
+        private List<Business> _businessList;
+
+        private string _searchToken;
+
+
+        private ObservableCollection<Business> _businesses;
         public ObservableCollection<Business> Businesses
         {
-            get
+            get => _businesses;
+            set
             {
-                return new ObservableCollection<Business>(_businessService.GetAllBusinesses());
+                _businesses = value;
+                OnPropertyChanged();
             }
         }
+
+        private void UpdateBusinessesCollection()
+        {
+            Businesses = new ObservableCollection<Business>(_businessList);
+        }
+
+        public List<Business> BusinessList
+        {
+            get => _businessList;
+            set
+            {
+                _businessList = value;
+                OnPropertyChanged();
+            }
+        }
+
         public INavigationService NavigationService
         {
             get => _navigation;
@@ -30,12 +55,26 @@ namespace bussiness_social_media.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-        
+
+        public string SearchToken
+        {
+            get => _searchToken;
+            set
+            {
+                _searchToken = value;
+                OnPropertyChanged();
+            }
+        }
+
         public RelayCommand NavigateToCreateNewBusinessViewCommand { get; set; }
         public RelayCommand NavigateToBusinessProfileViewCommand { get; set; }
 
+        public RelayCommand SearchBusinesessCommand { get; set; }
+
+
         public HomeViewModel(INavigationService navigationService, IBusinessService businessService)
         {
+            _searchToken = string.Empty;
             NavigationService = navigationService;
             NavigateToCreateNewBusinessViewCommand = new RelayCommand(o => { NavigationService.NavigateTo<CreateNewBusinessViewModel>(); }, o => true);
 
@@ -49,7 +88,15 @@ namespace bussiness_social_media.MVVM.ViewModel
                 }
             }, o => true);
             _businessService = businessService;
-            
+            _businessList = _businessService.GetAllBusinesses();
+            UpdateBusinessesCollection();
+
+            SearchBusinesessCommand = new RelayCommand(o => {
+                BusinessList = _businessService.SearchBusinesses(SearchToken);
+                UpdateBusinessesCollection();
+                }, o => true);
+
+
         }
 
         private void NavigateToBusinessProfile(object parameter)
