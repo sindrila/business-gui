@@ -33,8 +33,6 @@ namespace bussiness_social_media.MVVM.Model.Repository
         {
             _users = new List<Account>();
             _xmlFilePath = xmlFilePATH;
-            populateRepository();
-            SaveUsersToXml();
             LoadUsersFromXml();
         }
 
@@ -84,31 +82,35 @@ namespace bussiness_social_media.MVVM.Model.Repository
 
         private void LoadUsersFromXml()
         {
-            if (File.Exists(_xmlFilePath))
+            try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(Account), new XmlRootAttribute("User"));
-
-                _users = new List<Account>();
-
-                using (FileStream fileStream = new FileStream(_xmlFilePath, FileMode.Open))
+                if (File.Exists(_xmlFilePath))
                 {
-                    using (XmlReader reader = XmlReader.Create(fileStream))
+                    XmlSerializer serializer = new XmlSerializer(typeof(Account), new XmlRootAttribute("User"));
+
+                    _users = new List<Account>();
+
+                    using (FileStream fileStream = new FileStream(_xmlFilePath, FileMode.Open))
                     {
-                        // Move to the first Business element
-                        while (reader.ReadToFollowing("User"))
+                        using (XmlReader reader = XmlReader.Create(fileStream))
                         {
-                            // Deserialize each Business element and add it to the list
-                            Account user = (Account)serializer.Deserialize(reader);
-                            _users.Add(user);
+                            // Move to the first Business element
+                            while (reader.ReadToFollowing("User"))
+                            {
+                                // Deserialize each Business element and add it to the list
+                                Account user = (Account)serializer.Deserialize(reader);
+                                _users.Add(user);
+                            }
                         }
                     }
                 }
+                else
+                {
+                    // Handle the case where the XML file doesn't exist
+                    _users = new List<Account>();
+                }
             }
-            else
-            {
-                // Handle the case where the XML file doesn't exist
-                _users = new List<Account>();
-            }
+            catch { }
         }
 
         private void SaveUsersToXml()
@@ -157,6 +159,10 @@ namespace bussiness_social_media.MVVM.Model.Repository
         {
             using (MD5 md5Hash = MD5.Create())
             {
+                if (input is null)
+                {
+                    return "";
+                }
                 byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
 
                 StringBuilder sb = new StringBuilder();

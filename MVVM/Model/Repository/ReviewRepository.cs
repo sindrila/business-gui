@@ -38,28 +38,19 @@ namespace bussiness_social_media.MVVM.Model.Repository
 
         private void LoadReviewsFromXml()
         {
-<<<<<<< Updated upstream
-            if (File.Exists(_xmlFilePath))
-=======
-            try
->>>>>>> Stashed changes
-            {
+            try{
                 if (File.Exists(_xmlFilePath))
                 {
-<<<<<<< Updated upstream
                     using (XmlReader reader = XmlReader.Create(fileStream))
                     {
-                        // Move to the first Review element
-                        while (reader.ReadToFollowing("Review"))
-=======
-                    XmlSerializer serializer = new XmlSerializer(typeof(List<Review>), new XmlRootAttribute("ArrayOfReview"));
-
-                    _reviews = new List<Review>();
-
-                    using (FileStream fileStream = new FileStream(_xmlFilePath, FileMode.Open))
-                    {
-                        using (XmlReader reader = XmlReader.Create(fileStream))
->>>>>>> Stashed changes
+                        // Check if the XML file has a root element
+                        if (!reader.ReadToFollowing("ArrayOfReview"))
+                        {
+                            // Handle the case where the XML file doesn't have a root element
+                            _reviews = new List<Review>();
+                            return;
+                        }
+                      
                         {
                             // Move to the first Review element
                             while (reader.ReadToFollowing("Review"))
@@ -77,16 +68,9 @@ namespace bussiness_social_media.MVVM.Model.Repository
                     _reviews = new List<Review>();
                 }
             }
-<<<<<<< Updated upstream
-            else
-            {
-                // Handle the case where the XML file doesn't exist
-                _reviews = new List<Review>();
-            }
-=======
+
             catch { }
             
->>>>>>> Stashed changes
         }
 
         private void SaveReviewsToXml()

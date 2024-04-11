@@ -17,14 +17,15 @@ using System.Windows.Shapes;
 namespace bussiness_social_media.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for RegisterView.xaml
+    /// Interaction logic for LoginView.xaml
     /// </summary>
-    public partial class RegisterView : UserControl
+    public partial class LoginView : UserControl
     {
-        public RegisterView()
+        public LoginView()
         {
             InitializeComponent();
         }
+
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             if (DataContext is LoginViewModel viewModel)

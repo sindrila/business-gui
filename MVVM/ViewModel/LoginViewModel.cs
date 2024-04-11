@@ -1,24 +1,40 @@
 ﻿using business_social_media.Services;
 using bussiness_social_media.Core;
-using bussiness_social_media.MVVM.Model.Repository;
 using bussiness_social_media.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows;
+using System.Net.Mail;
+using System.Net;
+using System.Reflection;
+using System.Windows.Navigation;
 
 namespace bussiness_social_media.MVVM.ViewModel
 {
-    public class RegisterViewModel : Core.ViewModel
+    internal class LoginViewModel : Core.ViewModel
     {
-        private IUserRepository _userRepository;
         private INavigationService _navigation;
         private AuthenticationService authenticationService;
 
         private string _username;
         private string _password;
+        private string _errorMessage;
+
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged();
+            }
+        }
+
         public INavigationService NavigationService
         {
             get => _navigation;
@@ -48,30 +64,27 @@ namespace bussiness_social_media.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-       
-        public RelayCommand RegisterCommand { get; set; }
-        private void Register()
+
+        public RelayCommand LogInCommand { get; set; }
+        private void LogIn()
         {
-            if (authenticationService.AuthenticateUser(Username, Password))
-            {
-                MessageBox.Show("User already registered!", "Alert", MessageBoxButton.OK, MessageBoxImage.Warning);
+            if(authenticationService.AuthenticateUser(Username, Password)) {
+                ErrorMessage = "";
+                _navigation.NavigateTo<HomeViewModel>();
             }
             else
             {
-                Account newAccount = new Account(Username, Password);
-                _userRepository.AddAccount(newAccount);
-                NavigationService.NavigateTo<HomeViewModel>();
-
+                ErrorMessage = "Invalid username or password.";
             }
-
         }
-        public RegisterViewModel(INavigationService navigationService, AuthenticationService authentication,IUserRepository userRepository)
+
+        public LoginViewModel(INavigationService navigationService, AuthenticationService authentication)
         {
             NavigationService = navigationService;
             authenticationService = authentication;
-            _userRepository = userRepository;
-            RegisterCommand = new RelayCommand(o => { Register(); }, o => true);
+            LogInCommand = new RelayCommand(o => { LogIn();  }, o => true);
 
         }
+
     }
 }

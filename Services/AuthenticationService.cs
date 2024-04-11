@@ -9,9 +9,6 @@ using System.Threading;
 
 namespace business_social_media.Services
 {
-
-
-
     public class AuthenticationService
     {
         private IUserRepository _userRepository;
@@ -19,6 +16,17 @@ namespace business_social_media.Services
         private bool _isLoggedIn;
         private Timer _logoutTimer;
         private int _sessionDurationSeconds;
+        private Account currentUser;
+
+        public Account CurrentUser 
+        { 
+            get => currentUser; 
+            set
+            {
+                currentUser = value;
+ 
+            }
+        }
 
 
         public AuthenticationService(IUserRepository userRepository)
@@ -26,7 +34,7 @@ namespace business_social_media.Services
             _userRepository = userRepository;
             _sessionTokens = new Dictionary<string, DateTime>();
             _isLoggedIn = false;
-            _logoutTimer = new Timer(LogoutUser, null, Timeout.Infinite, Timeout.Infinite);
+            //_logoutTimer = new Timer(LogoutUser, null, Timeout.Infinite, Timeout.Infinite);
             _sessionDurationSeconds = 10;
         }
 
@@ -44,6 +52,8 @@ namespace business_social_media.Services
                 string sessionToken = Guid.NewGuid().ToString();
                 _sessionTokens.Add(sessionToken, DateTime.Now);
                 _isLoggedIn = true;
+
+                CurrentUser = new Account(username, password);
 
                 // Start the logout timer
                 //_logoutTimer.Change(_sessionDurationSeconds * 1000, Timeout.Infinite);

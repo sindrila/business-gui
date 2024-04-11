@@ -8,6 +8,7 @@ using System.Data;
 using System.Windows;
 using bussiness_social_media.MVVM.Model.Repository;
 using System.Reflection.PortableExecutable;
+using business_social_media.Services;
 
 namespace bussiness_social_media
 {
@@ -60,6 +61,8 @@ namespace bussiness_social_media
             services.AddSingleton<BusinessProfileReviewsViewModel>();
             services.AddSingleton<BusinessProfileContactViewModel>();
             services.AddSingleton<BusinessProfileAboutViewModel>();
+            services.AddSingleton<LoginViewModel>();
+            services.AddSingleton<AuthenticationService>();
             services.AddSingleton<RegisterViewModel>();
 
 
