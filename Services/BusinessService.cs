@@ -17,10 +17,16 @@ namespace bussiness_social_media.Services
     public class BusinessService : IBusinessService
     {
         private IBusinessRepository _businessRepository;
+        private IFAQRepository _faqRepository;
+        private IPostRepository _postRepository;
+        private IReviewRepository _reviewRepository;
 
-        public BusinessService(IBusinessRepository businessRepository)
+        public BusinessService(IBusinessRepository businessRepository, IFAQRepository faqRepository, IPostRepository postRepository, IReviewRepository reviewRepository)
         {
             _businessRepository = businessRepository;
+            _faqRepository = faqRepository;
+            _postRepository = postRepository;
+            _reviewRepository = reviewRepository;
         }
 
         public List<Business> GetAllBusinesses()
