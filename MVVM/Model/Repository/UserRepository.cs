@@ -109,7 +109,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
 
         private void SaveUsersToXml()
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Business>), new XmlRootAttribute("ArrayOfUsers"));
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Account>), new XmlRootAttribute("ArrayOfUsers"));
 
             using (FileStream fileStream = new FileStream(_xmlFilePath, FileMode.Create))
             {

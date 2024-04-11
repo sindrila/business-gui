@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace bussiness_social_media.MVVM.Model.Repository
@@ -40,9 +41,20 @@ namespace bussiness_social_media.MVVM.Model.Repository
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(List<Review>), new XmlRootAttribute("ArrayOfReview"));
 
+                _reviews = new List<Review>();
+
                 using (FileStream fileStream = new FileStream(_xmlFilePath, FileMode.Open))
                 {
-                    _reviews = (List<Review>)serializer.Deserialize(fileStream);
+                    using (XmlReader reader = XmlReader.Create(fileStream))
+                    {
+                        // Move to the first Review element
+                        while (reader.ReadToFollowing("Review"))
+                        {
+                            // Deserialize each Review element and add it to the list
+                            Review review = (Review)serializer.Deserialize(reader);
+                            _reviews.Add(review);
+                        }
+                    }
                 }
             }
             else
