@@ -7,7 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using Microsoft.Win32;
-using System.Windows.Media.Imaging; // Need to include this for ImageSource
+using System.Windows.Media.Imaging;
+using business_social_media.Services; // Need to include this for ImageSource
 
 namespace bussiness_social_media.MVVM.ViewModel
 {
@@ -15,6 +16,7 @@ namespace bussiness_social_media.MVVM.ViewModel
     {
         private INavigationService _navigation;
         private IBusinessService _businessService;
+        private readonly AuthenticationService _authenticationService;
         private Business _currentBusiness;
         private Review _currentReview;
         private string _imagePath;
@@ -22,6 +24,28 @@ namespace bussiness_social_media.MVVM.ViewModel
         // Property to hold the image source of the current business
         private ImageSource _businessImage;
         private string _reviewDescription;
+        private bool _isCurrentUserManager;
+
+        public bool IsCurrentUserManager
+        {
+            get
+            {
+                if (_authenticationService.getIsLoggedIn())
+                {
+                    return !_businessService.IsUserManagerOfBusiness(CurrentBusiness.Id,
+                        _authenticationService.CurrentUser.Username);
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            set
+            {
+                _isCurrentUserManager = value;
+                OnPropertyChanged(nameof(IsCurrentUserManager));
+            }
+        }
         public string ReviewDescription
         {
             get { return _reviewDescription; }
@@ -73,10 +97,11 @@ namespace bussiness_social_media.MVVM.ViewModel
         public RelayCommand LeaveReviewCommand { get; set; }
         public RelayCommand AddImageCommand { get; private set; }
 
-        public BusinessProfileReviewsViewModel(INavigationService navigationService, IBusinessService businessService)
+        public BusinessProfileReviewsViewModel(INavigationService navigationService, IBusinessService businessService, AuthenticationService authenticationService)
         {
             Navigation = navigationService;
             _businessService = businessService;
+            _authenticationService = authenticationService;
             NavigateToPostsCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileViewModel>(); }, o => true);
             NavigateToReviewsCommand = new RelayCommand(o => { Navigation.NavigateTo<CreateNewBusinessViewModel>(); }, o => true);
             NavigateToContactCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileContactViewModel>(); }, o => true);
