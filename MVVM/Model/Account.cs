@@ -61,7 +61,7 @@ public class Account : IXmlSerializable
 
     public void ReadXml(XmlReader reader)
     {
-        reader.ReadStartElement("User"); // Move to the <Account> element
+        reader.ReadStartElement("Account"); // Move to the <Account> element
 
         _username = reader.ReadElementString("_username");
         _password = reader.ReadElementString("_password");

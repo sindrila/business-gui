@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfUsers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<ArrayOfAccounts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Account>
     <_username>admin</_username>
     <_password>482c811da5d5b4bc6d497ffa98491e38</_password>
@@ -20,4 +20,4 @@
     <_username>kevin_smith</_username>
     <_password>101fe98fb8973c4306dd9eee973a4c0b</_password>
   </Account>
-</ArrayOfUsers>
+</ArrayOfAccounts>

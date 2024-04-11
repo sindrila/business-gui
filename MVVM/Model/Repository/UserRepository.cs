@@ -86,7 +86,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
             {
                 if (File.Exists(_xmlFilePath))
                 {
-                    XmlSerializer serializer = new XmlSerializer(typeof(Account), new XmlRootAttribute("User"));
+                    XmlSerializer serializer = new XmlSerializer(typeof(Account), new XmlRootAttribute("Account"));
 
                     _users = new List<Account>();
 
@@ -95,7 +95,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
                         using (XmlReader reader = XmlReader.Create(fileStream))
                         {
                             // Move to the first Business element
-                            while (reader.ReadToFollowing("User"))
+                            while (reader.ReadToFollowing("Account"))
                             {
                                 // Deserialize each Business element and add it to the list
                                 Account user = (Account)serializer.Deserialize(reader);
@@ -115,7 +115,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
 
         private void SaveUsersToXml()
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Account>), new XmlRootAttribute("ArrayOfUsers"));
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Account>), new XmlRootAttribute("ArrayOfAccounts"));
 
             using (FileStream fileStream = new FileStream(_xmlFilePath, FileMode.Create))
             {
