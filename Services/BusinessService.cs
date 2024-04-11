@@ -13,6 +13,7 @@ namespace bussiness_social_media.Services
         void UpdateBusiness(Business business);
         void DeleteBusiness(int id);
         List<Business> SearchBusinesses(string keyword);
+        public List<Business> GetBusinessesManagedBy(string username);
     }
     public class BusinessService : IBusinessService
     {

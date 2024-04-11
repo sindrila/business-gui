@@ -17,6 +17,7 @@ namespace bussiness_social_media.MVVM.ViewModel
         private INavigationService _navigation;
         private readonly AuthenticationService _authenticationService;
         private string _userId;
+        private string _noBusinessMessage;
 
         public string UserId
         {
@@ -33,9 +34,30 @@ namespace bussiness_social_media.MVVM.ViewModel
         {
             get
             {
-                // WE NEED TO CHANGE THIS TO ONLY SHOW BUSINESSES THAT THE USER OWNS
-                // return new ObservableCollection<Business>(_businessService.GetBusinessesByUserId(UserId));
-                return new ObservableCollection<Business>(_businessService.GetAllBusinesses());
+                UserId = _authenticationService.getIsLoggedIn() ? _authenticationService.CurrentUser.Username : string.Empty;
+                NoBusinessMessage = UserId == string.Empty ? "" : "You are not managing any businesses";
+                return new ObservableCollection<Business>(_businessService.GetBusinessesManagedBy(UserId));
+                
+            }
+        }
+
+        public string NoBusinessMessage
+        {
+            get
+            {
+                if (_authenticationService.getIsLoggedIn())
+                {
+                    return "";
+                }
+                else
+                {
+                    return "Ups.. You have no businesses.";
+                }
+            }
+            set
+            {
+                _noBusinessMessage = value;
+                OnPropertyChanged();
             }
         }
 
@@ -55,7 +77,8 @@ namespace bussiness_social_media.MVVM.ViewModel
             _businessService = businessService;
             _authenticationService = authenticationService;
 
-            //UserId = _authenticationService.CurrentUser.Username;
+            UserId = _authenticationService.getIsLoggedIn() ? _authenticationService.CurrentUser.Username : string.Empty;
+
             NavigateToBusinessProfileViewCommand = new RelayCommand(o =>
             {
                 if (o is Business business)
