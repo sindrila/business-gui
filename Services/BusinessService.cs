@@ -14,6 +14,8 @@ namespace bussiness_social_media.Services
         void DeleteBusiness(int id);
         List<Business> SearchBusinesses(string keyword);
         public List<Business> GetBusinessesManagedBy(string username);
+
+        public bool IsUserManagerOfBusiness(int businessId, string username);
     }
     public class BusinessService : IBusinessService
     {
@@ -73,6 +75,12 @@ namespace bussiness_social_media.Services
             }
 
             return businessesManagedByUser;
+        }
+
+        public bool IsUserManagerOfBusiness(int businessId, string username)
+        {
+            Business business = _businessRepository.GetBusinessById(businessId);
+            return business != null && business.ManagerUsernames.Contains(username);
         }
     }
 

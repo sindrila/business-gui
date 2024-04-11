@@ -8,17 +8,20 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="white">
-	
-    <Grid>
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-        <TabPanel
+            <TabPanel
             Grid.Row="0">
-            <Label Content="{Binding currentBusiness.Name}" 
+                <Label Content="{Binding currentBusiness.Name}" 
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Top"
                     Height="30"/>
@@ -28,33 +31,39 @@
                 <Button Content="Reviews"
                         Height="25"
                         Command="{Binding Path=NavigateToReviewsCommand}"/>
-            <Button Content="Contact"
+                <Button Content="Contact"
                         Height="25"
                         Command="{Binding Path=NavigateToContactCommand}"/>
-            <Button Content="About"
+                <Button Content="About"
                         Height="25"
                         Command="{Binding Path=NavigateToAboutCommand}"/>
-        </TabPanel>
+            </TabPanel>
 
-		<Grid
+            <Grid
             Grid.Row="1">
 
-			<Grid.RowDefinitions>
-				<RowDefinition Height="200"/>
-				<RowDefinition Height="*"/>
-			</Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
 
-			<Image Grid.Row="0" Source="{Binding CurrentBusiness.Banner}" Stretch="Fill"/>
-			<Image Grid.Row="0" Margin="20,20,0,0" Source="{Binding CurrentBusiness.Logo}" Width="100" Height="100" VerticalAlignment="Top"/>
-			<Grid Grid.Row="1" Margin="20,20,20,20">
-				<Label Content="{Binding CurrentBusiness.Name}"
+                <Image Grid.Row="0" Source="{Binding CurrentBusiness.Banner}" Stretch="Fill"/>
+                <Image Grid.Row="0" Margin="20,20,0,0" Source="{Binding CurrentBusiness.Logo}" Width="100" Height="100" VerticalAlignment="Top"/>
+                <Grid Grid.Row="1" Margin="20,20,20,20">
+                    <Label Content="{Binding CurrentBusiness.Name}"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
 					   FontSize="30"
-		          > 
-				</Label>
-			</Grid>
-		</Grid>
-    </Grid>
-	
+		          >
+                    </Label>
+                </Grid>
+                <Grid Grid.Row ="2">
+                    <Button Content="Add post" Width="130"
+                        Visibility="{Binding IsCurrentUserManager, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                </Grid>
+
+            </Grid>
+        </Grid>
+    </ScrollViewer>
 </UserControl>
