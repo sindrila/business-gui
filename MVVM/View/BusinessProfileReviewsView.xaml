@@ -11,9 +11,9 @@
              >
 
     <UserControl.Resources>
-        <!-- Styles -->
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
-	<ScrollViewer VerticalScrollBarVisibility="Auto">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="25"/>
@@ -21,10 +21,6 @@
 		</Grid.RowDefinitions>
 
 		<TabPanel>
-			<Label Content="{Binding currentBusiness.Name}"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Height="30"/>
 			<Button Content="Posts"
 					Height="25"
 					Command="{Binding Path=NavigateToPostsCommand}"/>
@@ -58,7 +54,7 @@
 		          >
 				</Label>
 			</Grid>
-			<Grid Grid.Row="2">
+                <Grid Grid.Row="2" Visibility="{Binding IsCurrentUserManager, Converter={StaticResource BooleanToVisibilityConverter}}">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto"/>
 					<RowDefinition Height="Auto"/>
