@@ -27,9 +27,9 @@
 			<Button Content="Reviews"
 					Height="25"
 					Command="{Binding Path=NavigateToReviewsCommand}"/>
-			<!--<Button Content="Contact"
+			<Button Content="Contact"
                         Height="25"
-                        Command="{Binding Path=NavigateToContactCommand}"/>-->
+                        Command="{Binding Path=NavigateToContactCommand}"/>
 			<Button Content="About"
                         Height="25"
                         Command="{Binding Path=NavigateToAboutCommand}"/>
