@@ -120,6 +120,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
         public void AddAccount(Account user)
         {
             _users.Add(user);
+            SaveUsersToXml();
         }
 
         public void DeleteUser(string username)
