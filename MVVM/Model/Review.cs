@@ -6,8 +6,7 @@ using System.Xml.Serialization;
 public class Review : IXmlSerializable
 {
     private int _id;
-    private int _businessId;
-    private int _userId;
+    private string _userName;
     private int _rating;
     private string _comment;
     private string _title;
@@ -15,11 +14,10 @@ public class Review : IXmlSerializable
     private DateTime _dateOfCreation;
     private string _adminComment;
 
-    public Review(int id, int businessId, int userId, int rating, string comment, string title, string imagePath, DateTime dateOfCreation, string adminComment)
+    public Review(int id, string userName, int rating, string comment, string title, string imagePath, DateTime dateOfCreation, string adminComment)
     {
         _id = id;
-        _businessId = businessId;
-        _userId = userId;
+        _userName = userName;
         _rating = rating;
         _comment = comment;
         _title = title;
@@ -35,14 +33,12 @@ public class Review : IXmlSerializable
     public string GetTitle() { return _title; }
     public string GetImagePath() { return _imagePath; }
     public string GetDateOfCreation() { return _dateOfCreation.ToString(); }
-    public int GetBusinessId() { return _businessId; }
-    public int GetUserId() { return _userId; }
+    public string GetUserName() { return _userName; }
     public string GetAdminComment() { return _adminComment; }
 
-    public void SetUserId(int userId) { _userId = userId; }
+    public void SetUserName(string userName) { _userName = userName; }
     public void SetTitle(string title) { _title = title; }
     public void SetImagePath(string imagePath) { _imagePath = imagePath; }
-    public void SetBusinessId(int businessId) { _businessId = businessId; }
     public void SetRating(int rating) { _rating = rating; }
     public void SetComment(string comment) { _comment = comment; }
     public void SetAdminComment(string comment) { _adminComment = comment; }
@@ -60,8 +56,7 @@ public class Review : IXmlSerializable
         if (!isEmptyElement)
         {
             _id = int.Parse(reader.ReadElementContentAsString("Id", ""));
-            _businessId = int.Parse(reader.ReadElementContentAsString("BusinessId", ""));
-            _userId = int.Parse(reader.ReadElementContentAsString("UserId", ""));
+            _userName = reader.ReadElementContentAsString("UserName", "");
             _rating = int.Parse(reader.ReadElementContentAsString("Rating", ""));
             _comment = reader.ReadElementContentAsString("Comment", "");
             _title = reader.ReadElementContentAsString("Title", "");
@@ -75,8 +70,7 @@ public class Review : IXmlSerializable
     public void WriteXml(XmlWriter writer)
     {
         writer.WriteElementString("Id", _id.ToString());
-        writer.WriteElementString("BusinessId", _businessId.ToString());
-        writer.WriteElementString("UserId", _userId.ToString());
+        writer.WriteElementString("UserName", _userName);
         writer.WriteElementString("Rating", _rating.ToString());
         writer.WriteElementString("Comment", _comment);
         writer.WriteElementString("Title", _title);
