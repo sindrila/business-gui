@@ -52,13 +52,15 @@ namespace bussiness_social_media.MVVM.ViewModel
         public RelayCommand RegisterCommand { get; set; }
         private void Register()
         {
-            if (authenticationService.AuthenticateUser(Username, Password))
+
+            string hashedPassword = _userRepository.GetMd5Hash(Password);
+            if (authenticationService.AuthenticateUser(Username, hashedPassword))
             {
                 MessageBox.Show("User already registered!", "Alert", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
-                Account newAccount = new Account(Username, Password);
+                Account newAccount = new Account(Username, hashedPassword);
                 _userRepository.AddAccount(newAccount);
                 NavigationService.NavigateTo<HomeViewModel>();
 
