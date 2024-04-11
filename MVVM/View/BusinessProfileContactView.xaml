@@ -32,6 +32,7 @@
                         Height="25"
                         Command="{Binding Path=NavigateToContactCommand}"/>
                 <Button Content="About"
+
                         Height="25"
                         Command="{Binding Path=NavigateToAboutCommand}"/>
             </TabPanel>

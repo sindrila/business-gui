@@ -1,48 +1,98 @@
 ﻿using System;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 
-public class Post
+[Serializable]
+public class Post : IXmlSerializable
 {
     private int _id;
-    private int _businessId;
     private int _numberOfLikes;
     private DateTime _creationDate;
     private string _imagePath;
     private string _caption;
-    private List<Comment> _comments;
-    //private Product _product;
+    private List<int> _commentIds;
 
     public int Id => _id;
-    public int BusinessId => _businessId;
     public int NumberOfLikes => _numberOfLikes;
     public DateTime CreationDate => _creationDate;
     public string ImagePath => _imagePath;
     public string Caption => _caption;
-    public List<Comment> Comments => _comments;
-    //public Product Product => _product;
+    public List<int> CommentIds => _commentIds;
 
-    public Post(int id, int businessId, DateTime creationDate, string imagePath, string caption)
-    //public Post(int id, int businessId, DateTime creationDate, string imagePath, string caption, Product product)
 
+    public Post(int id, DateTime creationDate, string imagePath, string caption)
     {
         _id = id;
-        _businessId = businessId;
         _numberOfLikes = 0;
         _creationDate = creationDate;
         _imagePath = imagePath;
         _caption = caption;
-        _comments = new List<Comment>();
-        //_product = product;
+        _commentIds = new List<int>();
     }
-
-    public void SetBusinessId(int businessId) => _businessId = businessId;
     public void SetNumberOfLikes(int likes) => _numberOfLikes = likes;
     public void SetCreationDate(DateTime creationDate) => _creationDate = creationDate;
     public void SetImagePath(string imagePath) => _imagePath = imagePath;
     public void SetCaption(string caption) => _caption = caption;
-    public void SetComments(List<Comment> comments) => _comments = comments;
-    //public void SetProduct(Product product) => _product = product;
-
+    public void SetComments(List<int> comments) => _commentIds = comments;
     public void AddLike() { _numberOfLikes++; }
-    public void AddComment(Comment comment) { _comments.Add(comment); }
+    public void AddComment(int commentId) { _commentIds.Add(commentId); }
 
+    public XmlSchema? GetSchema()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void ReadXml(XmlReader reader)
+    {
+        reader.ReadStartElement("Post"); // Move to the <Post> element
+
+        // Read private fields from XML
+        _id = int.Parse(reader.ReadElementString("_id"));
+        _numberOfLikes = int.Parse(reader.ReadElementString("_numberOfLikes"));
+        _creationDate = DateTime.Parse(reader.ReadElementString("_creationDate"));
+        _imagePath = reader.ReadElementString("_imagePath");
+        _caption = reader.ReadElementString("_caption");
+
+        // Read _commentIds if it exists
+        if (reader.IsStartElement("_commentIds"))
+        {
+            reader.ReadStartElement("_commentIds");
+            while (reader.NodeType != XmlNodeType.EndElement)
+            {
+                if (reader.NodeType == XmlNodeType.Element && reader.LocalName == "commentId")
+                {
+                    _commentIds.Add(int.Parse(reader.ReadElementString("commentId")));
+                }
+                else
+                {
+                    reader.Read();
+                }
+            }
+            reader.ReadEndElement(); // End _commentIds element
+        }
+
+        reader.ReadEndElement();
+    }
+
+    public void WriteXml(XmlWriter writer)
+    {
+        writer.WriteElementString("_id", _id.ToString());
+        writer.WriteElementString("_numberOfLikes", _numberOfLikes.ToString());
+        writer.WriteElementString("_creationDate", _creationDate.ToString());
+        writer.WriteElementString("_imagePath", _imagePath);
+        writer.WriteElementString("_caption", _caption);
+
+        // Write _commentIds if it exists
+        if (_commentIds.Count > 0)
+        {
+            writer.WriteStartElement("_commentIds");
+            foreach (int commentId in _commentIds)
+            {
+                writer.WriteElementString("commentId", commentId.ToString());
+            }
+            writer.WriteEndElement(); // End _commentIds element
+        }
+
+    }
 }

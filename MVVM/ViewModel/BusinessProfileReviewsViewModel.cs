@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using Microsoft.Win32;
 using System.Windows.Media.Imaging; // Need to include this for ImageSource
 
 namespace bussiness_social_media.MVVM.ViewModel
@@ -16,6 +17,7 @@ namespace bussiness_social_media.MVVM.ViewModel
         private IBusinessService _businessService;
         private Business _currentBusiness;
         private Review _currentReview;
+        private string _imagePath;
 
         // Property to hold the image source of the current business
         private ImageSource _businessImage;
@@ -31,11 +33,26 @@ namespace bussiness_social_media.MVVM.ViewModel
         }
         public ImageSource BusinessImage
         {
-            get { return _businessImage; }
+            get { return new BitmapImage(new Uri(CurrentBusiness.Logo)); }
             set
             {
                 _businessImage = value;
                 OnPropertyChanged(nameof(BusinessImage));
+            }
+        }
+
+        public Business CurrentBusiness
+        {
+            get { return ChangeCurrentBusiness(); }
+        }
+
+        public string ImagePath
+        {
+            get => _imagePath;
+            set
+            {
+                _imagePath = value;
+                OnPropertyChanged();
             }
         }
 
@@ -54,6 +71,7 @@ namespace bussiness_social_media.MVVM.ViewModel
         public RelayCommand NavigateToContactCommand { get; set; }
         public RelayCommand NavigateToAboutCommand { get; set; }
         public RelayCommand LeaveReviewCommand { get; set; }
+        public RelayCommand AddImageCommand { get; private set; }
 
         public BusinessProfileReviewsViewModel(INavigationService navigationService, IBusinessService businessService)
         {
@@ -63,23 +81,35 @@ namespace bussiness_social_media.MVVM.ViewModel
             NavigateToReviewsCommand = new RelayCommand(o => { Navigation.NavigateTo<CreateNewBusinessViewModel>(); }, o => true);
             NavigateToContactCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileContactViewModel>(); }, o => true);
             NavigateToAboutCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileAboutViewModel>(); }, o => true);
+            AddImageCommand = new RelayCommand(o => { ExecuteAddImage(); }, o => true);
             LeaveReviewCommand = new RelayCommand(o => { LeaveReview(); }, o => true);
-            ChangeCurrentBusiness();
+            _currentBusiness = ChangeCurrentBusiness();
             ImageSource img = new BitmapImage(new Uri(_currentBusiness.Logo));
-            // Set the BusinessImage property with the image source of the current business
-            BusinessImage = img; // Assuming Business class has an ImageSource property
+            BusinessImage = img; 
             
         }
         private void LeaveReview()
         {
             Review review = new Review();
-            review.SetBusinessId(_currentBusiness.Id);
             review.SetComment(ReviewDescription);
 
         }
-        public void ChangeCurrentBusiness()
+        public Business ChangeCurrentBusiness()
         {
-            _currentBusiness = _businessService.GetBusinessById(_navigation.BusinessId);
+            return _businessService.GetBusinessById(_navigation.BusinessId);
+        }
+
+        private void ExecuteAddImage()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files (*.jpg; *.jpeg; *.png;)|*.jpg; *.jpeg; *.png; |All Files (*.*)|*.*";
+            bool? result = openFileDialog.ShowDialog();
+            if (result == true)
+            {
+                string filename = openFileDialog.FileName;
+                ImagePath = filename;
+            }
+
         }
     }
 }

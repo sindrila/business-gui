@@ -6,8 +6,10 @@
              xmlns:local="clr-namespace:bussiness_social_media.MVVM.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             Background="#FFC0AAAA">
-    <Grid>
+             Background="#FFFFFFFF">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+        <Grid>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -33,17 +35,105 @@
                         Height="25"
                         Command="{Binding Path=NavigateToAboutCommand}"/>
         </TabPanel>
-        <Label Content="Phone&#xD;&#xA;" HorizontalAlignment="Left" Margin="510,10,0,0" Grid.Row="1" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <Label Content="Category&#xD;&#xA;" HorizontalAlignment="Left" Margin="510,65,0,0" Grid.Row="1" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <Label Content="Address" HorizontalAlignment="Left" Margin="510,120,0,0" Grid.Row="1" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <Label Content="Email&#xD;&#xA;" HorizontalAlignment="Left" Margin="510,175,0,0" Grid.Row="1" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <Label Content="Website" HorizontalAlignment="Left" Margin="510,230,0,0" Grid.Row="1" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <Label Content="Date of page creation" HorizontalAlignment="Left" Margin="510,285,0,0" Grid.Row="1" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
-        <Label Name="PhoneLable"  Content="" HorizontalAlignment="Left" Margin="560,35,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label Name="CategoryLable" Content="" HorizontalAlignment="Left" Margin="560,90,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label Name="AddressLable" Content="" HorizontalAlignment="Left" Margin="560,145,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label Name="EmailLable" Content="" HorizontalAlignment="Left" Margin="560,200,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label Name="WebsiteLable" Content="" HorizontalAlignment="Left" Margin="560,255,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label Name="CreationDateLable" Content="" HorizontalAlignment="Left" Margin="560,310,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+
+        <Grid
+    Grid.Row="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0" Source="{Binding CurrentBusiness.Banner}" Stretch="Fill"/>
+            <Image Grid.Row="0" Margin="20,20,0,0" Source="{Binding CurrentBusiness.Logo}" Width="100" Height="100" VerticalAlignment="Top"/>
+            <Grid Grid.Row="1" Margin="20,20,20,20">
+                <Label Content="{Binding CurrentBusiness.Name}"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+			   FontSize="30"
+          >
+                </Label>
+            </Grid>
+        </Grid>
+        <Label Content="Phone&#xD;&#xA;" 
+               HorizontalAlignment="Left" 
+               Margin="100,300,0,0" 
+               Grid.Row="1"
+               VerticalAlignment="Top"
+               FontWeight="Bold" FontSize="16"/>
+        <Label Content="Category&#xD;&#xA;" 
+               HorizontalAlignment="Left" 
+               Margin="100,355,0,0" 
+               Grid.Row="1" 
+               VerticalAlignment="Top" 
+               FontWeight="Bold" 
+               FontSize="16"/>
+        <Label Content="Address" 
+               HorizontalAlignment="Left" 
+               Margin="100,410,0,0" 
+               Grid.Row="1"
+               VerticalAlignment="Top" 
+               FontWeight="Bold" 
+               FontSize="16"/>
+        <Label Content="Email&#xD;&#xA;" 
+               HorizontalAlignment="Left" 
+               Margin="510,300,0,0" 
+               Grid.Row="1" 
+               VerticalAlignment="Top" 
+               FontWeight="Bold" 
+               FontSize="16"/>
+        <Label Content="Website" 
+               HorizontalAlignment="Left" 
+               Margin="510,355,0,0" 
+               Grid.Row="1" 
+               VerticalAlignment="Top" 
+               FontWeight="Bold" 
+               FontSize="16"/>
+        <Label Content="Date of page creation" 
+               HorizontalAlignment="Left" 
+               Margin="510,410,0,0" 
+               Grid.Row="1" 
+               VerticalAlignment="Top" 
+               FontWeight="Bold" 
+               FontSize="16"/>
+        <Label Name="PhoneLable" 
+               Content="{Binding CurrentBusiness.PhoneNumber}" 
+               HorizontalAlignment="Left" 
+               Margin="100,325,0,0" 
+               Grid.Row="1" 
+               VerticalAlignment="Top"/>
+        <Label Name="CategoryLable" 
+               Content="{Binding CurrentBusiness.Category}" 
+               HorizontalAlignment="Left" 
+               Margin="100,380,0,0" 
+               Grid.Row="1" 
+               VerticalAlignment="Top"/>
+        <Label Name="AddressLable" 
+               Content="{Binding CurrentBusiness.Address}" 
+               HorizontalAlignment="Left" 
+               Margin="100,435,0,0" 
+               Grid.Row="1" 
+               VerticalAlignment="Top"/>
+        <Label Name="EmailLable" 
+               Content="{Binding CurrentBusiness.Email}" 
+               HorizontalAlignment="Left" 
+               Margin="510,325,0,0" 
+               Grid.Row="1"
+               VerticalAlignment="Top"/>
+        <Label Name="WebsiteLable" 
+               Content="{Binding CurrentBusiness.Website}" 
+               HorizontalAlignment="Left" 
+               Margin="510,380,0,0" 
+               Grid.Row="1"
+               VerticalAlignment="Top"/>
+        <Label Name="CreationDateLable" 
+               Content="{Binding CurrentBusiness.CreatedAt}" 
+               HorizontalAlignment="Left" 
+               Margin="510,435,0,0" 
+               Grid.Row="1" 
+               VerticalAlignment="Top"/>
+
     </Grid>
+    </ScrollViewer>
+
 </UserControl>

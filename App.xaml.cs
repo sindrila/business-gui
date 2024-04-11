@@ -8,6 +8,7 @@ using System.Data;
 using System.Windows;
 using bussiness_social_media.MVVM.Model.Repository;
 using System.Reflection.PortableExecutable;
+using business_social_media.Services;
 
 namespace bussiness_social_media
 {
@@ -20,13 +21,21 @@ namespace bussiness_social_media
             IServiceCollection services = new ServiceCollection();
 
             // Read XML file path from configuration
-            string xmlFilePath = ConfigurationManager.AppSettings["XmlFilePath"];
+            string businessesXmlFilePath = ConfigurationManager.AppSettings["BusinessesXmlFilePath"];
+            string usersXmlFilePath = ConfigurationManager.AppSettings["UsersXmlFilePath"];
+            string postsXmlFilePath = ConfigurationManager.AppSettings["PostsXmlFilePath"];
+            string reviewsXmlFilePath = ConfigurationManager.AppSettings["ReviewsXmlFilePath"];
+            string faqsXmlFilePath = ConfigurationManager.AppSettings["FAQsXmlFilePath"];
             string binDirectory = "\\bin";
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
             string pathUntilBin;
             int index = basePath.IndexOf(binDirectory);
             pathUntilBin = basePath.Substring(0, index);
-            xmlFilePath = Path.Combine(pathUntilBin, xmlFilePath);
+            businessesXmlFilePath = Path.Combine(pathUntilBin, businessesXmlFilePath);
+            usersXmlFilePath = Path.Combine(pathUntilBin, usersXmlFilePath);
+            postsXmlFilePath = Path.Combine(pathUntilBin, postsXmlFilePath);
+            reviewsXmlFilePath = Path.Combine(pathUntilBin, reviewsXmlFilePath);
+            faqsXmlFilePath = Path.Combine(pathUntilBin, faqsXmlFilePath);
 
             services.AddSingleton<MainWindow>(provider => new MainWindow
             {
@@ -42,12 +51,19 @@ namespace bussiness_social_media
             services.AddSingleton<BusinessProfileViewModel>();
 
             // Pass xmlFilePath to your BusinessRepository constructor
-            services.AddSingleton<IBusinessRepository>(provider => new BusinessRepository(xmlFilePath));
+            services.AddSingleton<IBusinessRepository>(provider => new BusinessRepository(businessesXmlFilePath));
+            services.AddSingleton<IUserRepository>(provider => new UserRepository(usersXmlFilePath));
+            services.AddSingleton<IPostRepository>(provider => new PostRepository(postsXmlFilePath));
+            services.AddSingleton<IReviewRepository>(provider => new ReviewRepository(reviewsXmlFilePath));
+            services.AddSingleton<IFAQRepository>(provider => new FAQRepository(faqsXmlFilePath));
 
             services.AddSingleton <BusinessProfileViewModel>();
             services.AddSingleton<BusinessProfileReviewsViewModel>();
             services.AddSingleton<BusinessProfileContactViewModel>();
             services.AddSingleton<BusinessProfileAboutViewModel>();
+            services.AddSingleton<LoginViewModel>();
+            services.AddSingleton<AuthenticationService>();
+            services.AddSingleton<RegisterViewModel>();
 
 
             // Delegation
