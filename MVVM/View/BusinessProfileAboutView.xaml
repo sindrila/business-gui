@@ -7,6 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="#FFFFFFFF">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
 
         <Grid>
@@ -14,6 +17,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition/>
+            <RowDefinition />
         </Grid.RowDefinitions>
 
 
@@ -42,6 +46,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="200"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <Image Grid.Row="0" Source="{Binding CurrentBusiness.Banner}" Stretch="Fill"/>
@@ -55,6 +60,7 @@
                 </Label>
             </Grid>
         </Grid>
+
         <Label Content="Phone&#xD;&#xA;" 
                HorizontalAlignment="Left" 
                Margin="100,300,0,0" 
@@ -132,8 +138,11 @@
                Margin="510,435,0,0" 
                Grid.Row="1" 
                VerticalAlignment="Top"/>
-
-    </Grid>
+        <Grid Grid.Row="2">
+                <Button Content="Update business information" Height="80" Width="200"
+                Visibility="{Binding IsCurrentUserManager, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        </Grid>
+        </Grid>
     </ScrollViewer>
 
 </UserControl>

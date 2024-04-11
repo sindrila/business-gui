@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
+using business_social_media.Services;
 
 namespace bussiness_social_media.MVVM.ViewModel
 {
@@ -14,8 +15,32 @@ namespace bussiness_social_media.MVVM.ViewModel
     {
         private INavigationService _navigation;
         private IBusinessService _businessService;
-        
+        private readonly AuthenticationService _authenticationService;
+
         private Business _currentBusiness;
+
+        private bool _isCurrentUserManager;
+
+        public bool IsCurrentUserManager
+        {
+            get
+            {
+                if (_authenticationService.getIsLoggedIn())
+                {
+                    return _businessService.IsUserManagerOfBusiness(CurrentBusiness.Id,
+                        _authenticationService.CurrentUser.Username);
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            set
+            {
+                _isCurrentUserManager = value;
+                OnPropertyChanged(nameof(IsCurrentUserManager));
+            }
+        }
 
         public INavigationService Navigation
         {
@@ -45,14 +70,16 @@ namespace bussiness_social_media.MVVM.ViewModel
         public RelayCommand NavigateToReviewsCommand { get; set; }
         public RelayCommand NavigateToContactCommand { get; set; }
         public RelayCommand NavigateToAboutCommand { get; set; }
-        public BusinessProfileViewModel(INavigationService navigationService, IBusinessService businessService)
+        public BusinessProfileViewModel(INavigationService navigationService, IBusinessService businessService, AuthenticationService authenticationService)
         {
             Navigation = navigationService;
             _businessService = businessService;
+            _authenticationService = authenticationService;
             NavigateToPostsCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileViewModel>(); }, o => true);
             NavigateToReviewsCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileReviewsViewModel>(); }, o => true);
             NavigateToContactCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileContactViewModel>();  }, o => true);
-            NavigateToAboutCommand = new RelayCommand(o=> { Navigation.NavigateTo<BusinessProfileAboutViewModel>(); }, o => true);
+            NavigateToAboutCommand =
+                new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileAboutViewModel>(); }, o => true);
             changeCurrrentBusiness();
         }
 
