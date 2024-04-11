@@ -53,6 +53,8 @@ namespace bussiness_social_media
             services.AddSingleton<BusinessProfileAboutViewModel>();
             services.AddSingleton<LoginViewModel>();
             services.AddSingleton<AuthenticationService>();
+            services.AddSingleton<RegisterViewModel>();
+
 
             // Delegation
             services.AddSingleton<Func<Type, ViewModel>>(serviceProvider => viewModelType => (ViewModel)serviceProvider.GetRequiredService(viewModelType));
