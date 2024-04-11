@@ -9,12 +9,15 @@ using System.Windows.Input;
 using Microsoft.Win32;
 using System.Windows;
 using System.IO;
+using business_social_media.Services;
 namespace bussiness_social_media.MVVM.ViewModel
 {
     public class CreateNewBusinessViewModel : Core.ViewModel
     {
-        private IBusinessService _businessService;
+        private  IBusinessService _businessService;
         private INavigationService _navigationService;
+        private readonly AuthenticationService _authenticationService;
+
         public event EventHandler BusinessCreated;
 
         private string _businessName;
@@ -134,9 +137,10 @@ namespace bussiness_social_media.MVVM.ViewModel
         public ICommand AddLogoCommand { get; private set; }
         public ICommand AddBannerCommand {  get; private set; }
         public RelayCommand NavigateToHomeViewModelCommand { get; set; }
-        public CreateNewBusinessViewModel(INavigationService navigationService, IBusinessService businessService)
+        public CreateNewBusinessViewModel(INavigationService navigationService, IBusinessService businessService, AuthenticationService authenticationService)
         {
             NavigationService = navigationService;
+            _authenticationService = authenticationService;
             NavigateToHomeViewModelCommand = new RelayCommand(o => { NavigationService.NavigateTo<HomeViewModel>(); }, o => true);
             AddLogoCommand = new RelayCommand(o => { ExecuteAddLogo(); } , o => true);
             AddBannerCommand = new RelayCommand(o => { ExecuteAddBanner(); }, o => true);
@@ -194,8 +198,8 @@ namespace bussiness_social_media.MVVM.ViewModel
         
         private void CreateBusiness(object parameter)
         {
-            //TO DO: ADD USERNAME OF THE USER THAT CREATED THE BUSINESS TO THE managerUsernames array in the bussines
             List<string> managerUsernames = new List<string> { "admin" };
+            managerUsernames.Add(_authenticationService.CurrentUser.Username);
             _businessService.AddBusiness(BusinessName, BusinessDescription, BusinessCategory, Logo, Banner, PhoneNumber, EmailAddress, Website, Address, DateTime.Now, managerUsernames, new List<int>(), new List<int>(), new List<int>());
             _navigationService.NavigateTo<HomeViewModel>();
           
