@@ -46,7 +46,7 @@ namespace business_social_media.Services
                 _isLoggedIn = true;
 
                 // Start the logout timer
-                _logoutTimer.Change(_sessionDurationSeconds * 1000, Timeout.Infinite);
+                //_logoutTimer.Change(_sessionDurationSeconds * 1000, Timeout.Infinite);
                 return true;
             }
             else

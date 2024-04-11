@@ -17,18 +17,15 @@ public class Post
     public List<Comment> Comments => _comments;
 
 
-    public Post(int id, int businessId, DateTime creationDate, string imagePath, string caption)
+    public Post(int id, DateTime creationDate, string imagePath, string caption)
     {
         _id = id;
-        _businessId = businessId;
         _numberOfLikes = 0;
         _creationDate = creationDate;
         _imagePath = imagePath;
         _caption = caption;
         _comments = new List<Comment>();
     }
-
-    public void SetBusinessId(int businessId) => _businessId = businessId;
     public void SetNumberOfLikes(int likes) => _numberOfLikes = likes;
     public void SetCreationDate(DateTime creationDate) => _creationDate = creationDate;
     public void SetImagePath(string imagePath) => _imagePath = imagePath;
