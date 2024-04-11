@@ -20,8 +20,8 @@ namespace bussiness_social_media.MVVM.ViewModel
         {
             get
             {
-
-                return new ObservableCollection<FAQ>(_businessService.GetFAQsForBusiness(CurrentBusiness.Id));
+                return new ObservableCollection<FAQ>();
+                //return new ObservableCollection<FAQ>(_businessService.GetFAQsForBusiness(CurrentBusiness.Id));
 
             }
         }
