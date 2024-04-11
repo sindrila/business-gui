@@ -38,17 +38,28 @@ public class FAQ : IXmlSerializable
         reader.ReadStartElement();
         if (!isEmptyElement)
         {
-            _id = int.Parse(reader.ReadElementContentAsString("Id", ""));
-            _question = reader.ReadElementContentAsString("Question", "");
-            _answer = reader.ReadElementContentAsString("Answer", "");
+
+            //_id = int.Parse(reader.ReadElementString("_id"));
+            //_numberOfLikes = int.Parse(reader.ReadElementString("_numberOfLikes"));
+            //_creationDate = DateTime.Parse(reader.ReadElementString("_creationDate"));
+            //_imagePath = reader.ReadElementString("_imagePath");
+            //_caption = reader.ReadElementString("_caption");
+
+            _id = int.Parse(reader.ReadElementString("_id"));
+            _question = reader.ReadElementString("_question");
+            _answer = reader.ReadElementString("_answer");
+
+            //_id = int.Parse(reader.ReadElementContentAsString("Id", ""));
+            //_question = reader.ReadElementContentAsString("Question", "");
+            //_answer = reader.ReadElementContentAsString("Answer", "");
             reader.ReadEndElement();
         }
     }
 
     public void WriteXml(XmlWriter writer)
     {
-        writer.WriteElementString("Id", _id.ToString());
-        writer.WriteElementString("Question", _question);
-        writer.WriteElementString("Answer", _answer);
+        writer.WriteElementString("_id", _id.ToString());
+        writer.WriteElementString("_question", _question);
+        writer.WriteElementString("_answer", _answer);
     }
 }
