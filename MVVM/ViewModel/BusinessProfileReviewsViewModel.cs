@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Windows.Media.Imaging; // Need to include this for ImageSource
 
 namespace bussiness_social_media.MVVM.ViewModel
 {
@@ -12,7 +14,36 @@ namespace bussiness_social_media.MVVM.ViewModel
     {
         private INavigationService _navigation;
         private IBusinessService _businessService;
-        public Business currentBusiness;
+        private Business _currentBusiness;
+        private Review _currentReview;
+
+        // Property to hold the image source of the current business
+        private ImageSource _businessImage;
+        private string _reviewDescription;
+        public string ReviewDescription
+        {
+            get { return _reviewDescription; }
+            set
+            {
+                _reviewDescription = value;
+                OnPropertyChanged(nameof(ReviewDescription));
+            }
+        }
+        public ImageSource BusinessImage
+        {
+            get { return new BitmapImage(new Uri(CurrentBusiness.Logo)); }
+            set
+            {
+                _businessImage = value;
+                OnPropertyChanged(nameof(BusinessImage));
+            }
+        }
+
+        public Business CurrentBusiness
+        {
+            get { return ChangeCurrentBusiness(); }
+        }
+
 
         public INavigationService Navigation
         {
@@ -28,6 +59,8 @@ namespace bussiness_social_media.MVVM.ViewModel
         public RelayCommand NavigateToReviewsCommand { get; set; }
         public RelayCommand NavigateToContactCommand { get; set; }
         public RelayCommand NavigateToAboutCommand { get; set; }
+        public RelayCommand LeaveReviewCommand { get; set; }
+
         public BusinessProfileReviewsViewModel(INavigationService navigationService, IBusinessService businessService)
         {
             Navigation = navigationService;
@@ -36,13 +69,21 @@ namespace bussiness_social_media.MVVM.ViewModel
             NavigateToReviewsCommand = new RelayCommand(o => { Navigation.NavigateTo<CreateNewBusinessViewModel>(); }, o => true);
             NavigateToContactCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileContactViewModel>(); }, o => true);
             NavigateToAboutCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileAboutViewModel>(); }, o => true);
-            changeCurrrentBusiness();
-            // In this class, you have the instance of the business in currentBusiness. You can access it in the BusinessProfileView.xaml but I'm not quite sure how. Ask chat gpt, I tried something and I do not know if it works. It is currently 00:47 and I want to go to sleep
+            LeaveReviewCommand = new RelayCommand(o => { LeaveReview(); }, o => true);
+            _currentBusiness = ChangeCurrentBusiness();
+            ImageSource img = new BitmapImage(new Uri(_currentBusiness.Logo));
+            BusinessImage = img; 
+            
         }
-
-        public void changeCurrrentBusiness()
+        private void LeaveReview()
         {
-            currentBusiness = _businessService.GetBusinessById(_navigation.BusinessId);
+            Review review = new Review();
+            review.SetComment(ReviewDescription);
+
+        }
+        public Business ChangeCurrentBusiness()
+        {
+            return _businessService.GetBusinessById(_navigation.BusinessId);
         }
     }
 }

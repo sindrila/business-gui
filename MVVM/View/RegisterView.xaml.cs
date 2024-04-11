@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace bussiness_social_media.MVVM.View
 {
     /// <summary>
-    /// Interaction logic for BusinessProfileAboutView.xaml
+    /// Interaction logic for RegisterView.xaml
     /// </summary>
-    public partial class BusinessProfileAboutView : UserControl
+    public partial class RegisterView : Window
     {
-        public BusinessProfileAboutView()
+        public RegisterView()
         {
             InitializeComponent();
-            
         }
     }
 }

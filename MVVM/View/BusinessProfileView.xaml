@@ -4,9 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:bussiness_social_media.MVVM.View"
+			
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              Background="white">
+	
     <Grid>
 
         <Grid.RowDefinitions>
@@ -14,7 +16,8 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <TabPanel>
+        <TabPanel
+            Grid.Row="0">
             <Label Content="{Binding currentBusiness.Name}" 
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Top"
@@ -32,7 +35,26 @@
                         Height="25"
                         Command="{Binding Path=NavigateToAboutCommand}"/>
         </TabPanel>
-        <Image HorizontalAlignment="Left" Height="100" Margin="322,192,0,0" VerticalAlignment="Top" Width="100" Source="C:\Users\Alex\source\repos\gui\bussiness-social-media\Assets\Images\scat8.jpg"/>
-        
+
+		<Grid
+            Grid.Row="1">
+
+			<Grid.RowDefinitions>
+				<RowDefinition Height="200"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+
+			<Image Grid.Row="0" Source="{Binding CurrentBusiness.Banner}" Stretch="Fill"/>
+			<Image Grid.Row="0" Margin="20,20,0,0" Source="{Binding CurrentBusiness.Logo}" Width="100" Height="100" VerticalAlignment="Top"/>
+			<Grid Grid.Row="1" Margin="20,20,20,20">
+				<Label Content="{Binding CurrentBusiness.Name}"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+					   FontSize="30"
+		          > 
+				</Label>
+			</Grid>
+		</Grid>
     </Grid>
+	
 </UserControl>

@@ -188,14 +188,17 @@ namespace bussiness_social_media.MVVM.ViewModel
                 // Placeholder values for logo, banner, etc.
 
                 Logo = destinationFilePath;
+
             }
         }
-
+        
         private void CreateBusiness(object parameter)
         {
-            _businessService.AddBusiness(BusinessName, BusinessDescription, BusinessCategory, Logo, Banner, PhoneNumber, EmailAddress, Website, Address, DateTime.Now);
+            //TO DO: ADD USERNAME OF THE USER THAT CREATED THE BUSINESS TO THE managerUsernames array in the bussines
+            List<string> managerUsernames = new List<string> { "admin" };
+            _businessService.AddBusiness(BusinessName, BusinessDescription, BusinessCategory, Logo, Banner, PhoneNumber, EmailAddress, Website, Address, DateTime.Now, managerUsernames, new List<int>(), new List<int>());
             _navigationService.NavigateTo<HomeViewModel>();
-            
+          
         }
         
         private bool CanCreateBusiness(object parameter)
