@@ -1,61 +1,49 @@
 ﻿
-public class PostService
+using bussiness_social_media.MVVM.Model.Repository;
+
+namespace business_social_media.Services
 {
-    private List<Post> _posts;
-
-    public PostService()
+    public interface IPostService
     {
-        _posts = new List<Post>();
-        // initialize
+        List<Post> GetAllPosts();
+        Post GetPostById(int id);
+        void AddPost(DateTime creationDate, string imagePath, string caption);
+        void UpdatePost(Post post);
+        void DeletePost(int id);
     }
-
-    public List<Post> GetAllPosts()
+    public class PostService
     {
-        return _posts;
-    }
+        private IPostRepository _postRepository;
 
-    public Post GetPostById(int id)
-    {
-        return _posts.FirstOrDefault(p => p.Id == id);
-    }
-
-    public void AddPost(int businessId, DateTime creationDate, string imagePath, string caption)
-    //public void AddPost(int id, int businessId, DateTime creationDate, string imagePath, string caption, Product product)
-
-    {
-        Post post = new Post(_getNextId(), businessId, creationDate, imagePath, caption);
-    //    Post post = new Post(_getNextId(), businessId, creationDate, imagePath, caption, product);
-        _posts.Add(post);
-    }
-
-    public void UpdatePost(Post post)
-    {
-        var existingPost = _posts.FirstOrDefault(p => p.Id == post.Id);
-        if (existingPost != null)
+        public PostService(IPostRepository postRepository)
         {
-            //existingPost.SetBusinessId(post.BusinessId);
-            existingPost.SetNumberOfLikes(post.NumberOfLikes);
-            existingPost.SetCreationDate(post.CreationDate);
-            existingPost.SetImagePath(post.ImagePath);
-            existingPost.SetCaption(post.Caption);
-            existingPost.SetComments(post.Comments);
-//            existingPost.SetProduct(post.Product);
+            _postRepository = postRepository;
+        }
 
+        public List<Post> GetAllPosts()
+        {
+            return _postRepository.GetAllPosts();
+        }
+
+        public Post GetPostById(int id)
+        {
+            return _postRepository.GetPostById(id);
+        }
+
+        public void AddPost(DateTime creationDate, string imagePath, string caption)
+
+        {
+            _postRepository.AddPost(creationDate, imagePath, caption);
+        }
+
+        public void UpdatePost(Post post)
+        {
+            _postRepository.UpdatePost(post);
+        }
+
+        public void DeletePost(int id)
+        {
+            _postRepository.DeletePost(id);
         }
     }
-
-    public void DeletePost(int id)
-    {
-        var postToRemove = _posts.FirstOrDefault(p => p.Id == id);
-        if (postToRemove != null)
-        {
-            _posts.Remove(postToRemove);
-        }
-    }
-
-    private int _getNextId()
-    {
-        return _posts.Count > 0 ? _posts.Max(p => p.Id) + 1 : 1;
-    }
-
 }

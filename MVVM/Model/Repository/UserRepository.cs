@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace bussiness_social_media.MVVM.Model.Repository
@@ -81,11 +82,22 @@ namespace bussiness_social_media.MVVM.Model.Repository
         {
             if (File.Exists(_xmlFilePath))
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<Business>), new XmlRootAttribute("ArrayOfUsers"));
+                XmlSerializer serializer = new XmlSerializer(typeof(Account), new XmlRootAttribute("User"));
+
+                _users = new List<Account>();
 
                 using (FileStream fileStream = new FileStream(_xmlFilePath, FileMode.Open))
                 {
-                    _users = (List<Account>)serializer.Deserialize(fileStream);
+                    using (XmlReader reader = XmlReader.Create(fileStream))
+                    {
+                        // Move to the first Business element
+                        while (reader.ReadToFollowing("User"))
+                        {
+                            // Deserialize each Business element and add it to the list
+                            Account user = (Account)serializer.Deserialize(reader);
+                            _users.Add(user);
+                        }
+                    }
                 }
             }
             else
