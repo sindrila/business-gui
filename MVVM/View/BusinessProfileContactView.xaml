@@ -55,10 +55,55 @@
                     </Label>
                 </Grid>
             </Grid>
+                
 
-
+            </Grid>
+            <Grid>
+                <Label Content="Frequently Asked Questions"
+                       Margin="20,300,0,0"
+     HorizontalAlignment="Left"
+     VerticalAlignment="Top"
+		   FontSize="20"
+>
+                </Label>
+                
+            </Grid>
+            <Grid >
+               
+                <Label Content="Frequently Asked Questions"
+                       Margin="20,300,0,0"
+     HorizontalAlignment="Left"
+     VerticalAlignment="Top"
+		   FontSize="20"
+>
+                </Label>
+            
+            </Grid>
+            <Grid Margin="400,300,0,0" Width="300" Height="300">
+                <Border BorderBrush="#65B1C1" BorderThickness="1" CornerRadius="10" Background="#65B1C1">
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="Contact information"
+                             Margin="20,0,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+		                           FontSize="20" Foreground="White">
+                        </Label>
+                        <Label Content="{Binding CurrentBusiness.PhoneNumber}"
+                            Margin="20,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                                FontSize="14" Foreground="White">
+                        </Label>
+                        <Label Content="{Binding CurrentBusiness.Email}"
+                             Margin="20,0,0,0"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Top"
+                                   FontSize="14" Foreground="White">
+                        </Label>
+                    </StackPanel>
+                </Border>
+            </Grid>
         </Grid>
-    </Grid>
     </ScrollViewer>
 
 </UserControl>
