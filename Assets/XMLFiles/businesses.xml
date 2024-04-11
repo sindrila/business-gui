@@ -2,16 +2,16 @@
 <ArrayOfBusiness xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Business>
     <_id>1</_id>
-    <_name>Awesome Place</_name>
+    <_name>The Hub</_name>
     <_description>A cool business doing cool things!</_description>
     <_category>Finance</_category>
     <_logo>Assets\Images\scat1.jpg</_logo>
     <_banner>Assets\Images\banner1.jpg</_banner>
-    <_phoneNumber>329-281-6625</_phoneNumber>
+    <_phoneNumber>541-932-6784</_phoneNumber>
     <_email>business0@example.com</_email>
-    <_website>http://Awesome-Place.com</_website>
+    <_website>http://The-Hub.com</_website>
     <_address>123 Main St., Anytown, CA</_address>
-    <_createdAt>4/11/2024 2:55:35 PM</_createdAt>
+    <_createdAt>4/11/2024 3:00:57 PM</_createdAt>
     <_managerUsernames>
       <username>admin</username>
     </_managerUsernames>
@@ -20,16 +20,16 @@
   </Business>
   <Business>
     <_id>2</_id>
-    <_name>Super Co.</_name>
+    <_name>Awesome Inc.</_name>
     <_description>A cool business doing cool things!</_description>
-    <_category>Finance</_category>
+    <_category>Services</_category>
     <_logo>Assets\Images\scat2.jpg</_logo>
     <_banner>Assets\Images\banner2.jpg</_banner>
-    <_phoneNumber>346-759-6942</_phoneNumber>
+    <_phoneNumber>796-283-6295</_phoneNumber>
     <_email>business1@example.com</_email>
-    <_website>http://Super-Co..com</_website>
+    <_website>http://Awesome-Inc..com</_website>
     <_address>123 Main St., Anytown, CA</_address>
-    <_createdAt>4/11/2024 2:55:35 PM</_createdAt>
+    <_createdAt>4/11/2024 3:00:57 PM</_createdAt>
     <_managerUsernames>
       <username>admin</username>
     </_managerUsernames>
@@ -56,16 +56,16 @@
   </Business>
   <Business>
     <_id>4</_id>
-    <_name>Innovative Inc.</_name>
+    <_name>Super Hub</_name>
     <_description>A cool business doing cool things!</_description>
-    <_category>Tech</_category>
+    <_category>Food</_category>
     <_logo>Assets\Images\scat4.jpg</_logo>
     <_banner>Assets\Images\banner4.jpg</_banner>
-    <_phoneNumber>135-827-1534</_phoneNumber>
+    <_phoneNumber>889-317-7136</_phoneNumber>
     <_email>business3@example.com</_email>
-    <_website>http://Innovative-Inc..com</_website>
+    <_website>http://Super-Hub.com</_website>
     <_address>123 Main St., Anytown, CA</_address>
-    <_createdAt>4/11/2024 2:55:35 PM</_createdAt>
+    <_createdAt>4/11/2024 3:00:57 PM</_createdAt>
     <_managerUsernames>
       <username>admin</username>
     </_managerUsernames>
@@ -74,16 +74,16 @@
   </Business>
   <Business>
     <_id>5</_id>
-    <_name>Super Co.</_name>
+    <_name>The Solutions</_name>
     <_description>A cool business doing cool things!</_description>
-    <_category>Food</_category>
+    <_category>Finance</_category>
     <_logo>Assets\Images\scat5.jpg</_logo>
     <_banner>Assets\Images\banner5.jpg</_banner>
-    <_phoneNumber>390-669-7700</_phoneNumber>
+    <_phoneNumber>167-665-5336</_phoneNumber>
     <_email>business4@example.com</_email>
-    <_website>http://Super-Co..com</_website>
+    <_website>http://The-Solutions.com</_website>
     <_address>123 Main St., Anytown, CA</_address>
-    <_createdAt>4/11/2024 2:55:35 PM</_createdAt>
+    <_createdAt>4/11/2024 3:00:57 PM</_createdAt>
     <_managerUsernames>
       <username>admin</username>
     </_managerUsernames>
@@ -92,16 +92,16 @@
   </Business>
   <Business>
     <_id>6</_id>
-    <_name>The Inc.</_name>
+    <_name>Awesome Co.</_name>
     <_description>A cool business doing cool things!</_description>
-    <_category>Finance</_category>
+    <_category>Food</_category>
     <_logo>Assets\Images\scat6.jpg</_logo>
     <_banner>Assets\Images\banner6.jpg</_banner>
-    <_phoneNumber>624-981-2420</_phoneNumber>
+    <_phoneNumber>117-768-7156</_phoneNumber>
     <_email>business5@example.com</_email>
-    <_website>http://The-Inc..com</_website>
+    <_website>http://Awesome-Co..com</_website>
     <_address>123 Main St., Anytown, CA</_address>
-    <_createdAt>4/11/2024 2:55:36 PM</_createdAt>
+    <_createdAt>4/11/2024 3:00:58 PM</_createdAt>
     <_managerUsernames>
       <username>admin</username>
     </_managerUsernames>
@@ -110,16 +110,16 @@
   </Business>
   <Business>
     <_id>7</_id>
-    <_name>Modern Solutions</_name>
+    <_name>Super Co.</_name>
     <_description>A cool business doing cool things!</_description>
     <_category>Retail</_category>
     <_logo>Assets\Images\scat7.jpg</_logo>
     <_banner>Assets\Images\banner7.jpg</_banner>
     <_phoneNumber>778-863-8856</_phoneNumber>
     <_email>business6@example.com</_email>
-    <_website>http://Modern-Solutions.com</_website>
+    <_website>http://Super-Co..com</_website>
     <_address>123 Main St., Anytown, CA</_address>
-    <_createdAt>4/11/2024 2:55:36 PM</_createdAt>
+    <_createdAt>4/11/2024 3:00:58 PM</_createdAt>
     <_managerUsernames>
       <username>admin</username>
     </_managerUsernames>
@@ -129,15 +129,13 @@
   <Business>
     <_id>8</_id>
     <_name>Super Co.</_name>
+    <_name>Innovative Solutions</_name>
     <_description>A cool business doing cool things!</_description>
-    <_category>Services</_category>
-    <_logo>Assets\Images\scat8.jpg</_logo>
-    <_banner>Assets\Images\banner8.jpg</_banner>
-    <_phoneNumber>872-585-2356</_phoneNumber>
+    <_phoneNumber>891-568-6765</_phoneNumber>
     <_email>business7@example.com</_email>
-    <_website>http://Super-Co..com</_website>
+    <_website>http://Innovative-Solutions.com</_website>
     <_address>123 Main St., Anytown, CA</_address>
-    <_createdAt>4/11/2024 2:55:36 PM</_createdAt>
+    <_createdAt>4/11/2024 3:00:58 PM</_createdAt>
     <_managerUsernames>
       <username>admin</username>
     </_managerUsernames>
@@ -146,16 +144,16 @@
   </Business>
   <Business>
     <_id>9</_id>
-    <_name>Super Solutions</_name>
+    <_name>The Hub</_name>
     <_description>A cool business doing cool things!</_description>
-    <_category>Food</_category>
+    <_category>Retail</_category>
     <_logo>Assets\Images\scat9.jpg</_logo>
     <_banner>Assets\Images\banner9.jpg</_banner>
-    <_phoneNumber>396-147-6599</_phoneNumber>
+    <_phoneNumber>581-274-6479</_phoneNumber>
     <_email>business8@example.com</_email>
-    <_website>http://Super-Solutions.com</_website>
+    <_website>http://The-Hub.com</_website>
     <_address>123 Main St., Anytown, CA</_address>
-    <_createdAt>4/11/2024 2:55:36 PM</_createdAt>
+    <_createdAt>4/11/2024 3:00:58 PM</_createdAt>
     <_managerUsernames>
       <username>admin</username>
     </_managerUsernames>
@@ -164,16 +162,16 @@
   </Business>
   <Business>
     <_id>10</_id>
-    <_name>The Hub</_name>
+    <_name>The Solutions</_name>
     <_description>A cool business doing cool things!</_description>
     <_category>Tech</_category>
     <_logo>Assets\Images\scat10.jpg</_logo>
     <_banner>Assets\Images\banner10.jpg</_banner>
-    <_phoneNumber>502-653-2111</_phoneNumber>
+    <_phoneNumber>387-336-6091</_phoneNumber>
     <_email>business9@example.com</_email>
-    <_website>http://The-Hub.com</_website>
+    <_website>http://The-Solutions.com</_website>
     <_address>123 Main St., Anytown, CA</_address>
-    <_createdAt>4/11/2024 2:55:36 PM</_createdAt>
+    <_createdAt>4/11/2024 3:00:58 PM</_createdAt>
     <_managerUsernames>
       <username>admin</username>
     </_managerUsernames>
