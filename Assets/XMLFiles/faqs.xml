@@ -1,1 +1,53 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfFAQ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <FAQ>
+    <Id>1</Id>
+    <Question>Question 1</Question>
+    <Answer>Answer to question 1</Answer>
+  </FAQ>
+  <FAQ>
+    <Id>2</Id>
+    <Question>Question 2</Question>
+    <Answer>Answer to question 2</Answer>
+  </FAQ>
+  <FAQ>
+    <Id>3</Id>
+    <Question>Question 3</Question>
+    <Answer>Answer to question 3</Answer>
+  </FAQ>
+  <FAQ>
+    <Id>4</Id>
+    <Question>Question 4</Question>
+    <Answer>Answer to question 4</Answer>
+  </FAQ>
+  <FAQ>
+    <Id>5</Id>
+    <Question>Question 5</Question>
+    <Answer>Answer to question 5</Answer>
+  </FAQ>
+  <FAQ>
+    <Id>6</Id>
+    <Question>Question 6</Question>
+    <Answer>Answer to question 6</Answer>
+  </FAQ>
+  <FAQ>
+    <Id>7</Id>
+    <Question>Question 7</Question>
+    <Answer>Answer to question 7</Answer>
+  </FAQ>
+  <FAQ>
+    <Id>8</Id>
+    <Question>Question 8</Question>
+    <Answer>Answer to question 8</Answer>
+  </FAQ>
+  <FAQ>
+    <Id>9</Id>
+    <Question>Question 9</Question>
+    <Answer>Answer to question 9</Answer>
+  </FAQ>
+  <FAQ>
+    <Id>10</Id>
+    <Question>Question 10</Question>
+    <Answer>Answer to question 10</Answer>
+  </FAQ>
+</ArrayOfFAQ>
