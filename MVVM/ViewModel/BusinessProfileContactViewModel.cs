@@ -20,6 +20,15 @@ namespace bussiness_social_media.MVVM.ViewModel
 
         private bool _isCurrentUserManager;
 
+        public ObservableCollection<FAQ> FAQs
+        {
+            get
+            {
+                return new ObservableCollection<FAQ>(_businessService.GetAllFAQsOfBusiness(CurrentBusiness.Id));
+            }
+        }
+
+
         public bool IsCurrentUserManager
         {
             get
