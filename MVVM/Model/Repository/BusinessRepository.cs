@@ -19,6 +19,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
         void UpdateBusiness(Business business);
         void DeleteBusiness(int id);
         List<Business> SearchBusinesses(string keyword);
+        void SaveBusinessesToXml();
     }
     public class BusinessRepository : IBusinessRepository
     {
@@ -117,7 +118,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
             catch { }
         }
 
-        private void SaveBusinessesToXml()
+        public void SaveBusinessesToXml()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<Business>), new XmlRootAttribute("ArrayOfBusiness"));
 
