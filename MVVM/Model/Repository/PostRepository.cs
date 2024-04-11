@@ -35,6 +35,8 @@ namespace bussiness_social_media.MVVM.Model.Repository
         {
             _xmlFilePath = xmlFilePath;
             _posts = new List<Post>();
+            generate10RandomPosts();
+            SavePostsToXml();
             LoadPostsFromXml();
         }
 
@@ -56,31 +58,35 @@ namespace bussiness_social_media.MVVM.Model.Repository
 
         private void LoadPostsFromXml()
         {
-            if (File.Exists(_xmlFilePath))
+            try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<Post>), new XmlRootAttribute("ArrayOfPost"));
-
-                _posts = new List<Post>();
-
-                using (FileStream fileStream = new FileStream(_xmlFilePath, FileMode.Open))
+                if (File.Exists(_xmlFilePath))
                 {
-                    using (XmlReader reader = XmlReader.Create(fileStream))
+                    XmlSerializer serializer = new XmlSerializer(typeof(List<Post>), new XmlRootAttribute("ArrayOfPost"));
+
+                    _posts = new List<Post>();
+
+                    using (FileStream fileStream = new FileStream(_xmlFilePath, FileMode.Open))
                     {
-                        // Move to the first Post element
-                        while (reader.ReadToFollowing("Post"))
+                        using (XmlReader reader = XmlReader.Create(fileStream))
                         {
-                            // Deserialize each Post element and add it to the list
-                            Post post = (Post)serializer.Deserialize(reader);
-                            _posts.Add(post);
+                            // Move to the first Post element
+                            while (reader.ReadToFollowing("Post"))
+                            {
+                                // Deserialize each Post element and add it to the list
+                                Post post = (Post)serializer.Deserialize(reader);
+                                _posts.Add(post);
+                            }
                         }
                     }
                 }
+                else
+                {
+                    // Handle the case where the XML file doesn't exist
+                    _posts = new List<Post>();
+                }
             }
-            else
-            {
-                // Handle the case where the XML file doesn't exist
-                _posts = new List<Post>();
-            }
+            catch { }
         }
 
         private void SavePostsToXml()

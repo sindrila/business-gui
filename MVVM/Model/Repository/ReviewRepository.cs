@@ -37,7 +37,8 @@ namespace bussiness_social_media.MVVM.Model.Repository
 
         private void LoadReviewsFromXml()
         {
-            if (File.Exists(_xmlFilePath))
+            FileInfo fileInfo = new FileInfo(_xmlFilePath);
+            if (fileInfo.Exists && fileInfo.Length > 0)
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(List<Review>), new XmlRootAttribute("ArrayOfReview"));
 
@@ -47,6 +48,14 @@ namespace bussiness_social_media.MVVM.Model.Repository
                 {
                     using (XmlReader reader = XmlReader.Create(fileStream))
                     {
+                        // Check if the XML file has a root element
+                        if (!reader.ReadToFollowing("ArrayOfReview"))
+                        {
+                            // Handle the case where the XML file doesn't have a root element
+                            _reviews = new List<Review>();
+                            return;
+                        }
+
                         // Move to the first Review element
                         while (reader.ReadToFollowing("Review"))
                         {
@@ -59,7 +68,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
             }
             else
             {
-                // Handle the case where the XML file doesn't exist
+                // Handle the case where the XML file doesn't exist or is empty
                 _reviews = new List<Review>();
             }
         }

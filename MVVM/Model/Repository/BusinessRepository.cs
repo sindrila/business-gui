@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -83,31 +84,35 @@ namespace bussiness_social_media.MVVM.Model.Repository
 
         private void LoadBusinessesFromXml()
         {
-            if (File.Exists(_xmlFilePath))
+            try
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(Business), new XmlRootAttribute("Business"));
-
-                _businesses = new List<Business>();
-
-                using (FileStream fileStream = new FileStream(_xmlFilePath, FileMode.Open))
+                if (File.Exists(_xmlFilePath))
                 {
-                    using (XmlReader reader = XmlReader.Create(fileStream))
+                    XmlSerializer serializer = new XmlSerializer(typeof(Business), new XmlRootAttribute("Business"));
+
+                    _businesses = new List<Business>();
+
+                    using (FileStream fileStream = new FileStream(_xmlFilePath, FileMode.Open))
                     {
-                        // Move to the first Business element
-                        while (reader.ReadToFollowing("Business"))
+                        using (XmlReader reader = XmlReader.Create(fileStream))
                         {
-                            // Deserialize each Business element and add it to the list
-                            Business business = (Business)serializer.Deserialize(reader);
-                            _businesses.Add(business);
+                            // Move to the first Business element
+                            while (reader.ReadToFollowing("Business"))
+                            {
+                                // Deserialize each Business element and add it to the list
+                                Business business = (Business)serializer.Deserialize(reader);
+                                _businesses.Add(business);
+                            }
                         }
                     }
                 }
+                else
+                {
+                    // Handle the case where the XML file doesn't exist
+                    _businesses = new List<Business>();
+                }
             }
-            else
-            {
-                // Handle the case where the XML file doesn't exist
-                _businesses = new List<Business>();
-            }
+            catch { }
         }
 
         private void SaveBusinessesToXml()
