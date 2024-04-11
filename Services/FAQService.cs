@@ -16,7 +16,7 @@ namespace bussiness_social_media.Services
         void DeleteFAQ(int faqID);
 
     }
-    internal class FAQService : IFAQService
+    public class FAQService : IFAQService
     {
         private IFAQRepository _faqRepository;
 

@@ -1,3 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfComments xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Comment>
+    <Id>1</Id>
+    <Username>sindrilosulsuprem</Username>
+    <Content>ew</Content>
+    <DateOfCreation>11-04-2024 23:44</DateOfCreation>
+    <DateOfUpdate>11-04-2024 23:44</DateOfUpdate>
+  </Comment>
+  <Comment>
+    <Id>2</Id>
+    <Username>clacla</Username>
+    <Content>amazing1</Content>
+    <DateOfCreation>11-04-2024 23:44</DateOfCreation>
+    <DateOfUpdate>11-04-2024 23:44</DateOfUpdate>
+  </Comment>
 </ArrayOfComments>

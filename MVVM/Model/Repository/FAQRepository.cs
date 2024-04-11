@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -14,7 +15,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
         List<FAQ> GetAllFAQs();
         FAQ GetFAQById(int id);
         int AddFAQ(string faqQuestion, string faqAnswer);
-        void UpdateFAQ(int faqID, string newFaqQuestion, string newFaqAnswer);
+        void UpdateFAQ(int id, string newFaqQuestion, string newFaqAnswer);
         void DeleteFAQ(int id);
     }
 
@@ -28,28 +29,30 @@ namespace bussiness_social_media.MVVM.Model.Repository
             _xmlFilePath = xmlFilePath;
             _faqs = new List<FAQ>();
             LoadFAQsFromXml();
-            //SaveFAQsToXml();
         }
 
         ~FAQRepository()
         {
+            // TODO: the destructor is not called?????? 
+            // Probably all repositories are saved to file only after CRUD operations
             SaveFAQsToXml();
         }
 
         private void LoadFAQsFromXml()
         {
-            try {
+            try
+            {
+                _faqs = new List<FAQ>();
                 if (File.Exists(_xmlFilePath))
                 {
-                    // I have no idea why this works
+                    // I have no idea why only this line works
                     // It should have been (typeof(List<FAQ>), new XmlRootAttribute("ArrayOfFAQ")
                     // if you look in the xml file, the root attribute is a ArrayOfFaq
                     // but this line reads the first FAQ
                     // Tried to make it a List<FAQ>, got an exception
+                    // Maybe it is a personal skill issue and this line is actually correct
                     // If shit goes south, look into this :* xoxo gossip girl
                     XmlSerializer serializer = new XmlSerializer(typeof(FAQ), new XmlRootAttribute("FAQ"));
-
-                    _faqs = new List<FAQ>();
 
                     using (FileStream fileStream = new FileStream(_xmlFilePath, FileMode.Open))
                     {
@@ -63,15 +66,13 @@ namespace bussiness_social_media.MVVM.Model.Repository
                         }
 
                     }
-                    
-                    
-                }
-                else
-                {
-                    _faqs = new List<FAQ>();
                 }
             }
-            catch { }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something terrible, terrible has happened during the execution of the program. Show this to your local IT guy: " + ex.Message);
+            }
         }
 
         private void SaveFAQsToXml()
@@ -103,9 +104,9 @@ namespace bussiness_social_media.MVVM.Model.Repository
             return newID;
         }
 
-        public void UpdateFAQ(int faqID, string newFaqQuestion, string newFaqAnswer)
+        public void UpdateFAQ(int id, string newFaqQuestion, string newFaqAnswer)
         {
-            var existingFAQ = _faqs.FirstOrDefault(f => f.GetId() ==faqID);
+            var existingFAQ = _faqs.FirstOrDefault(f => f.GetId() == id);
             if (existingFAQ != null)
             {
                 existingFAQ.SetQuestion(newFaqQuestion);

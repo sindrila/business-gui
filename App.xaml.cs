@@ -10,6 +10,7 @@ using bussiness_social_media.MVVM.Model.Repository;
 using System.Reflection.PortableExecutable;
 using business_social_media.Services;
 using System.Xml.Serialization;
+using System.Xml;
 
 namespace bussiness_social_media
 {
@@ -27,6 +28,7 @@ namespace bussiness_social_media
             string postsXmlFilePath = ConfigurationManager.AppSettings["PostsXmlFilePath"];
             string reviewsXmlFilePath = ConfigurationManager.AppSettings["ReviewsXmlFilePath"];
             string faqsXmlFilePath = ConfigurationManager.AppSettings["FAQsXmlFilePath"];
+            string commentsXmlFilePath = ConfigurationManager.AppSettings["CommentsXmlFilePath"];
             string binDirectory = "\\bin";
             string basePath = AppDomain.CurrentDomain.BaseDirectory;
             string pathUntilBin;
@@ -37,6 +39,8 @@ namespace bussiness_social_media
             postsXmlFilePath = Path.Combine(pathUntilBin, postsXmlFilePath);
             reviewsXmlFilePath = Path.Combine(pathUntilBin, reviewsXmlFilePath);
             faqsXmlFilePath = Path.Combine(pathUntilBin, faqsXmlFilePath);
+            commentsXmlFilePath = Path.Combine(pathUntilBin, commentsXmlFilePath);
+            CommentRepository c = new CommentRepository(commentsXmlFilePath);
 
             services.AddSingleton<MainWindow>(provider => new MainWindow
             {
@@ -79,25 +83,9 @@ namespace bussiness_social_media
         protected override void OnStartup(StartupEventArgs e)
         {
             var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-            //mainWindow.Show();
+            mainWindow.Show();
 
 
-            Comment comment1 = new Comment(1, "alexbigdick", "ew",DateTime.Now);
-            Comment comment2 = new Comment(1, "clacla", "amazing1",DateTime.Now);
-
-
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Comment>), new XmlRootAttribute("ArrayOfComments"));
-            List<Comment> comments = new List<Comment>();   
-            comment2.DateOfUpdate= DateTime.Now;
-            comments.Add(comment1);
-            comments.Add(comment2);
-
-            using (FileStream fileStream = new FileStream("comments.xml", FileMode.Create))
-            {
-                serializer.Serialize(fileStream, comments);
-            }
-
-            comment2.DateOfUpdate = DateTime.Now;
             base.OnStartup(e);
         }
     }

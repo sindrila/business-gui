@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -35,8 +36,8 @@ namespace bussiness_social_media.MVVM.Model.Repository
         {
             _xmlFilePath = xmlFilePath;
             _posts = new List<Post>();
-            generate10RandomPosts();
-            SavePostsToXml();
+            //generate10RandomPosts();
+            //SavePostsToXml();
             LoadPostsFromXml();
         }
 
@@ -62,7 +63,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
             {
                 if (File.Exists(_xmlFilePath))
                 {
-                    XmlSerializer serializer = new XmlSerializer(typeof(List<Post>), new XmlRootAttribute("ArrayOfPost"));
+                    XmlSerializer serializer = new XmlSerializer(typeof(Post), new XmlRootAttribute("Post"));
 
                     _posts = new List<Post>();
 
@@ -70,10 +71,8 @@ namespace bussiness_social_media.MVVM.Model.Repository
                     {
                         using (XmlReader reader = XmlReader.Create(fileStream))
                         {
-                            // Move to the first Post element
                             while (reader.ReadToFollowing("Post"))
                             {
-                                // Deserialize each Post element and add it to the list
                                 Post post = (Post)serializer.Deserialize(reader);
                                 _posts.Add(post);
                             }
@@ -82,11 +81,13 @@ namespace bussiness_social_media.MVVM.Model.Repository
                 }
                 else
                 {
-                    // Handle the case where the XML file doesn't exist
                     _posts = new List<Post>();
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something terrible, terrible has happened during the execution of the program. Show this to your local IT guy: " + ex.Message);
+            }
         }
 
         private void SavePostsToXml()
