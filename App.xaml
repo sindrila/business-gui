@@ -38,5 +38,9 @@
             <view:BusinessProfileContactView/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModel:LoginViewModel}">
+            <view:LoginView/>
+        </DataTemplate>
+
     </Application.Resources>
 </Application>

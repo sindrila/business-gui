@@ -8,17 +8,25 @@ using System.Threading;
 
 namespace business_social_media.Services
 {
-
-    
-
     public class AuthenticationService 
     {
         private List<Account> users;
         private Dictionary<string, DateTime> sessionTokens;
         private bool isLoggedIn;
+        private Account currentUser;
         private Timer logoutTimer;
         private int sessionDurationSeconds;
         private string filePath = "acounts.json";
+
+        public Account CurrentUser 
+        { 
+            get => currentUser; 
+            set
+            {
+                currentUser = value;
+ 
+            }
+        }
 
         public AuthenticationService()
         {
@@ -58,9 +66,9 @@ namespace business_social_media.Services
                 string sessionToken = Guid.NewGuid().ToString();
                 sessionTokens.Add(sessionToken, DateTime.Now);
                 isLoggedIn = true;
-
+                currentUser = users.FirstOrDefault(u => u.Username == username && u.Password == password);
                 // Start the logout timer
-                logoutTimer.Change(sessionDurationSeconds * 1000, Timeout.Infinite);
+                // logoutTimer.Change(sessionDurationSeconds * 1000, Timeout.Infinite);
                 return true;
             }
             else
