@@ -15,8 +15,6 @@ namespace bussiness_social_media.Services
         void DeleteBusiness(int id);
         List<Business> SearchBusinesses(string keyword);
         public List<Business> GetBusinessesManagedBy(string username);
-        public List<FAQ> GetAllFAQsOfBusiness(int businessID);
-
 
         public bool IsUserManagerOfBusiness(int businessId, string username);
     }
@@ -33,15 +31,7 @@ namespace bussiness_social_media.Services
             _faqService = FAQService;
             _postService = postService;
             _reviewService = reviewService;
-
         }
-
-        ~BusinessService()
-        {
-            _businessRepository.SaveBusinessesToXml();
-        }
-
-
 
         public List<Business> GetAllBusinesses()
         {

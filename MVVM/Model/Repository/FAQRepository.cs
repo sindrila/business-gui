@@ -28,7 +28,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
             _xmlFilePath = xmlFilePath;
             _faqs = new List<FAQ>();
             LoadFAQsFromXml();
-            //SaveFAQsToXml();
+            SaveFAQsToXml();
         }
 
         ~FAQRepository()
@@ -41,33 +41,25 @@ namespace bussiness_social_media.MVVM.Model.Repository
             try {
                 if (File.Exists(_xmlFilePath))
                 {
-                    // I have no idea why this works
-                    // It should have been (typeof(List<FAQ>), new XmlRootAttribute("ArrayOfFAQ")
-                    // if you look in the xml file, the root attribute is a ArrayOfFaq
-                    // but this line reads the first FAQ
-                    // Tried to make it a List<FAQ>, got an exception
-                    // If shit goes south, look into this :* xoxo gossip girl
                     XmlSerializer serializer = new XmlSerializer(typeof(FAQ), new XmlRootAttribute("FAQ"));
 
                     _faqs = new List<FAQ>();
 
                     using (FileStream fileStream = new FileStream(_xmlFilePath, FileMode.Open))
+                    using (XmlReader reader = XmlReader.Create(fileStream))
                     {
-                        using (XmlReader reader = XmlReader.Create(fileStream))
+                        // Move to the first FAQ element
+                        while (reader.ReadToFollowing("FAQ"))
                         {
-                            while (reader.ReadToFollowing("FAQ"))
-                            {
-                                FAQ faq = (FAQ)serializer.Deserialize(reader);
-                                _faqs.Add(faq);
-                            }
+                            // Deserialize each FAQ element and add it to the list
+                            FAQ faq = (FAQ)serializer.Deserialize(reader);
+                            _faqs.Add(faq);
                         }
-
                     }
-                    
-                    
                 }
                 else
                 {
+                    // Handle the case where the XML file doesn't exist
                     _faqs = new List<FAQ>();
                 }
             }
