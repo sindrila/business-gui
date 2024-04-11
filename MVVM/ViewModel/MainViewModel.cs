@@ -3,6 +3,7 @@ using bussiness_social_media.Services;
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace bussiness_social_media.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
+
         public RelayCommand NavigateToRegisterViewCommand { get; set; }
 
 
@@ -29,6 +31,7 @@ namespace bussiness_social_media.MVVM.ViewModel
         public RelayCommand NavigateToCreateNewBusinessViewCommand{ get; set; }
 
         public RelayCommand NavigateToLoginViewCommand { get; set; }
+        public RelayCommand NavigateToUserManagedBusinessesViewCommand { get; set; }
         public MainViewModel(INavigationService navigationService)
         {
             Navigation = navigationService;
@@ -36,6 +39,10 @@ namespace bussiness_social_media.MVVM.ViewModel
             NavigateToCreateNewBusinessViewCommand = new RelayCommand(o => { Navigation.NavigateTo<CreateNewBusinessViewModel>(); }, o => true);
             NavigateToRegisterViewCommand = new RelayCommand(o => { Navigation.NavigateTo<RegisterViewModel>(); }, o => true);
             NavigateToLoginViewCommand = new RelayCommand(o => { Navigation.NavigateTo<LoginViewModel>(); }, o => true);
+            NavigateToUserManagedBusinessesViewCommand = new RelayCommand(o =>
+            {
+                Navigation.NavigateTo<UserManagedBusinessPagesViewModel>();
+            }, o => true);
             Navigation.NavigateTo<HomeViewModel>();
         }
     }

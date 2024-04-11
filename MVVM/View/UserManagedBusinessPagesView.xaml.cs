@@ -24,5 +24,6 @@ namespace bussiness_social_media.MVVM.View
         {
             InitializeComponent();
         }
+
     }
 }

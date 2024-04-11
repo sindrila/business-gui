@@ -29,6 +29,10 @@
             <Button Content="Login"
                     Height="25"
                     Command="{Binding Path=NavigateToLoginViewCommand}"/>
+			
+			<Button Content="Managed businesses"
+					Height="25"
+					Command="{Binding Path=NavigateToUserManagedBusinessesViewCommand}"/>
         </TabPanel>
 
         <ContentControl Grid.Row="1" Content="{Binding Navigation.CurrentView}"></ContentControl>
