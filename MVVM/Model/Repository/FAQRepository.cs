@@ -28,6 +28,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
             _xmlFilePath = xmlFilePath;
             _faqs = new List<FAQ>();
             LoadFAQsFromXml();
+            SaveFAQsToXml();
         }
 
         ~FAQRepository()
