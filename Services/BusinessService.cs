@@ -19,7 +19,8 @@ namespace bussiness_social_media.Services
         public List<Business> GetBusinessesManagedBy(string username);
         public List<FAQ> GetAllFAQsOfBusiness(int businessID);
         public List<Review> GetAllReviewsForBusiness(int businessId);
-        public Comment GetAdminCommentForReview(int reviewId);
+        public Comment GetAdminCommentForReview(int reviewId); 
+        public void CreateReviewAndAddItToBusiness(int businessId, string userName, int rating, string comment, string title, string imagePath);
 
 
         public bool IsUserManagerOfBusiness(int businessId, string username);
