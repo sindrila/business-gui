@@ -34,7 +34,7 @@
 
       <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
+    
         <Grid>
 
             <Grid.RowDefinitions>
@@ -43,11 +43,11 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <TabPanel Grid.Row="0">
-                <Label Content="{Binding currentBusiness.Name}"
-    HorizontalAlignment="Left"
-    VerticalAlignment="Top"
-    Height="50"/>
+            <TabPanel Grid.Row="0" AutomationProperties.IsRowHeader="True" AutomationProperties.IsColumnHeader="True">
+                <Label Content="{Binding currentBusiness.Name}" 
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top"
+                    Height="30"/>
                 <Button Content="Posts"
         Height="40"
         Width="150"
@@ -65,6 +65,7 @@
         Width="150"
         Command="{Binding Path=NavigateToAboutCommand}" Margin="-10,0,10,10"/>
             </TabPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
 
 
             <Grid
@@ -92,6 +93,7 @@
                 </Grid>
 
             </Grid>
-        </Grid>
     </ScrollViewer>
+    </Grid>
+
 </UserControl>

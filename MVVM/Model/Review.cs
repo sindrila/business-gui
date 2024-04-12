@@ -12,7 +12,7 @@ public class Review : IXmlSerializable
     private string _title;
     private string _imagePath;
     private DateTime _dateOfCreation;
-    private string _adminComment;
+    private int _adminCommentId;
 
     public Review(int id, string userName, int rating, string comment, string title, string imagePath, DateTime dateOfCreation)
     {
@@ -23,7 +23,10 @@ public class Review : IXmlSerializable
         _title = title;
         _imagePath = imagePath;
         _dateOfCreation = dateOfCreation;
+        _adminCommentId = -1;
     }
+
+    public int AdminCommentId { get => _adminCommentId; set => _adminCommentId = value;  }
 
     public Review() { }
     public int GetRating() { return _rating; }
@@ -33,14 +36,12 @@ public class Review : IXmlSerializable
     public string GetImagePath() { return _imagePath; }
     public string GetDateOfCreation() { return _dateOfCreation.ToString(); }
     public string GetUserName() { return _userName; }
-    public string GetAdminComment() { return _adminComment; }
 
     public void SetUserName(string userName) { _userName = userName; }
     public void SetTitle(string title) { _title = title; }
     public void SetImagePath(string imagePath) { _imagePath = imagePath; }
     public void SetRating(int rating) { _rating = rating; }
     public void SetComment(string comment) { _comment = comment; }
-    public void SetAdminComment(string comment) { _adminComment = comment; }
 
     public XmlSchema GetSchema()
     {
@@ -54,14 +55,14 @@ public class Review : IXmlSerializable
         reader.ReadStartElement();
         if (!isEmptyElement)
         {
-            _id = int.Parse(reader.ReadElementContentAsString("Id", ""));
-            _userName = reader.ReadElementContentAsString("UserName", "");
-            _rating = int.Parse(reader.ReadElementContentAsString("Rating", ""));
-            _comment = reader.ReadElementContentAsString("Comment", "");
-            _title = reader.ReadElementContentAsString("Title", "");
-            _imagePath = reader.ReadElementContentAsString("ImagePath", "");
-            _dateOfCreation = DateTime.Parse(reader.ReadElementContentAsString("DateOfCreation", ""));
-            _adminComment = reader.ReadElementContentAsString("AdminComment", "");
+            _id = int.Parse(reader.ReadElementString("Id"));
+            _userName = reader.ReadElementString("UserName");
+            _rating = int.Parse(reader.ReadElementString("Rating"));
+            _comment = reader.ReadElementString("Comment");
+            _title = reader.ReadElementString("Title");
+            _imagePath = reader.ReadElementString("ImagePath");
+            _dateOfCreation = DateTime.Parse(reader.ReadElementString("DateOfCreation"));
+            _adminCommentId = int.Parse(reader.ReadElementString("AdminComment"));
             reader.ReadEndElement();
         }
     }
@@ -75,6 +76,6 @@ public class Review : IXmlSerializable
         writer.WriteElementString("Title", _title);
         writer.WriteElementString("ImagePath", _imagePath);
         writer.WriteElementString("DateOfCreation", _dateOfCreation.ToString());
-        writer.WriteElementString("AdminComment", _adminComment);
+        writer.WriteElementString("AdminComment", _adminCommentId.ToString());
     }
 }

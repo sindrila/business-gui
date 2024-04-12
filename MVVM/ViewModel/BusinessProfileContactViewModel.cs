@@ -17,8 +17,29 @@ namespace bussiness_social_media.MVVM.ViewModel
         private AuthenticationService _authenticationService;
 
         public Business _currentBusiness;
+        public FAQ _currentFAQ;
+        public FAQ _noFAQ;
+
 
         private bool _isCurrentUserManager;
+
+        public ObservableCollection<FAQ> FAQs
+        {
+            get
+            {
+
+                return new ObservableCollection<FAQ>(_businessService.GetAllFAQsOfBusiness(CurrentBusiness.Id));
+            }
+        }
+
+        public string CurrentFAQAnswer
+        {
+            get
+            {
+                return _currentFAQ.Answer;
+            }
+        }
+
 
         public bool IsCurrentUserManager
         {
@@ -64,10 +85,24 @@ namespace bussiness_social_media.MVVM.ViewModel
             }
         }
 
+        public FAQ CurrentFAQ
+        {
+            get => _currentFAQ;
+            set
+            {
+                _currentFAQ = value;
+                OnPropertyChanged(nameof(CurrentFAQ));
+            }
+        }
+
         public RelayCommand NavigateToPostsCommand { get; set; }
         public RelayCommand NavigateToReviewsCommand { get; set; }
         public RelayCommand NavigateToContactCommand { get; set; }
         public RelayCommand NavigateToAboutCommand { get; set; }
+
+        public RelayCommand FAQCommand { get; set; }
+
+
         public BusinessProfileContactViewModel(INavigationService navigationService, IBusinessService businessService, AuthenticationService authenticationService)
         {
             Navigation = navigationService;
@@ -78,12 +113,29 @@ namespace bussiness_social_media.MVVM.ViewModel
             NavigateToContactCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileContactViewModel>(); }, o => true);
             NavigateToAboutCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileAboutViewModel>(); }, o => true);
             changeCurrrentBusiness();
+            _noFAQ = new FAQ(0, "FAQs...", "--    --\n    \\__/");
+            _currentFAQ = _noFAQ;
+
+            FAQCommand = new RelayCommand(o => {
+                if (o is FAQ faq)
+                {
+                    CurrentFAQ = faq;
+                }
+                //changeCurrrentFAQ();
+            }, o => true);
             // In this class, you have the instance of the business in currentBusiness. You can access it in the BusinessProfileView.xaml but I'm not quite sure how. Ask chat gpt, I tried something and I do not know if it works. It is currently 00:47 and I want to go to sleep
         }
 
         public Business changeCurrrentBusiness()
         {
+            CurrentFAQ = _noFAQ;
             return _businessService.GetBusinessById(_navigation.BusinessId);
+        }
+
+        public FAQ changeCurrrentFAQ()
+        {
+            List<FAQ> faqList = _businessService.GetAllFAQsOfBusiness(CurrentBusiness.Id);
+            return faqList[0];
         }
     }
 }

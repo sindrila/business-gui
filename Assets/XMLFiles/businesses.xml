@@ -11,13 +11,22 @@
     <_email>business0@example.com</_email>
     <_website>http://The-Place.com</_website>
     <_address>123 Main St., Anytown, CA</_address>
-    <_createdAt>4/11/2024 5:48:27 PM</_createdAt>
+    <_createdAt>04.11.2024 17:48:27</_createdAt>
     <_managerUsernames>
       <username>admin</username>
     </_managerUsernames>
-    <_postIds />
-    <_reviewIds />
-    <_faqIds />
+    <_postIds>
+      <postId>1</postId>
+      <postId>2</postId>
+      <postId>3</postId>
+    </_postIds>
+    <_reviewIds>
+      <reviewId>1</reviewId>
+    </_reviewIds>
+    <_faqIds>
+      <faqId>11</faqId>
+      <faqId>12</faqId>
+    </_faqIds>
   </Business>
   <Business>
     <_id>2</_id>
@@ -30,12 +39,16 @@
     <_email>business1@example.com</_email>
     <_website>http://Innovative-Solutions.com</_website>
     <_address>123 Main St., Anytown, CA</_address>
-    <_createdAt>4/11/2024 5:48:27 PM</_createdAt>
+    <_createdAt>04.11.2024 17:48:27</_createdAt>
     <_managerUsernames>
       <username>admin</username>
     </_managerUsernames>
-    <_postIds />
-    <_reviewIds />
+    <_postIds>
+      <postId>4</postId>
+    </_postIds>
+    <_reviewIds>
+      <reviewId>2</reviewId>
+    </_reviewIds>
     <_faqIds />
   </Business>
   <Business>
@@ -49,12 +62,14 @@
     <_email>business2@example.com</_email>
     <_website>http://Super-Co..com</_website>
     <_address>123 Main St., Anytown, CA</_address>
-    <_createdAt>4/11/2024 5:48:27 PM</_createdAt>
+    <_createdAt>04.11.2024 17:48:27</_createdAt>
     <_managerUsernames>
       <username>admin</username>
     </_managerUsernames>
     <_postIds />
-    <_reviewIds />
+    <_reviewIds>
+      <reviewId>3</reviewId>
+    </_reviewIds>
     <_faqIds />
   </Business>
   <Business>
@@ -68,7 +83,7 @@
     <_email>business3@example.com</_email>
     <_website>http://Innovative-Solutions.com</_website>
     <_address>123 Main St., Anytown, CA</_address>
-    <_createdAt>4/11/2024 5:48:27 PM</_createdAt>
+    <_createdAt>04.11.2024 17:48:27</_createdAt>
     <_managerUsernames>
       <username>admin</username>
     </_managerUsernames>
@@ -87,7 +102,7 @@
     <_email>business4@example.com</_email>
     <_website>http://Super-Inc..com</_website>
     <_address>123 Main St., Anytown, CA</_address>
-    <_createdAt>4/11/2024 5:48:27 PM</_createdAt>
+    <_createdAt>04.11.2024 17:48:27</_createdAt>
     <_managerUsernames>
       <username>admin</username>
     </_managerUsernames>
@@ -106,7 +121,7 @@
     <_email>business5@example.com</_email>
     <_website>http://Innovative-Co..com</_website>
     <_address>123 Main St., Anytown, CA</_address>
-    <_createdAt>4/11/2024 5:48:27 PM</_createdAt>
+    <_createdAt>04.11.2024 17:48:27</_createdAt>
     <_managerUsernames>
       <username>admin</username>
     </_managerUsernames>
@@ -125,7 +140,7 @@
     <_email>business6@example.com</_email>
     <_website>http://Modern-Inc..com</_website>
     <_address>123 Main St., Anytown, CA</_address>
-    <_createdAt>4/11/2024 5:48:27 PM</_createdAt>
+    <_createdAt>04.11.2024 17:48:27</_createdAt>
     <_managerUsernames>
       <username>admin</username>
     </_managerUsernames>
@@ -144,7 +159,7 @@
     <_email>business7@example.com</_email>
     <_website>http://Super-Inc..com</_website>
     <_address>123 Main St., Anytown, CA</_address>
-    <_createdAt>4/11/2024 5:48:27 PM</_createdAt>
+    <_createdAt>04.11.2024 17:48:27</_createdAt>
     <_managerUsernames>
       <username>admin</username>
     </_managerUsernames>
@@ -163,7 +178,7 @@
     <_email>business8@example.com</_email>
     <_website>http://The-Solutions.com</_website>
     <_address>123 Main St., Anytown, CA</_address>
-    <_createdAt>4/11/2024 5:48:27 PM</_createdAt>
+    <_createdAt>04.11.2024 17:48:27</_createdAt>
     <_managerUsernames>
       <username>admin</username>
     </_managerUsernames>
@@ -182,7 +197,7 @@
     <_email>business9@example.com</_email>
     <_website>http://Super-Solutions.com</_website>
     <_address>123 Main St., Anytown, CA</_address>
-    <_createdAt>4/11/2024 5:48:27 PM</_createdAt>
+    <_createdAt>04.11.2024 17:48:27</_createdAt>
     <_managerUsernames>
       <username>admin</username>
     </_managerUsernames>

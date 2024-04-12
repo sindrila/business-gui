@@ -18,11 +18,10 @@ public class FAQ : IXmlSerializable
         _answer = answer;
     }
 
-    public string GetQuestion() { return _question; }
-    public string GetAnswer() { return _answer; }
-    public int GetId() { return _id; }
-    public void SetQuestion(string question) { _question = question; }
-    public void SetAnswer(string answer) { _answer = answer; }
+    public string Question { get => _question; set => _question = value; }
+    public string Answer { get => _answer; set => _answer = value; }
+    public int Id { get => _id; set => _id = value; }
+
     public XmlSchema GetSchema()
     {
         return null;

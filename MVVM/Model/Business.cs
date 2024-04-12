@@ -218,7 +218,7 @@ public class Business : IXmlSerializable
                 {
                     if (reader.NodeType == XmlNodeType.Element && reader.LocalName == "faqId")
                     {
-                        _reviewIds.Add(int.Parse(reader.ReadElementString("faqId")));
+                        _faqIds.Add(int.Parse(reader.ReadElementString("faqId")));
                     }
                     else
                     {
@@ -273,9 +273,9 @@ public class Business : IXmlSerializable
         writer.WriteEndElement();
 
         writer.WriteStartElement("_faqIds");
-        foreach (int reviewId in _reviewIds)
+        foreach (int faqId in _faqIds)
         {
-            writer.WriteElementString("faqId", reviewId.ToString());
+            writer.WriteElementString("faqId", faqId.ToString());
         }
         writer.WriteEndElement();
 

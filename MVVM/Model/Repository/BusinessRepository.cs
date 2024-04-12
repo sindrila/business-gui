@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -19,6 +20,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
         void UpdateBusiness(Business business);
         void DeleteBusiness(int id);
         List<Business> SearchBusinesses(string keyword);
+        void SaveBusinessesToXml();
     }
     public class BusinessRepository : IBusinessRepository
     {
@@ -114,10 +116,14 @@ namespace bussiness_social_media.MVVM.Model.Repository
                     _businesses = new List<Business>();
                 }
             }
-            catch { }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something terrible, terrible has happened during the execution of the program. Show this to your local IT guy: " + ex.Message);
+            }
         }
 
-        private void SaveBusinessesToXml()
+        public void SaveBusinessesToXml()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<Business>), new XmlRootAttribute("ArrayOfBusiness"));
 

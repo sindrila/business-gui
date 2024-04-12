@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -17,6 +18,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
         int AddReview(string userName, int rating, string comment, string title, string imagePath, DateTime dateOfCreation);
         void UpdateReview(int id, int newRating, string newComment, string newTitle, string newImagePath);
         void DeleteReview(int id);
+        void ForceReviewSavingToXml();
     }
 
     public class ReviewRepository : IReviewRepository
@@ -66,8 +68,12 @@ namespace bussiness_social_media.MVVM.Model.Repository
                 }
             }
 
-            catch { }
-            
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something terrible, terrible has happened during the execution of the program. Show this to your local IT guy. ReviewRepository.LoadReviewsFromXml():" + ex.Message);
+
+            }
+
         }
 
         private void SaveReviewsToXml()
@@ -126,6 +132,11 @@ namespace bussiness_social_media.MVVM.Model.Repository
         private int _getNextId()
         {
             return _reviews.Count > 0 ? _reviews.Max(r => r.GetReviewId()) + 1 : 1;
+        }
+
+        public void ForceReviewSavingToXml()
+        {
+            SaveReviewsToXml();
         }
     }
 }

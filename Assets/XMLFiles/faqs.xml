@@ -47,7 +47,17 @@
   </FAQ>
   <FAQ>
     <_id>10</_id>
-    <_question>Question 10</_question>
-    <_answer>Answer to question 10</_answer>
+    <_question>Question 1</_question>
+    <_answer>Answer 1</_answer>
+  </FAQ>
+  <FAQ>
+    <_id>11</_id>
+    <_question>Is your food gluten-free?</_question>
+    <_answer>I do offer gluten-free options.</_answer>
+  </FAQ>
+  <FAQ>
+    <_id>12</_id>
+    <_question>Why are you so expensive?</_question>
+    <_answer>Why wouldn't I be?</_answer>
   </FAQ>
 </ArrayOfFAQ>
