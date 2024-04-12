@@ -18,6 +18,8 @@ namespace bussiness_social_media.Services
         List<Business> SearchBusinesses(string keyword);
         public List<Business> GetBusinessesManagedBy(string username);
         public List<FAQ> GetAllFAQsOfBusiness(int businessID);
+        public List<Review> GetAllReviewsForBusiness(int businessId);
+        public Comment GetAdminCommentForReview(int reviewId);
 
 
         public bool IsUserManagerOfBusiness(int businessId, string username);

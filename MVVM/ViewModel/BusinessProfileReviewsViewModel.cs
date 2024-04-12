@@ -20,11 +20,22 @@ namespace bussiness_social_media.MVVM.ViewModel
         private Business _currentBusiness;
         private Review _currentReview;
         private string _imagePath;
+        private List<Review> _reviewsList;
 
         // Property to hold the image source of the current business
         private ImageSource _businessImage;
         private string _reviewDescription;
         private bool _isCurrentUserManager;
+
+        public List<Review> ReviewsList
+        {
+            get => _reviewsList;
+            set
+            {
+                _reviewsList = value;
+                OnPropertyChanged();
+            }
+        }
 
         public bool IsCurrentUserManager
         {
@@ -110,7 +121,9 @@ namespace bussiness_social_media.MVVM.ViewModel
             LeaveReviewCommand = new RelayCommand(o => { LeaveReview(); }, o => true);
             _currentBusiness = ChangeCurrentBusiness();
             ImageSource img = new BitmapImage(new Uri(_currentBusiness.Logo));
-            BusinessImage = img; 
+            BusinessImage = img;
+
+            _reviewsList = _businessService.GetAllReviewsForBusiness(CurrentBusiness.Id);
             
         }
         private void LeaveReview()
