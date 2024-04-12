@@ -21,6 +21,7 @@ namespace bussiness_social_media.MVVM.ViewModel
         private string _emailAddress;
         private string _website;
         private string _address;
+        private string _newAdmin;
 
         public Business _currentBusiness;
 
@@ -35,6 +36,16 @@ namespace bussiness_social_media.MVVM.ViewModel
             {
                 _isUpdatingBusinessInfo = value;
                 OnPropertyChanged(nameof(IsUpdatingBusinessInfo));
+            }
+        }
+
+        public string NewAdmin
+        {
+            get => _newAdmin;
+            set
+            {
+                _newAdmin = value;
+                OnPropertyChanged();
             }
         }
 
@@ -131,6 +142,7 @@ namespace bussiness_social_media.MVVM.ViewModel
         public RelayCommand UpdateAddressCommand { get; set; }
         public RelayCommand UpdateEmailCommand { get; set; }
         public RelayCommand UpdateWebsiteCommand { get; set; }
+        public RelayCommand AddNewAdministratorCommand { get; set; }
 
         public BusinessProfileAboutViewModel(INavigationService navigationService, IBusinessService businessService, AuthenticationService authenticationService)
         {
@@ -145,6 +157,7 @@ namespace bussiness_social_media.MVVM.ViewModel
             UpdateAddressCommand = new RelayCommand(UpdateAddress, o => true);
             UpdateEmailCommand = new RelayCommand(UpdateEmail, o => true);
             UpdateWebsiteCommand = new RelayCommand(UpdateWebsite, o => true);
+            AddNewAdministratorCommand = new RelayCommand(AddNewAdministrator, o => true);
             NavigateToAboutCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileAboutViewModel>(); }, o => true);
             changeCurrrentBusiness();
             
@@ -154,6 +167,12 @@ namespace bussiness_social_media.MVVM.ViewModel
         public Business changeCurrrentBusiness()
         {
             return  _businessService.GetBusinessById(_navigation.BusinessId);
+        }
+
+        private void AddNewAdministrator(object parameter)
+        {
+            _businessService.GetBusinessById(CurrentBusiness.Id).AddManager(NewAdmin);
+            CurrentBusiness = _businessService.GetBusinessById(CurrentBusiness.Id);
         }
 
         private void UpdatePhoneNumber(object parameter)
