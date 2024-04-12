@@ -24,10 +24,10 @@
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Top"
                     Height="30"/>
-                <Button Content="Posts"
+            <Button Content="Posts"
                         Height="25"
                         Command="{Binding Path=NavigateToPostsCommand}"/>
-                <Button Content="Reviews"
+            <Button Content="Reviews"
                         Height="25"
                         Command="{Binding Path=NavigateToReviewsCommand}"/>
                 <Button Content="Contact"
@@ -45,7 +45,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="200"/>
                     <RowDefinition Height="100"/>
-                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
                 <Image Grid.Row="0" Source="{Binding CurrentBusiness.Banner}" Stretch="Fill"/>
@@ -54,15 +54,45 @@
                     <Label Content="{Binding CurrentBusiness.Name}"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
-					   FontSize="30"
-		          >
-                    </Label>
-                </Grid>
-                <Grid Grid.Row ="2">
+					   FontSize="30"/>
                     <Button Content="Add post" Width="130"
-                        Visibility="{Binding IsCurrentUserManager, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            Visibility="{Binding IsCurrentUserManager, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                            HorizontalAlignment="Right"/>
                 </Grid>
+                <!--<grid grid.row ="2">
+                </grid>-->
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2">  
+                    <ItemsControl ItemsSource="{Binding Posts}" Margin="0,60,0,0" Grid.ColumnSpan="3">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" 
+                                   HorizontalAlignment="Center"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
 
+
+                        <ItemsControl.ItemContainerStyle>
+                            <Style TargetType="{x:Type ContentPresenter}">
+                                <Setter Property="Margin" Value="10"/>
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Ellipse Width="50" Height="50">
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{Binding ImagePath}"/>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+
+                                    <TextBlock Text="{Binding Caption}" FontSize="20" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                </ScrollViewer>
             </Grid>
     </ScrollViewer>
     </Grid>

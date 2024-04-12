@@ -20,6 +20,9 @@ namespace bussiness_social_media.Services
         public List<FAQ> GetAllFAQsOfBusiness(int businessID);
         public List<Review> GetAllReviewsForBusiness(int businessId);
         public Comment GetAdminCommentForReview(int reviewId);
+        public void CreatePostAndAddItToBusiness(int businessId, string postImagePath, string postCaption);
+
+        public List<Post> GetAllPostsOfBusiness(int businessId);
 
 
         public bool IsUserManagerOfBusiness(int businessId, string username);

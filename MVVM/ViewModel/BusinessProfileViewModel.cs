@@ -16,9 +16,8 @@ namespace bussiness_social_media.MVVM.ViewModel
         private INavigationService _navigation;
         private IBusinessService _businessService;
         private readonly AuthenticationService _authenticationService;
-
+        private List<Post> _postList;
         private Business _currentBusiness;
-
         private bool _isCurrentUserManager;
 
         public bool IsCurrentUserManager
@@ -80,7 +79,24 @@ namespace bussiness_social_media.MVVM.ViewModel
             NavigateToContactCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileContactViewModel>();  }, o => true);
             NavigateToAboutCommand =
                 new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileAboutViewModel>(); }, o => true);
+            //_postList = _businessService.GetAllPostsOfBusiness(CurrentBusiness.Id);
+            UpdatePostsCollection();
             changeCurrrentBusiness();
+        }
+        private ObservableCollection<Post> _posts;
+        public ObservableCollection<Post> Posts
+        {
+            get => _posts;
+            set
+            {
+                _posts = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private void UpdatePostsCollection()
+        {
+            Posts = new ObservableCollection<Post>(_businessService.GetAllPostsOfBusiness(CurrentBusiness.Id));
         }
 
         public Business changeCurrrentBusiness()
