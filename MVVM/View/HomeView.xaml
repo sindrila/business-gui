@@ -25,7 +25,7 @@
                      Margin="3"
                      Width="262"
                              Background="Transparent"
-                             />
+                             Foreground="White"/>
                 </Border>
 
                 <Button Margin="270,0,0,0" Background="#FFE7E7E7" Command="{Binding SearchBusinesessCommand}">
