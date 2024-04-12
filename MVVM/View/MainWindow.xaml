@@ -16,11 +16,13 @@
         <TabPanel>
             <Button Content="Home"
                     Height="25"
-                    Command="{Binding Path=NavigateToHomeCommand}"/>
+                    Command="{Binding Path=NavigateToHomeCommand}"
+                    Visibility="{Binding Path=IsLoggedInMenuItemsVisibility}"/>
 
             <Button Content="Create business"
                     Height="25"
-                    Command="{Binding Path=NavigateToCreateNewBusinessViewCommand}"/>
+                    Command="{Binding Path=NavigateToCreateNewBusinessViewCommand}"
+                    Visibility="{Binding Path=IsLoggedInMenuItemsVisibility}"/>
 
             <Button Content="Register"
                     Height="25"
@@ -28,11 +30,13 @@
 
             <Button Content="Login"
                     Height="25"
-                    Command="{Binding Path=NavigateToLoginViewCommand}"/>
+                    Command="{Binding Path=NavigateToLoginViewCommand}"
+                    Visibility="{Binding Path=IsLoggedInMenuItemsVisibility}"/>
 			
 			<Button Content="Managed businesses"
 					Height="25"
-					Command="{Binding Path=NavigateToUserManagedBusinessesViewCommand}"/>
+					Command="{Binding Path=NavigateToUserManagedBusinessesViewCommand}"
+                    Visibility="{Binding Path=IsLoggedInMenuItemsVisibility}"/>
         </TabPanel>
 
         <ContentControl Grid.Row="1" Content="{Binding Navigation.CurrentView}"></ContentControl>
