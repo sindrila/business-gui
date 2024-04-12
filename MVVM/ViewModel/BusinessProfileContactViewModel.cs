@@ -31,14 +31,6 @@ namespace bussiness_social_media.MVVM.ViewModel
             }
         }
 
-        public string CurrentFAQAnswer
-        {
-            get
-            {
-                return _currentFAQ.Answer;
-            }
-        }
-
 
         public bool IsCurrentUserManager
         {
@@ -86,7 +78,10 @@ namespace bussiness_social_media.MVVM.ViewModel
 
         public FAQ CurrentFAQ
         {
-            get => _currentFAQ;
+            get
+            {
+                return changeCurrrentFAQ();
+            }
             set
             {
                 _currentFAQ = value;
@@ -112,13 +107,7 @@ namespace bussiness_social_media.MVVM.ViewModel
             NavigateToAboutCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileAboutViewModel>(); }, o => true);
             changeCurrrentBusiness();
 
-            FAQCommand = new RelayCommand(o => {
-                if (o is FAQ faq)
-                {
-                    CurrentFAQ = faq;
-                }
-                //changeCurrrentFAQ();
-            }, o => true);
+            FAQCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileAboutViewModel>(); }, o => true);
             // In this class, you have the instance of the business in currentBusiness. You can access it in the BusinessProfileView.xaml but I'm not quite sure how. Ask chat gpt, I tried something and I do not know if it works. It is currently 00:47 and I want to go to sleep
         }
 
@@ -129,8 +118,7 @@ namespace bussiness_social_media.MVVM.ViewModel
 
         public FAQ changeCurrrentFAQ()
         {
-            List<FAQ> faqList = _businessService.GetAllFAQsOfBusiness(CurrentBusiness.Id);
-            return faqList[0];
+            return new FAQ();
         }
     }
 }
