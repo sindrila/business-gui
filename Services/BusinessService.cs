@@ -21,7 +21,6 @@ namespace bussiness_social_media.Services
         public List<Review> GetAllReviewsForBusiness(int businessId);
         public Comment GetAdminCommentForReview(int reviewId); 
         public void CreateReviewAndAddItToBusiness(int businessId, string userName, int rating, string comment, string title, string imagePath);
-        public Comment GetAdminCommentForReview(int reviewId);
         public void CreatePostAndAddItToBusiness(int businessId, string postImagePath, string postCaption);
 
         public List<Post> GetAllPostsOfBusiness(int businessId);
