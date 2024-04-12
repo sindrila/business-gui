@@ -1,5 +1,6 @@
 ﻿
 using bussiness_social_media.MVVM.Model.Repository;
+using bussiness_social_media.Services;
 
 namespace business_social_media.Services
 {
@@ -10,6 +11,7 @@ namespace business_social_media.Services
         int AddPost(DateTime creationDate, string imagePath, string caption);
         void UpdatePost(int id, DateTime newCreationDate, string newImagePath, string newCaption);
         void DeletePost(int id);
+        void LinkCommentIdToPost(int postId, int commentId);
     }
     public class PostService : IPostService 
     {
@@ -45,6 +47,13 @@ namespace business_social_media.Services
         public void DeletePost(int id)
         {
             _postRepository.DeletePost(id);
+        }
+
+        public void LinkCommentIdToPost(int postId, int commentId)
+        {
+            Post postToCommentOn = GetPostById(postId);
+            postToCommentOn.AddComment(commentId);
+            _postRepository.ForcePostSavingToXml();
         }
 
     }

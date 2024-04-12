@@ -22,8 +22,6 @@ public class FAQ : IXmlSerializable
     public string Answer { get => _answer; set => _answer = value; }
     public int Id { get => _id; set => _id = value; }
 
-    public void SetQuestion(string question) { _question = question; }
-    public void SetAnswer(string answer) { _answer = answer; }
     public XmlSchema GetSchema()
     {
         return null;

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Windows;
 using System.Xml;
 using System.Xml.Serialization;
@@ -17,6 +12,7 @@ namespace bussiness_social_media.MVVM.Model.Repository
         int AddPost(DateTime creationDate, string imagePath, string caption);
         void UpdatePost(Post post);
         void DeletePost(int id);
+        void ForcePostSavingToXml();
     }
 
     public class PostRepository : IPostRepository
@@ -128,6 +124,11 @@ namespace bussiness_social_media.MVVM.Model.Repository
         private int _getNextId()
         {
             return _posts.Count > 0 ? _posts.Max(p => p.Id) + 1 : 1;
+        }
+
+        public void ForcePostSavingToXml()
+        {
+            SavePostsToXml();
         }
     }
 }

@@ -40,7 +40,6 @@ namespace bussiness_social_media
             reviewsXmlFilePath = Path.Combine(pathUntilBin, reviewsXmlFilePath);
             faqsXmlFilePath = Path.Combine(pathUntilBin, faqsXmlFilePath);
             commentsXmlFilePath = Path.Combine(pathUntilBin, commentsXmlFilePath);
-            CommentRepository c = new CommentRepository(commentsXmlFilePath);
 
             services.AddSingleton<MainWindow>(provider => new MainWindow
             {
@@ -57,6 +56,7 @@ namespace bussiness_social_media
             services.AddSingleton<IFAQService, FAQService>();
             services.AddSingleton<IPostService, PostService>();
             services.AddSingleton<IReviewService, ReviewService>();
+            services.AddSingleton<ICommentService, CommentService>();
 
             // Pass xmlFilePath to your BusinessRepository constructor
             services.AddSingleton<IBusinessRepository>(provider => new BusinessRepository(businessesXmlFilePath));
@@ -64,6 +64,7 @@ namespace bussiness_social_media
             services.AddSingleton<IPostRepository>(provider => new PostRepository(postsXmlFilePath));
             services.AddSingleton<IReviewRepository>(provider => new ReviewRepository(reviewsXmlFilePath));
             services.AddSingleton<IFAQRepository>(provider => new FAQRepository(faqsXmlFilePath));
+            services.AddSingleton<ICommentRepository>(provider => new CommentRepository(commentsXmlFilePath));
 
             services.AddSingleton <BusinessProfileViewModel>();
             services.AddSingleton<BusinessProfileReviewsViewModel>();

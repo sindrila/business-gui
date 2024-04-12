@@ -3,6 +3,8 @@ using business_social_media.Services;
 using bussiness_social_media.MVVM.Model.Repository;
 using System;
 using System.IO;
+using System.Windows.Media;
+using System.Xml.Linq;
 
 namespace bussiness_social_media.Services
 {
@@ -26,21 +28,21 @@ namespace bussiness_social_media.Services
         private IFAQService _faqService;
         private IPostService _postService;
         private IReviewService _reviewService;
+        private ICommentService _commentService;
 
-        public BusinessService(IBusinessRepository businessRepository, IFAQService FAQService, IPostService postService, IReviewService reviewService)
+        public BusinessService(IBusinessRepository businessRepository, IFAQService FAQService, IPostService postService, IReviewService reviewService, ICommentService commentService)
         {
             _businessRepository = businessRepository;
             _faqService = FAQService;
             _postService = postService;
             _reviewService = reviewService;
-
+            _commentService = commentService;
         }
 
         ~BusinessService()
         {
             _businessRepository.SaveBusinessesToXml();
         }
-
 
 
         public List<Business> GetAllBusinesses()
@@ -94,59 +96,113 @@ namespace bussiness_social_media.Services
             return business != null && business.ManagerUsernames.Contains(username);
         }
 
-        public void AddFAQToBusiness(int businessID, string faqQuestion, string faqAnswer)
+        private void LinkFaqIdToBusiness(int businessId, int faqId)
         {
-            Business business = GetBusinessById(businessID);
-            int faqID = _faqService.AddFAQ(faqQuestion, faqAnswer);
-            business.FaqIds.Add(faqID);
+            Business business = GetBusinessById(businessId);
+            business.FaqIds.Add(faqId);
+            _businessRepository.SaveBusinessesToXml();
 
         }
 
-        public List<FAQ> GetAllFAQsOfBusiness(int businessID)
+        public void CreateFAQAndAddItToBusiness(int businessId, string faqQuestion, string faqAnswer)
         {
-            Business business = GetBusinessById(businessID);
+            int faqId = _faqService.AddFAQ(faqQuestion, faqAnswer);
+            LinkFaqIdToBusiness(businessId, faqId);
+        }
+
+        public List<FAQ> GetAllFAQsOfBusiness(int businessId)
+        {
+            Business business = GetBusinessById(businessId);
             List<FAQ> givenBusinessFAQs = [];
-            foreach (int faqID in business.FaqIds)
+            foreach (int faqId in business.FaqIds)
             {
-                givenBusinessFAQs.Add(_faqService.GetFAQById(faqID));
+                givenBusinessFAQs.Add(_faqService.GetFAQById(faqId));
             }
             return givenBusinessFAQs;
         }
 
-        public void AddPostToBusiness(int businessID, DateTime postCreationDate, string postImagePath, string postCaption)
+        private void LinkPostIdToBusiness(int businessId, int postId)
         {
-            Business business = GetBusinessById(businessID);
-            int postID = _postService.AddPost(postCreationDate, postImagePath, postCaption);
-            business.PostIds.Add(postID);
+            Business business = GetBusinessById(businessId);
+            business.PostIds.Add(postId);
+            _businessRepository.SaveBusinessesToXml();
+
         }
 
-        public List<Post> GetAllPostsOfBusiness(int businessID)
+        public void CreatePostAndAddItToBusiness(int businessId, string postImagePath, string postCaption)
         {
-            Business business = GetBusinessById(businessID);
+            int postId = _postService.AddPost(DateTime.Now, postImagePath, postCaption);
+            LinkPostIdToBusiness(businessId, postId);
+        }
+
+        public List<Post> GetAllPostsOfBusiness(int businessId)
+        {
+            Business business = GetBusinessById(businessId);
             List<Post> givenBusinessPosts = [];
-            foreach (int postID in business.PostIds)
+            foreach (int postId in business.PostIds)
             {
-                givenBusinessPosts.Add(_postService.GetPostById(postID));
+                givenBusinessPosts.Add(_postService.GetPostById(postId));
             }
             return givenBusinessPosts;
         }
 
-        public void AddReviewToBusiness(int businessID, string userName, int rating, string comment, string title, string imagePath)
+        private void LinkReviewIdToBusiness(int businessId, int reviewId)
         {
-            Business business = GetBusinessById(businessID);
-            int reviewID = _reviewService.AddReview(userName, rating, comment, title, imagePath);
-            business.ReviewIds.Add(reviewID);
+            Business business = GetBusinessById(businessId);
+            business.ReviewIds.Add(reviewId);
+            _businessRepository.SaveBusinessesToXml();
+
         }
 
-        public List<Review> GetAllReviewsForBusiness(int businessID)
+        public void CreateReviewAndAddItToBusiness(int businessId, string userName, int rating, string comment, string title, string imagePath)
         {
-            Business business = GetBusinessById(businessID);
+            int reviewId = _reviewService.AddReview(userName, rating, comment, title, imagePath);
+            LinkReviewIdToBusiness(businessId, reviewId);
+        }
+
+        public List<Review> GetAllReviewsForBusiness(int businessId)
+        {
+            Business business = GetBusinessById(businessId);
             List<Review> givenBusinessReviews = [];
-            foreach (int reviewID in business.ReviewIds)
+            foreach (int reviewId in business.ReviewIds)
             {
-                givenBusinessReviews.Add(_reviewService.GetReviewById(reviewID));
+                givenBusinessReviews.Add(_reviewService.GetReviewById(reviewId));
             }
             return givenBusinessReviews;
+        }
+
+        private int CreateComment(string username, string content)
+        {
+            return _commentService.AddComment(username, content, DateTime.Now);
+        }
+
+        public void CreateCommentAndAddItToPost(int postId, string username, string content)
+        {
+            int commentId = CreateComment(username, content);
+            _postService.LinkCommentIdToPost(postId, commentId);
+        }
+
+        public List<Comment> GetAllCommentsForPost(int postId)
+        {
+            Post post = _postService.GetPostById(postId);
+            List<Comment> givenPostComments = [];
+            foreach (int commentId in post.CommentIds)
+            {
+                givenPostComments.Add(_commentService.GetCommentById(commentId));
+            }
+            return givenPostComments;
+        }
+
+        public void CreateAdminCommentAndAddItToReview(int reviewId, string administratorUsername, string content)
+        {
+            int adminCommentId = CreateComment(administratorUsername, content);
+            _reviewService.LinkAdminCommentIdToReview(reviewId, adminCommentId);
+        }
+
+        public Comment GetAdminCommentForReview(int reviewId)
+        {
+            Review review = _reviewService.GetReviewById(reviewId);
+            return _commentService.GetCommentById(review.AdminCommentId);
         }
     }
 
