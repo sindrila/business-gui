@@ -36,38 +36,37 @@
         <Grid>
         <Grid>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition/>
-                
-            </Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TabPanel Grid.Row="0">
+                    <Label Content="{Binding currentBusiness.Name}"
+    HorizontalAlignment="Left"
+    VerticalAlignment="Top"
+    Height="50"/>
+                    <Button Content="Posts"
+        Height="40"
+        Width="150"
+    Command="{Binding Path=NavigateToPostsCommand}" Margin="-10,0,10,10"/>
+                    <Button Content="Reviews"
+        Height="40"
+        Width="150"
+    Command="{Binding Path=NavigateToReviewsCommand}" Margin="-10,0,10,10"/>
+                    <Button Content="Contact"
+        Height="40"
+        Width="150"
+    Command="{Binding Path=NavigateToContactCommand}" Margin="-10,0,10,10"/>
+                    <Button Content="About"
+        Height="40"
+        Width="150"
+        Command="{Binding Path=NavigateToAboutCommand}" Margin="-10,0,10,10"/>
+                </TabPanel>
 
 
-          <TabPanel Grid.Row="0">
-            <Label Content="{Binding currentBusiness.Name}"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Height="40"/>
-            <Button Content="Posts"
-                Height="20"
-                Width="80"
-                Command="{Binding Path=NavigateToPostsCommand}"/>
-            <Button Content="Reviews"
-                Height="20"
-                Width="80"
-                Command="{Binding Path=NavigateToReviewsCommand}"/>
-            <Button Content="Contact"
-                Height="20"
-                Width="80"
-                Command="{Binding Path=NavigateToContactCommand}"/>
-            <Button Content="About"
-                    Height="20"
-                    Width="80"
-                    Command="{Binding Path=NavigateToAboutCommand}"/>
-          </TabPanel>
-
-
-          <Grid
+                <Grid
                      Grid.Row="1">
 
                 <Grid.RowDefinitions>

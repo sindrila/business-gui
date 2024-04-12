@@ -6,33 +6,52 @@
         xmlns:local="clr-namespace:bussiness_social_media"
 
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        Background="#3A3A3A"
+>
+  
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="40"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <TabPanel>
             <Button Content="Home"
-                    Height="25"
-                    Command="{Binding Path=NavigateToHomeCommand}"/>
+                    Height="40"
+                    Width="150"
+                    Command="{Binding Path=NavigateToHomeCommand}"
+                    Background="#65B1C1"
+                    Foreground="White"
+                    />
 
             <Button Content="Create business"
-                    Height="25"
-                    Command="{Binding Path=NavigateToCreateNewBusinessViewCommand}"/>
+                    Height="40"
+                    Width="150"
+                    Command="{Binding Path=NavigateToCreateNewBusinessViewCommand}"
+                    Background="#65B1C1"
+                    Foreground="White"/>
 
             <Button Content="Register"
-                    Height="25"
-                    Command="{Binding Path=NavigateToRegisterViewCommand}"/>
+                    Height="40"
+                    Width="150"
+                    Command="{Binding Path=NavigateToRegisterViewCommand}"
+                    Background="#65B1C1"
+                    Foreground="White"/>
 
             <Button Content="Login"
-                    Height="25"
-                    Command="{Binding Path=NavigateToLoginViewCommand}"/>
+                    Height="40"
+                    Width="150"
+                    Command="{Binding Path=NavigateToLoginViewCommand}"
+                    Background="#65B1C1"
+                    Foreground="White"/>
 			
-			<Button Content="Managed businesses"
-					Height="25"
-					Command="{Binding Path=NavigateToUserManagedBusinessesViewCommand}"/>
+			      <Button Content="Managed businesses"
+					          Height="40"
+                    Width="150"
+					          Command="{Binding Path=NavigateToUserManagedBusinessesViewCommand}"
+                    Background="#65B1C1"
+                    Foreground="White"/>
         </TabPanel>
 
         <ContentControl Grid.Row="1" Content="{Binding Navigation.CurrentView}"></ContentControl>
