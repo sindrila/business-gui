@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using Microsoft.Win32;
+using System.Windows;
 using System.Windows.Media.Imaging;
 using business_social_media.Services; // Need to include this for ImageSource
 
@@ -151,7 +152,6 @@ namespace bussiness_social_media.MVVM.ViewModel
         }
         private void LeaveReview()
         {
-            // TODO: change this to handle review adding in business service
             if (_authenticationService.getIsLoggedIn())
             {
                 string userName = _authenticationService.CurrentUser.Username;
@@ -163,6 +163,10 @@ namespace bussiness_social_media.MVVM.ViewModel
                 _businessService.CreateReviewAndAddItToBusiness(businessId, userName, rating, comment, title, imagePath);
                 _reviewsList = _businessService.GetAllReviewsForBusiness(businessId);
                 OnPropertyChanged(nameof(ReviewsList));
+            }
+            else
+            {
+                MessageBox.Show("Please log in to leave a review.");
             }
 
         }
