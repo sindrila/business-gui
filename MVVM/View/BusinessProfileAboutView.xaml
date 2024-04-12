@@ -37,114 +37,148 @@
                         Height="25"
                         Command="{Binding Path=NavigateToAboutCommand}"/>
         </TabPanel>
-
-        <!--<Grid Grid.Row="1">-->
+			
             <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
-            <Grid>
-                    <Grid>
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="300"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="*"/>
+					</Grid.RowDefinitions>
+					<Grid Grid.Row ="0">
 
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="200"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="200"/>
+							<RowDefinition Height="*"/>
+						
+						</Grid.RowDefinitions>
 
-                        <Image Grid.Row="0" Source="{Binding CurrentBusiness.Banner}" Stretch="Fill"/>
-                        <Image Grid.Row="0" Margin="20,20,0,0" Source="{Binding CurrentBusiness.Logo}" Width="100" Height="100" VerticalAlignment="Top"/>
-                        <Grid Grid.Row="1" Margin="20,20,20,20">
-                            <Label Content="{Binding CurrentBusiness.Name}"
+						<Image Grid.Row="0" Source="{Binding CurrentBusiness.Banner}" Stretch="Fill"/>
+						<Image Grid.Row="0" Margin="20,20,0,0" Source="{Binding CurrentBusiness.Logo}" Width="100" Height="100" VerticalAlignment="Top"/>
+						<Grid Grid.Row="1" Margin="20,20,20,20">
+							<Label Content="{Binding CurrentBusiness.Name}"
      HorizontalAlignment="Left"
      VerticalAlignment="Top"
   FontSize="30"
 >
-                            </Label>
-                        </Grid>
-                    </Grid>
-
-                    <Label Content="Phone&#xD;&#xA;" 
-     HorizontalAlignment="Left" 
-     Margin="100,300,0,0" 
+							</Label>
+						</Grid>
+					</Grid>
+					
+					<Label Content="Phone&#xD;&#xA;"
+     HorizontalAlignment="Left"
+     Margin="100,00,0,0"
      Grid.Row="1"
      VerticalAlignment="Top"
      FontWeight="Bold" FontSize="16"/>
-                    <Label Content="Category&#xD;&#xA;" 
-     HorizontalAlignment="Left" 
-     Margin="100,355,0,0" 
-     Grid.Row="1" 
-     VerticalAlignment="Top" 
-     FontWeight="Bold" 
-     FontSize="16"/>
-                    <Label Content="Address" 
-     HorizontalAlignment="Left" 
-     Margin="100,410,0,0" 
+					<Label Content="Category&#xD;&#xA;"
+     HorizontalAlignment="Left"
+     Margin="100,55,0,0"
      Grid.Row="1"
-     VerticalAlignment="Top" 
-     FontWeight="Bold" 
+     VerticalAlignment="Top"
+     FontWeight="Bold"
      FontSize="16"/>
-                    <Label Content="Email&#xD;&#xA;" 
-     HorizontalAlignment="Left" 
-     Margin="510,300,0,0" 
-     Grid.Row="1" 
-     VerticalAlignment="Top" 
-     FontWeight="Bold" 
+					<Label Content="Address"
+     HorizontalAlignment="Left"
+     Margin="100,110,0,0"
+     Grid.Row="1"
+     VerticalAlignment="Top"
+     FontWeight="Bold"
      FontSize="16"/>
-                    <Label Content="Website" 
-     HorizontalAlignment="Left" 
-     Margin="510,355,0,0" 
-     Grid.Row="1" 
-     VerticalAlignment="Top" 
-     FontWeight="Bold" 
+					<Label Content="Email&#xD;&#xA;"
+     HorizontalAlignment="Left"
+     Margin="510,110,0,0"
+     Grid.Row="1"
+     VerticalAlignment="Top"
+     FontWeight="Bold"
      FontSize="16"/>
-                    <Label Content="Date of page creation" 
-     HorizontalAlignment="Left" 
-     Margin="510,410,0,0" 
-     Grid.Row="1" 
-     VerticalAlignment="Top" 
-     FontWeight="Bold" 
+					<Label Content="Website"
+     HorizontalAlignment="Left"
+     Margin="510,55,0,0"
+     Grid.Row="1"
+     VerticalAlignment="Top"
+     FontWeight="Bold"
      FontSize="16"/>
-                    <Label Name="PhoneLable" 
-     Content="{Binding CurrentBusiness.PhoneNumber}" 
-     HorizontalAlignment="Left" 
-     Margin="100,325,0,0" 
-     Grid.Row="1" 
-     VerticalAlignment="Top"/>
-                    <Label Name="CategoryLable" 
-     Content="{Binding CurrentBusiness.Category}" 
-     HorizontalAlignment="Left" 
-     Margin="100,380,0,0" 
-     Grid.Row="1" 
-     VerticalAlignment="Top"/>
-                    <Label Name="AddressLable" 
-     Content="{Binding CurrentBusiness.Address}" 
-     HorizontalAlignment="Left" 
-     Margin="100,435,0,0" 
-     Grid.Row="1" 
-     VerticalAlignment="Top"/>
-                    <Label Name="EmailLable" 
-     Content="{Binding CurrentBusiness.Email}" 
-     HorizontalAlignment="Left" 
-     Margin="510,325,0,0" 
+					<Label Content="Date of page creation"
+     HorizontalAlignment="Left"
+     Margin="510,10,0,0"
+     Grid.Row="1"
+     VerticalAlignment="Top"
+     FontWeight="Bold"
+     FontSize="16"/>
+					<Label Name="PhoneLable"
+     Content="{Binding CurrentBusiness.PhoneNumber}"
+     HorizontalAlignment="Left"
+     Margin="100,25,0,0"
      Grid.Row="1"
      VerticalAlignment="Top"/>
-                    <Label Name="WebsiteLable" 
-     Content="{Binding CurrentBusiness.Website}" 
-     HorizontalAlignment="Left" 
-     Margin="510,380,0,0" 
+					<Label Name="CategoryLable"
+     Content="{Binding CurrentBusiness.Category}"
+     HorizontalAlignment="Left"
+     Margin="100,80,0,0"
      Grid.Row="1"
      VerticalAlignment="Top"/>
-                    <Label Name="CreationDateLable" 
-     Content="{Binding CurrentBusiness.CreatedAt}" 
-     HorizontalAlignment="Left" 
-     Margin="510,435,0,0" 
-     Grid.Row="1" 
+					<Label Name="AddressLable"
+     Content="{Binding CurrentBusiness.Address}"
+     HorizontalAlignment="Left"
+     Margin="100,140,0,0"
+     Grid.Row="1"
      VerticalAlignment="Top"/>
-                    <Grid Grid.Row="2">
-                        <Button Content="Update business information" Height="80" Width="200"
+					<Label Name="EmailLable"
+     Content="{Binding CurrentBusiness.Email}"
+     HorizontalAlignment="Left"
+     Margin="510,140,0,0"
+     Grid.Row="1"
+     VerticalAlignment="Top"/>
+					<Label Name="WebsiteLable"
+     Content="{Binding CurrentBusiness.Website}"
+     HorizontalAlignment="Left"
+     Margin="510,80,0,0"
+     Grid.Row="1"
+     VerticalAlignment="Top"/>
+					<Label Name="CreationDateLable"
+     Content="{Binding CurrentBusiness.CreatedAt}"
+     HorizontalAlignment="Left"
+     Margin="510,35,0,0"
+     Grid.Row="1"
+     VerticalAlignment="Top"/>
+					<Grid Grid.Row="2" Visibility="{Binding IsCurrentUserManager, Converter={StaticResource BooleanToVisibilityConverter}}">
+						<TextBox  Text="{Binding NewAdmin, UpdateSourceTrigger=PropertyChanged}" Width="300" Margin="5" />
+						<Button  Content="Add Administrator" Command="{Binding AddNewAdministratorCommand}" Margin ="500,0,0,0" Width ="150" Height="30"  />
+						
+					</Grid>
+					<Grid Grid.Row="3">
+						<Button Content="Update business information" Height="80" Width="200" Command="{Binding ToggleUpdateFormCommand}"
       Visibility="{Binding IsCurrentUserManager, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                    </Grid>
-                </Grid>
+					</Grid>
+					<Grid Grid.Row="4"  Visibility="{Binding IsUpdatingBusinessInfo, Converter={StaticResource BooleanToVisibilityConverter}}">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+					
+
+						<TextBox Grid.Row="0" Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Width="300" Margin="5" />
+						<Button Grid.Row="0" Content="Update phone number" Command="{Binding UpdatePhoneNumberCommand}" Margin ="500,0,0,0" Width ="150" Height="30"  />
+
+						<TextBox Grid.Row="1" Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" Width="300" Margin="5" />
+						<Button Grid.Row="1" Content="Update address" Command="{Binding UpdateAddressCommand}" Width =" 150" Height="30" Margin ="500,0,0,0"  />
+                        
+						<TextBox Grid.Row="2" Text="{Binding EmailAddress, UpdateSourceTrigger=PropertyChanged}" Width="300" Margin="5" />
+						<Button Grid.Row="2" Content="Update email" Command="{Binding UpdateEmailCommand}" Width ="150" Height="30" Margin ="500,0,0,0" />
+                        
+						<TextBox Grid.Row="3" Text="{Binding Website, UpdateSourceTrigger=PropertyChanged}" Width="300" Margin="5" />
+						<Button Grid.Row="3" Content="Update webiste" Command="{Binding UpdateWebsiteCommand}" Width="150" Height="30" Margin ="500,0,0,0" />
+
+
+					</Grid>
+				</Grid>
         </ScrollViewer>
-        <!--</Grid>-->
+    
         
         </Grid>
 

@@ -205,6 +205,10 @@ namespace bussiness_social_media.MVVM.ViewModel
                 _businessService.AddBusiness(BusinessName, BusinessDescription, BusinessCategory, Logo, Banner, PhoneNumber, EmailAddress, Website, Address, DateTime.Now, managerUsernames, new List<int>(), new List<int>(), new List<int>());
 
             }
+            else
+            {
+                MessageBox.Show("Please log in to create business.");
+            }
             _navigationService.NavigateTo<HomeViewModel>();
           
         }
