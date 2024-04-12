@@ -19,11 +19,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TabPanel Grid.Row="0" AutomationProperties.IsRowHeader="True" AutomationProperties.IsColumnHeader="True">
-                <Label Content="{Binding CurrentBusiness.Name}" 
-                    HorizontalAlignment="Left" 
-                    VerticalAlignment="Top"
-                    Height="30"/>
+        <TabPanel Grid.Row="0" AutomationProperties.IsRowHeader="True" AutomationProperties.IsColumnHeader="True">
             <Button Content="Posts"
                         Height="25"
                         Command="{Binding Path=NavigateToPostsCommand}"/>
