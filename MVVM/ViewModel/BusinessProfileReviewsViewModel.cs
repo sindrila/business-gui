@@ -24,8 +24,30 @@ namespace bussiness_social_media.MVVM.ViewModel
 
         // Property to hold the image source of the current business
         private ImageSource _businessImage;
-        private string _reviewDescription;
+        private string _comment;
         private bool _isCurrentUserManager;
+        private string _title;
+        private int _rating;
+
+        public int Rating
+        {
+            get => _rating;
+            set
+            {
+                _rating = value;
+                OnPropertyChanged(nameof(Rating));
+            }
+        }
+
+        public string Title
+        {
+            get => _title;
+            set
+            {
+                _title = value;
+                OnPropertyChanged(nameof(Title));
+            }
+        }
 
         public List<Review> ReviewsList
         {
@@ -57,15 +79,16 @@ namespace bussiness_social_media.MVVM.ViewModel
                 OnPropertyChanged(nameof(IsCurrentUserManager));
             }
         }
-        public string ReviewDescription
+        public string Comment
         {
-            get { return _reviewDescription; }
+            get => _comment; 
             set
             {
-                _reviewDescription = value;
-                OnPropertyChanged(nameof(ReviewDescription));
+                _comment = value;
+                OnPropertyChanged(nameof(Comment));
             }
         }
+
         public ImageSource BusinessImage
         {
             get { return new BitmapImage(new Uri(CurrentBusiness.Logo)); }
@@ -129,8 +152,18 @@ namespace bussiness_social_media.MVVM.ViewModel
         private void LeaveReview()
         {
             // TODO: change this to handle review adding in business service
-            Review review = new Review();
-            review.SetComment(ReviewDescription);
+            if (_authenticationService.getIsLoggedIn())
+            {
+                string userName = _authenticationService.CurrentUser.Username;
+                int businessId = _currentBusiness.Id;
+                int rating = Rating; 
+                string comment = Comment; 
+                string title = Title;
+                string imagePath = ImagePath;
+                _businessService.CreateReviewAndAddItToBusiness(businessId, userName, rating, comment, title, imagePath);
+                _reviewsList = _businessService.GetAllReviewsForBusiness(businessId);
+                OnPropertyChanged(nameof(ReviewsList));
+            }
 
         }
         public Business ChangeCurrentBusiness()

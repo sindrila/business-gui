@@ -41,7 +41,7 @@
 		<ScrollViewer VerticalScrollBarVisibility="Auto"  Grid.Row="1">
 			<Grid Grid.Row="1">
 				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="200"/>
 					<RowDefinition Height="Auto"/>
 					<RowDefinition Height="Auto"/>
 					<RowDefinition Height="Auto"/>
@@ -74,7 +74,7 @@
 					<TextBox Grid.Row="1" Width="200" Height="20" Text="{Binding Title, Mode=TwoWay}" />
 
 					<Label Grid.Row="2" Content="Description:" Foreground="Black"/>
-					<TextBox Grid.Row="2" Width="200" Height="80" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Description, Mode=TwoWay}"/>
+					<TextBox Grid.Row="2" Width="200" Height="80" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Comment, Mode=TwoWay}"/>
 					<Button  Grid.Row="3" Content="Add image" Width="120" Command="{Binding AddImageCommand}"/>
 					<Button Grid.Row="4" Content="Leave Review" Command="{Binding LeaveReviewCommand}"  Height="30" Width="120"/>
 				</Grid>
