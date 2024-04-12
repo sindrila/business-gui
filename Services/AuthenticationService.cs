@@ -17,7 +17,7 @@ namespace business_social_media.Services
         private Timer _logoutTimer;
         private int _sessionDurationSeconds;
         private Account currentUser;
-
+        public event EventHandler<EventArgs> LoginStatusChanged;
         public Account CurrentUser 
         { 
             get => currentUser; 
@@ -55,8 +55,7 @@ namespace business_social_media.Services
 
                 CurrentUser = new Account(username, password);
 
-                // Start the logout timer
-                //_logoutTimer.Change(_sessionDurationSeconds * 1000, Timeout.Infinite);
+                LoginStatusChanged?.Invoke(this, EventArgs.Empty);
                 return true;
             }
             else
@@ -69,6 +68,7 @@ namespace business_social_media.Services
         {
             _isLoggedIn = false;
             Console.WriteLine("\nUser has been logged out automatically.");
+            LoginStatusChanged?.Invoke(this, EventArgs.Empty); // Raise the event
         }
 
         public List<Account> GetAllUsers()
