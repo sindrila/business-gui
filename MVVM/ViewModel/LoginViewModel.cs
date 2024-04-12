@@ -1,18 +1,6 @@
 ﻿using business_social_media.Services;
 using bussiness_social_media.Core;
 using bussiness_social_media.Services;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows;
-using System.Net.Mail;
-using System.Net;
-using System.Reflection;
-using System.Windows.Navigation;
 
 namespace bussiness_social_media.MVVM.ViewModel
 {
@@ -66,11 +54,12 @@ namespace bussiness_social_media.MVVM.ViewModel
         }
 
         public RelayCommand LogInCommand { get; set; }
+
         private void LogIn()
         {
             if(authenticationService.AuthenticateUser(Username, Password)) {
                 ErrorMessage = "";
-                //authenticationService.
+
                 _navigation.NavigateTo<HomeViewModel>();
             }
             else
@@ -79,11 +68,15 @@ namespace bussiness_social_media.MVVM.ViewModel
             }
         }
 
+        public RelayCommand NavigateToRegisterViewCommand { get; set; }
+
         public LoginViewModel(INavigationService navigationService, AuthenticationService authentication)
         {
             NavigationService = navigationService;
             authenticationService = authentication;
             LogInCommand = new RelayCommand(o => { LogIn();  }, o => true);
+            NavigateToRegisterViewCommand = new RelayCommand(o => { NavigationService.NavigateTo<RegisterViewModel>(); }, o => true);
+
 
         }
 

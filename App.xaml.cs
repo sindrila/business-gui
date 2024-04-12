@@ -83,6 +83,10 @@ namespace bussiness_social_media
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            //var loginWindow = new Window();
+            //loginWindow.Content = _serviceProvider.GetRequiredService<LoginViewModel>();
+            //loginWindow.ShowDialog();
+
             var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
             mainWindow.Show();
 
