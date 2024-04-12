@@ -115,6 +115,7 @@ namespace bussiness_social_media.MVVM.ViewModel
         }
         private void LeaveReview()
         {
+            // TODO: change this to handle review adding in business service
             Review review = new Review();
             review.SetComment(ReviewDescription);
 

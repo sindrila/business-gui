@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Windows;
 using System.Xml;
 using System.Xml.Serialization;
@@ -29,9 +24,6 @@ namespace bussiness_social_media.MVVM.Model.Repository
             _xmlFilePath = xmlFilePath;
             _comments = new List<Comment>();
             LoadCommentsFromXml();
-            //AddComment("cutiepie123", "Great work!", DateTime.Now);
-            //AddComment("blueskull", "i hate this lol", DateTime.Now);
-            SaveCommentsToXml();
         }
 
         ~CommentRepository()
@@ -99,22 +91,33 @@ namespace bussiness_social_media.MVVM.Model.Repository
 
         public void DeleteComment(int id)
         {
-            throw new NotImplementedException();
+            var commentToRemove = _comments.FirstOrDefault(comment => comment.Id == id);
+            if (commentToRemove != null)
+            {
+                _comments.Remove(commentToRemove);
+                SaveCommentsToXml();
+            }
         }
 
         public List<Comment> GetAllComments()
         {
-            throw new NotImplementedException();
+            return _comments;
         }
 
         public Comment GetCommentById(int id)
         {
-            throw new NotImplementedException();
+            return _comments.FirstOrDefault(comment => comment.Id == id);
         }
 
         public void UpdateComment(int id, string username, string content, DateTime dateOfCreation, DateTime dateOfUpdate)
         {
-            throw new NotImplementedException();
+            Comment existingComment = GetCommentById(id);
+            if (existingComment != null) 
+            {
+                existingComment.Username = username;
+                existingComment.Content = content;
+                SaveCommentsToXml();
+            }
         }
     }
 }

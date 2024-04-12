@@ -14,6 +14,7 @@ namespace bussiness_social_media.Services
         int AddReview(string userName, int rating, string comment, string title, string imagePath);
         void UpdateReview(int id, int newRating, string newComment, string newTitle, string newImagePath);
         void DeletePost(int id);
+        void LinkAdminCommentIdToReview(int reviewId, int commentId);
 
     }
     public class ReviewService : IReviewService
@@ -48,6 +49,12 @@ namespace bussiness_social_media.Services
         public void UpdateReview(int id, int newRating, string newComment, string newTitle, string newImagePath)
         {
             _reviewRepository.UpdateReview(id, newRating, newComment, newTitle, newImagePath);
+        }
+
+        public void LinkAdminCommentIdToReview(int reviewId, int commentId)
+        {
+            _reviewRepository.GetReviewById(reviewId).AdminCommentId = commentId;
+            _reviewRepository.ForceReviewSavingToXml();
         }
     }
 }

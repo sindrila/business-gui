@@ -273,9 +273,9 @@ public class Business : IXmlSerializable
         writer.WriteEndElement();
 
         writer.WriteStartElement("_faqIds");
-        foreach (int reviewId in _reviewIds)
+        foreach (int faqId in _faqIds)
         {
-            writer.WriteElementString("faqId", reviewId.ToString());
+            writer.WriteElementString("faqId", faqId.ToString());
         }
         writer.WriteEndElement();
 

@@ -51,9 +51,13 @@ public class Post : IXmlSerializable
         _id = int.Parse(reader.ReadElementString("_id"));
         _numberOfLikes = int.Parse(reader.ReadElementString("_numberOfLikes"));
         _creationDate = DateTime.ParseExact(reader.ReadElementString("_creationDate"), "dd-MM-yyyy HH:mm", null);
-        _imagePath = reader.ReadElementString("_imagePath");
+        if(reader.IsStartElement("_imagePath"))
+        {
+            _imagePath = reader.ReadElementString("_imagePath");
+        }
         _caption = reader.ReadElementString("_caption");
 
+        _commentIds = new List<int>();
         // Read _commentIds if it exists
         if (reader.IsStartElement("_commentIds"))
         {
@@ -69,7 +73,6 @@ public class Post : IXmlSerializable
                     reader.Read();
                 }
             }
-            reader.ReadEndElement(); // End _commentIds element
         }
 
         reader.ReadEndElement();
@@ -84,15 +87,15 @@ public class Post : IXmlSerializable
         writer.WriteElementString("_caption", _caption);
 
         // Write _commentIds if it exists
-        if (_commentIds.Count > 0)
+        writer.WriteStartElement("_commentIds");
+        if (_commentIds is not null)
         {
-            writer.WriteStartElement("_commentIds");
             foreach (int commentId in _commentIds)
             {
                 writer.WriteElementString("commentId", commentId.ToString());
             }
-            writer.WriteEndElement(); // End _commentIds element
         }
+        writer.WriteEndElement(); // End _commentIds element
 
     }
 }

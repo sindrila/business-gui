@@ -109,11 +109,11 @@ namespace bussiness_social_media.MVVM.Model.Repository
 
         public void UpdateFAQ(int faqID, string newFaqQuestion, string newFaqAnswer)
         {
-            var existingFAQ = _faqs.FirstOrDefault(f => f.Id ==faqID);
+            FAQ existingFAQ = _faqs.FirstOrDefault(f => f.Id ==faqID);
             if (existingFAQ != null)
             {
-                existingFAQ.SetQuestion(newFaqQuestion);
-                existingFAQ.SetAnswer(newFaqAnswer);
+                existingFAQ.Question = newFaqQuestion;
+                existingFAQ.Answer = newFaqAnswer;
                 SaveFAQsToXml();
             }
         }
