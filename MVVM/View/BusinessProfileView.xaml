@@ -11,8 +11,8 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
-    
-        <Grid>
+
+    <Grid>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
@@ -31,6 +31,7 @@
                         Command="{Binding Path=NavigateToContactCommand}"/>
                 <Button Content="About"
                         Height="25"
+
                         Command="{Binding Path=NavigateToAboutCommand}"/>
             </TabPanel>
         <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
@@ -52,7 +53,8 @@
                        VerticalAlignment="Top"
 					   FontSize="30"/>
                     <Button Content="Add post" Width="130"
-                            Visibility="{Binding IsCurrentUserManager, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                            Visibility="{Binding IsCurrentUserManager, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            Command="{Binding Path=NavigateToCreatePostCommand}"
                             HorizontalAlignment="Right"/>
                 </Grid>
                 <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2">

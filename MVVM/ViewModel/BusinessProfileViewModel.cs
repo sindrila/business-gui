@@ -97,6 +97,7 @@ namespace bussiness_social_media.MVVM.ViewModel
         public RelayCommand NavigateToContactCommand { get; set; }
         public RelayCommand NavigateToAboutCommand { get; set; }
         public RelayCommand SendCommentCommand { get; set; }
+        public RelayCommand NavigateToCreatePostCommand { get; set; }
         public BusinessProfileViewModel(INavigationService navigationService, IBusinessService businessService, AuthenticationService authenticationService)
         {
             Navigation = navigationService;
@@ -106,6 +107,7 @@ namespace bussiness_social_media.MVVM.ViewModel
             NavigateToReviewsCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileReviewsViewModel>(); }, o => true);
             NavigateToContactCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileContactViewModel>();  }, o => true);
             NavigateToAboutCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileAboutViewModel>(); }, o => true);
+            NavigateToCreatePostCommand = new RelayCommand(o => { Navigation.NavigateTo<CreatePostViewModel>(); }, o => true);
             //SendCommentCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileAboutViewModel>(); }, o => true);
             //SendCommentCommand = new RelayCommand(o =>
             //{

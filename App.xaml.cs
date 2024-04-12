@@ -73,6 +73,7 @@ namespace bussiness_social_media
             services.AddSingleton<LoginViewModel>();
             services.AddSingleton<AuthenticationService>();
             services.AddSingleton<RegisterViewModel>();
+            services.AddSingleton<CreatePostViewModel>();
 
 
             // Delegation
