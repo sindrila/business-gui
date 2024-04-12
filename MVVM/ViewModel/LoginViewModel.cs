@@ -54,6 +54,7 @@ namespace bussiness_social_media.MVVM.ViewModel
         }
 
         public RelayCommand LogInCommand { get; set; }
+
         private void LogIn()
         {
             if(authenticationService.AuthenticateUser(Username, Password)) {
@@ -67,11 +68,15 @@ namespace bussiness_social_media.MVVM.ViewModel
             }
         }
 
+        public RelayCommand NavigateToRegisterViewCommand { get; set; }
+
         public LoginViewModel(INavigationService navigationService, AuthenticationService authentication)
         {
             NavigationService = navigationService;
             authenticationService = authentication;
             LogInCommand = new RelayCommand(o => { LogIn();  }, o => true);
+            NavigateToRegisterViewCommand = new RelayCommand(o => { NavigationService.NavigateTo<RegisterViewModel>(); }, o => true);
+
 
         }
 
