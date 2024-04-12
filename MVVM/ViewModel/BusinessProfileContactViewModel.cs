@@ -18,6 +18,7 @@ namespace bussiness_social_media.MVVM.ViewModel
 
         public Business _currentBusiness;
         public FAQ _currentFAQ;
+        public FAQ _noFAQ;
 
 
         private bool _isCurrentUserManager;
@@ -101,6 +102,7 @@ namespace bussiness_social_media.MVVM.ViewModel
 
         public RelayCommand FAQCommand { get; set; }
 
+
         public BusinessProfileContactViewModel(INavigationService navigationService, IBusinessService businessService, AuthenticationService authenticationService)
         {
             Navigation = navigationService;
@@ -111,6 +113,8 @@ namespace bussiness_social_media.MVVM.ViewModel
             NavigateToContactCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileContactViewModel>(); }, o => true);
             NavigateToAboutCommand = new RelayCommand(o => { Navigation.NavigateTo<BusinessProfileAboutViewModel>(); }, o => true);
             changeCurrrentBusiness();
+            _noFAQ = new FAQ(0, "FAQs...", "--    --\n    \\__/");
+            _currentFAQ = _noFAQ;
 
             FAQCommand = new RelayCommand(o => {
                 if (o is FAQ faq)
@@ -124,6 +128,7 @@ namespace bussiness_social_media.MVVM.ViewModel
 
         public Business changeCurrrentBusiness()
         {
+            CurrentFAQ = _noFAQ;
             return _businessService.GetBusinessById(_navigation.BusinessId);
         }
 

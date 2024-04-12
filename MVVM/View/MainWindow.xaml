@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:bussiness_social_media"
 
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="700" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
