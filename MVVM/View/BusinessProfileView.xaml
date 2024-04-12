@@ -19,15 +19,11 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <TabPanel Grid.Row="0" AutomationProperties.IsRowHeader="True" AutomationProperties.IsColumnHeader="True">
-                <Label Content="{Binding currentBusiness.Name}" 
-                    HorizontalAlignment="Left" 
-                    VerticalAlignment="Top"
-                    Height="30"/>
-                <Button Content="Posts"
+        <TabPanel Grid.Row="0" AutomationProperties.IsRowHeader="True" AutomationProperties.IsColumnHeader="True">
+            <Button Content="Posts"
                         Height="25"
                         Command="{Binding Path=NavigateToPostsCommand}"/>
-                <Button Content="Reviews"
+            <Button Content="Reviews"
                         Height="25"
                         Command="{Binding Path=NavigateToReviewsCommand}"/>
                 <Button Content="Contact"
@@ -45,7 +41,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="200"/>
                     <RowDefinition Height="100"/>
-                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
                 <Image Grid.Row="0" Source="{Binding CurrentBusiness.Banner}" Stretch="Fill"/>
@@ -54,15 +50,110 @@
                     <Label Content="{Binding CurrentBusiness.Name}"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Top"
-					   FontSize="30"
-		          >
-                    </Label>
-                </Grid>
-                <Grid Grid.Row ="2">
+					   FontSize="30"/>
                     <Button Content="Add post" Width="130"
-                        Visibility="{Binding IsCurrentUserManager, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            Visibility="{Binding IsCurrentUserManager, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                            HorizontalAlignment="Right"/>
                 </Grid>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2">
+                    <ItemsControl ItemsSource="{Binding PostsAndComments}" Margin="0,6,0,0" Grid.RowSpan="3">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Vertical" 
+                                   HorizontalAlignment="Left"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
 
+
+                        <ItemsControl.ItemContainerStyle>
+                            <Style TargetType="{x:Type ContentPresenter}">
+                                <Setter Property="Margin" Value="10"/>
+                            </Style>
+                        </ItemsControl.ItemContainerStyle>
+
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                        <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="25"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="{Binding Post.CreationDate}" FontSize="10" HorizontalAlignment="Right" Grid.Row="0"/>
+                                        <Image Source="{Binding Post.ImagePath}" Grid.Row="1"  MaxHeight="450" Stretch="Fill"/>
+                                        <TextBlock Text="{Binding Post.Caption}" Background="AliceBlue" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Grid.Row="2"/>
+                                        
+                                        <TextBlock Text="Number of likes: " FontSize="10" Padding="0,5,0,0" HorizontalAlignment="Left" Grid.Row="3"/>
+                                        <TextBlock Text="{Binding Post.NumberOfLikes}" Padding="80,5,0,0" FontSize="10" Grid.Row="3"/>
+                                        <Button Content="Like"
+                                                Height="20"
+                                                Margin="0, 5, 0 ,0"
+                                                Width="40"
+                                                VerticalAlignment="Top"
+                                                HorizontalAlignment="Right"
+                                                Grid.Row="3"/>
+                                        <Grid Grid.Row="4">
+                                            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="2">
+                                                <ItemsControl ItemsSource="{Binding Comments}" Margin="0,0,0,0" Grid.RowSpan="2">
+                                                    <ItemsControl.ItemsPanel>
+                                                        <ItemsPanelTemplate>
+                                                            <WrapPanel Orientation="Horizontal" 
+                                                                        HorizontalAlignment="Left"/>
+                                                        </ItemsPanelTemplate>
+                                                    </ItemsControl.ItemsPanel>
+
+
+                                                    <ItemsControl.ItemContainerStyle>
+                                                        <Style TargetType="{x:Type ContentPresenter}">
+                                                            <Setter Property="Margin" Value="10"/>
+                                                        </Style>
+                                                    </ItemsControl.ItemContainerStyle>
+                                                    <ItemsControl.ItemTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel>
+                                                                <Grid Background="AntiqueWhite">
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto"/>
+                                                                        <RowDefinition Height="Auto"/>
+                                                                        <RowDefinition Height="Auto"/>
+                                                                        <RowDefinition Height="Auto"/>
+                                                                        <RowDefinition Height="Auto"/>
+                                                                    </Grid.RowDefinitions>
+                                                                    <TextBlock Text="Comments:" HorizontalAlignment="Left" Grid.Row="0"/>
+                                                                    <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                                                                        <Grid>
+                                                                            <TextBlock Text="{Binding Username}"  FontSize ="12" FontWeight="Bold" HorizontalAlignment="Left"/>
+                                                                            <TextBlock Text="{Binding Content}"  FontSize=" 12" Padding="80,0,0,0"/>
+                                                                        </Grid>
+                                                                    </ScrollViewer>
+                                                                </Grid>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+
+                                                    </ItemsControl.ItemTemplate>
+
+
+                                                </ItemsControl>
+
+
+                                            </ScrollViewer>
+                                            <!--<TextBox x:Name="commentTextBox" Margin="5,0,5,0" 
+                                                                                    Text="Add a comment"/>
+                                            <Button Content="Send Comment" 
+                                                            Command="{Binding SendCommentCommand}"/>-->
+                                        </Grid>
+                                    </Grid>
+
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                </ScrollViewer>
             </Grid>
     </ScrollViewer>
     </Grid>
