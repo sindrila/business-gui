@@ -10,22 +10,16 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="2*"/>
-            </Grid.RowDefinitions>
-            <Grid Grid.RowSpan="2">
+    <Grid >
 
-                <Grid.RowDefinitions>
+        <Grid.RowDefinitions>
                     <RowDefinition Height="25"/>
                     <RowDefinition/>
 
                 </Grid.RowDefinitions>
 
 
-                <TabPanel>
+        <TabPanel Grid.Row="0">
                     <Label Content="{Binding currentBusiness.Name}" 
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Top"
@@ -44,8 +38,10 @@
                         Height="25"
                         Command="{Binding Path=NavigateToAboutCommand}"/>
                 </TabPanel>
-
-                <Grid
+            
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1">
+                <Grid>
+                    <Grid
                      Grid.Row="1">
 
                     <Grid.RowDefinitions>
@@ -66,7 +62,6 @@
                 </Grid>
 
 
-            </Grid>
             <Grid Grid.RowSpan="2">
                 <Label Content="Frequently Asked Questions"
                        Margin="20,300,0,0"
@@ -139,6 +134,8 @@
                         Visibility="{Binding IsCurrentUserManager, Converter={StaticResource BooleanToVisibilityConverter}}" />
             </Grid>
         </Grid>
+                
     </ScrollViewer>
+        </Grid>
 
 </UserControl>

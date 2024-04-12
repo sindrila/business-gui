@@ -13,14 +13,15 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
+    
+    
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="25"/>
 			<RowDefinition/>
 		</Grid.RowDefinitions>
 
-		<TabPanel>
+            <TabPanel Grid.Row="0">
 			<Button Content="Posts"
 					Height="25"
 					Command="{Binding Path=NavigateToPostsCommand}"/>
@@ -34,8 +35,10 @@
                         Height="25"
                         Command="{Binding Path=NavigateToAboutCommand}"/>
 		</TabPanel>
-		
-		<Grid
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto"  Grid.Row="1">
+
+            <Grid
             Grid.Row="1">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="200"/>
@@ -55,33 +58,29 @@
 				</Label>
 			</Grid>
                 <Grid Grid.Row="2" Visibility="{Binding IsCurrentUserManager, Converter={StaticResource BooleanToVisibilityConverter}}">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					
-				</Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
 
-				<Label Grid.Row="0" Content="Rating:" Foreground="Black"/>
-				<TextBox Grid.Row="0" Width="200" Height="20" Text="{Binding Rating, Mode=TwoWay}"/>
+                    </Grid.RowDefinitions>
 
-				<Label Grid.Row="1" Content="Title:" Foreground="Black"/>
-				<TextBox Grid.Row="1" Width="200" Height="20" Text="{Binding Title, Mode=TwoWay}" />
+                    <Label Grid.Row="0" Content="Rating:" Foreground="Black"/>
+                    <TextBox Grid.Row="0" Width="200" Height="20" Text="{Binding Rating, Mode=TwoWay}"/>
 
-				<Label Grid.Row="2" Content="Description:" Foreground="Black"/>
-				<TextBox Grid.Row="2" Width="200" Height="80" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Description, Mode=TwoWay}"/>
-				<Button  Grid.Row="3" Content="Add image" Width="120" Command="{Binding AddImageCommand}"/>
-				<Button Grid.Row="4" Content="Leave Review" Command="{Binding LeaveReviewCommand}"  Height="30" Width="120"/>
-			</Grid>
+                    <Label Grid.Row="1" Content="Title:" Foreground="Black"/>
+                    <TextBox Grid.Row="1" Width="200" Height="20" Text="{Binding Title, Mode=TwoWay}" />
 
-			<Grid Grid.Row="3">
-				
-			</Grid>
-				
-		</Grid>
+                    <Label Grid.Row="2" Content="Description:" Foreground="Black"/>
+                    <TextBox Grid.Row="2" Width="200" Height="80" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Description, Mode=TwoWay}"/>
+                    <Button  Grid.Row="3" Content="Add image" Width="120" Command="{Binding AddImageCommand}"/>
+                    <Button Grid.Row="4" Content="Leave Review" Command="{Binding LeaveReviewCommand}"  Height="30" Width="120"/>
+                </Grid>
 
-	</Grid>
+            </Grid>
+
 	</ScrollViewer>
+    </Grid>
 </UserControl>
