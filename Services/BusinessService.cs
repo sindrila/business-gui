@@ -26,6 +26,9 @@ namespace bussiness_social_media.Services
 
 
         public bool IsUserManagerOfBusiness(int businessId, string username);
+        public void CreateCommentAndAddItToPost(int postId, string username, string content);
+
+        public List<Comment> GetAllCommentsForPost(int postId);
     }
     public class BusinessService : IBusinessService
     {
