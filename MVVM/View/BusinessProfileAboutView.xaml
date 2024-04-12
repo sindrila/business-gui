@@ -34,138 +34,137 @@
 
     </UserControl.Resources>
 
-        <Grid>
+    <Grid>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-            <TabPanel Grid.Row="0">
-                <Label Content="{Binding currentBusiness.Name}"
+        <TabPanel Grid.Row="0">
+            <Label Content="{Binding currentBusiness.Name}"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Height="50"/>
-                <Button Content="Posts"
+            <Button Content="Posts"
                     Height="40"
                     Width="150"
                 Command="{Binding Path=NavigateToPostsCommand}" Margin="-10,0,10,10"/>
-                <Button Content="Reviews"
+            <Button Content="Reviews"
                     Height="40"
                     Width="150"
                 Command="{Binding Path=NavigateToReviewsCommand}" Margin="-10,0,10,10"/>
-                <Button Content="Contact"
+            <Button Content="Contact"
                     Height="40"
                     Width="150"
                 Command="{Binding Path=NavigateToContactCommand}" Margin="-10,0,10,10"/>
-                <Button Content="About"
+            <Button Content="About"
                     Height="40"
                     Width="150"
                     Command="{Binding Path=NavigateToAboutCommand}" Margin="-10,0,10,10"/>
-            </TabPanel>
+        </TabPanel>
 
-            <Grid Grid.Row="1">
+        <Grid Grid.Row="1">
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="200"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-                <Image Grid.Row="0" Source="{Binding CurrentBusiness.Banner}" Stretch="Fill"/>
-                <Image Grid.Row="0" Margin="20,20,0,0" Source="{Binding CurrentBusiness.Logo}" Width="100" Height="100" VerticalAlignment="Top"/>
-                <Grid Grid.Row="1" Margin="20,20,20,20">
-                    <Label Content="{Binding CurrentBusiness.Name}"
+            <Image Grid.Row="0" Source="{Binding CurrentBusiness.Banner}" Stretch="Fill"/>
+            <Image Grid.Row="0" Margin="20,20,0,0" Source="{Binding CurrentBusiness.Logo}" Width="100" Height="100" VerticalAlignment="Top"/>
+            <Grid Grid.Row="1" Margin="20,20,20,20">
+                <Label Content="{Binding CurrentBusiness.Name}"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
 			   FontSize="30"
           >
-                    </Label>
-                </Grid>
+                </Label>
             </Grid>
+        </Grid>
 
-            <Label Content="Phone&#xD;&#xA;" 
+        <Label Content="Phone&#xD;&#xA;" 
 HorizontalAlignment="Left" 
 Margin="100,300,0,0" 
 Grid.Row="1"
 VerticalAlignment="Top"
 FontWeight="Bold" FontSize="16"/>
-            <Label Content="Category&#xD;&#xA;" 
+        <Label Content="Category&#xD;&#xA;" 
 HorizontalAlignment="Left" 
 Margin="100,355,0,0" 
 Grid.Row="1" 
 VerticalAlignment="Top" 
 FontWeight="Bold" 
 FontSize="16"/>
-            <Label Content="Address" 
+        <Label Content="Address" 
 HorizontalAlignment="Left" 
 Margin="100,410,0,0" 
 Grid.Row="1"
 VerticalAlignment="Top" 
 FontWeight="Bold" 
 FontSize="16"/>
-            <Label Content="Email&#xD;&#xA;" 
+        <Label Content="Email&#xD;&#xA;" 
 HorizontalAlignment="Left" 
 Margin="510,300,0,0" 
 Grid.Row="1" 
 VerticalAlignment="Top" 
 FontWeight="Bold" 
 FontSize="16"/>
-            <Label Content="Website" 
+        <Label Content="Website" 
 HorizontalAlignment="Left" 
 Margin="510,355,0,0" 
 Grid.Row="1" 
 VerticalAlignment="Top" 
 FontWeight="Bold" 
 FontSize="16"/>
-            <Label Content="Date of page creation" 
+        <Label Content="Date of page creation" 
 HorizontalAlignment="Left" 
 Margin="510,410,0,0" 
 Grid.Row="1" 
 VerticalAlignment="Top" 
 FontWeight="Bold" 
 FontSize="16"/>
-            <Label Name="PhoneLable" 
+        <Label Name="PhoneLable" 
 Content="{Binding CurrentBusiness.PhoneNumber}" 
 HorizontalAlignment="Left" 
 Margin="100,325,0,0" 
 Grid.Row="1" 
 VerticalAlignment="Top"/>
-            <Label Name="CategoryLable" 
+        <Label Name="CategoryLable" 
 Content="{Binding CurrentBusiness.Category}" 
 HorizontalAlignment="Left" 
 Margin="100,380,0,0" 
 Grid.Row="1" 
 VerticalAlignment="Top"/>
-            <Label Name="AddressLable" 
+        <Label Name="AddressLable" 
 Content="{Binding CurrentBusiness.Address}" 
 HorizontalAlignment="Left" 
 Margin="100,435,0,0" 
 Grid.Row="1" 
 VerticalAlignment="Top"/>
-            <Label Name="EmailLable" 
+        <Label Name="EmailLable" 
 Content="{Binding CurrentBusiness.Email}" 
 HorizontalAlignment="Left" 
 Margin="510,325,0,0" 
 Grid.Row="1"
 VerticalAlignment="Top"/>
-            <Label Name="WebsiteLable" 
+        <Label Name="WebsiteLable" 
 Content="{Binding CurrentBusiness.Website}" 
 HorizontalAlignment="Left" 
 Margin="510,380,0,0" 
 Grid.Row="1"
 VerticalAlignment="Top"/>
-            <Label Name="CreationDateLable" 
+        <Label Name="CreationDateLable" 
 Content="{Binding CurrentBusiness.CreatedAt}" 
 HorizontalAlignment="Left" 
 Margin="510,435,0,0" 
 Grid.Row="1" 
 VerticalAlignment="Top"/>
-            <Grid Grid.Row="2">
-                <Button Content="Update business information" Height="80" Width="200"
+        <Grid Grid.Row="2">
+            <Button Content="Update business information" Height="80" Width="200"
  Visibility="{Binding IsCurrentUserManager, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            </Grid>
         </Grid>
-    </ScrollViewer>
+    </Grid>
 </UserControl>

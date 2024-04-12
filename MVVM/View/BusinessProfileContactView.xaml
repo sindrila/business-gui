@@ -10,25 +10,25 @@
     <UserControl.Resources>
         <!-- Style for Label -->
         <Style TargetType="Label">
-          <Setter Property="Foreground" Value="White"/>
-          <Setter Property="Margin" Value="0,10,0,0"/>
-          <Setter Property="VerticalAlignment" Value="Center"/>
-          <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
         </Style>
 
         <!-- Style for TextBox -->
         <Style TargetType="TextBox">
-          <Setter Property="Width" Value="200"/>
-          <Setter Property="Height" Value="20"/>
-          <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
         </Style>
 
         <!-- Style for Button -->
         <Style TargetType="Button">
-          <Setter Property="Height" Value="20"/>
-          <Setter Property="Margin" Value="0,10,0,0"/>
-          <Setter Property="Background" Value="#65B1C1"/>
-          <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+            <Setter Property="Background" Value="#65B1C1"/>
+            <Setter Property="Foreground" Value="White"/>
         </Style>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
@@ -78,89 +78,87 @@
                     <Image Grid.Row="0" Margin="20,20,0,0" Source="{Binding CurrentBusiness.Logo}" Width="100" Height="100" VerticalAlignment="Top"/>
                     <Grid Grid.Row="1" Margin="20,20,20,20">
                         <Label Content="{Binding CurrentBusiness.Name}"
-               HorizontalAlignment="Left"
-               VerticalAlignment="Top"
-			   FontSize="30"
-          >
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+			                   FontSize="30">
                         </Label>
                     </Grid>
+
+                    <Label Content="Frequently Asked Questions"
+                        Margin="20,300,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+		                FontSize="20"
+>
+                    </Label>
                 </Grid>
 
 
-            <Grid Grid.RowSpan="2">
-                <Label Content="Frequently Asked Questions"
+                <Grid Grid.RowSpan="2">
+                    <Label Content="Frequently Asked Questions"
                        Margin="20,300,0,0"
      HorizontalAlignment="Left"
      VerticalAlignment="Top"
 		   FontSize="20"
 >
-                </Label>
-                <Grid Margin="30,340,0,0" Height="200" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    </Label>
+                    <Grid Margin="30,340,0,0" Height="200" HorizontalAlignment="Left" VerticalAlignment="Top">
 
-                    <ItemsControl ItemsSource="{Binding FAQs}" Margin="0,20,0,20" Width="180" Grid.ColumnSpan="3" HorizontalAlignment="Left" Panel.ZIndex="10">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Margin="0,20,0,0">
-                                    <Button Height="20"
+                        <ItemsControl ItemsSource="{Binding FAQs}" Margin="0,20,0,20" Width="180" Grid.ColumnSpan="3" HorizontalAlignment="Left" Panel.ZIndex="10">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,20,0,0">
+                                        <Button Height="20"
                                     Command="{Binding DataContext.FAQCommand, 
                                       RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
                                    CommandParameter="{Binding}"
                                     Content ="{Binding Question}">
 
-                                    </Button>
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                    <Label Content="{Binding CurrentFAQ.Question}" Margin="200,0,0,0" FontSize="14" FontWeight="Bold"></Label>
-                    <Border BorderBrush="#FFC5C5C5" BorderThickness="1" CornerRadius="10" Background="#FFC5C5C5" Margin="200,30,0,0" Width="200">
-                        <Label Content="{Binding CurrentFAQ.Answer}" Margin="10,20,10,10" VerticalAlignment="Top" HorizontalAlignment="Center"></Label>
-                    </Border>
+                                        </Button>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <Label Content="{Binding CurrentFAQ.Question}" Margin="200,0,0,0" FontSize="14" FontWeight="Bold"></Label>
+                        <Border BorderBrush="#FFC5C5C5" BorderThickness="1" CornerRadius="10" Background="#FFC5C5C5" Margin="200,30,0,0" Width="200">
+                            <Label Content="{Binding CurrentFAQ.Answer}" Margin="10,20,10,10" VerticalAlignment="Top" HorizontalAlignment="Center"></Label>
+                        </Border>
+
+                    </Grid>
+                </Grid>
+                <Grid Grid.RowSpan="2" >
+
 
                 </Grid>
-            </Grid>
-            <Grid Grid.RowSpan="2" >
-
-                <Label Content="Frequently Asked Questions"
-                       Margin="20,300,0,0"
-     HorizontalAlignment="Left"
-     VerticalAlignment="Top"
-		   FontSize="20"
->
-                </Label>
-
-            </Grid>
-            <Grid Margin="442,300,41,0" Width="300" Height="300" Grid.RowSpan="2">
-                <Border BorderBrush="#65B1C1" BorderThickness="1" CornerRadius="10" Background="#65B1C1">
-                    <StackPanel Orientation="Vertical">
-                        <Label Content="Contact information"
+                <Grid Margin="442,300,41,0" Width="300" Height="300" Grid.RowSpan="2">
+                    <Border BorderBrush="#65B1C1" BorderThickness="1" CornerRadius="10" Background="#65B1C1">
+                        <StackPanel Orientation="Vertical">
+                            <Label Content="Contact information"
                              Margin="20,0,0,0"
                              HorizontalAlignment="Left"
                              VerticalAlignment="Top"
 		                           FontSize="20" Foreground="White">
-                        </Label>
-                        <Label Content="{Binding CurrentBusiness.PhoneNumber}"
+                            </Label>
+                            <Label Content="{Binding CurrentBusiness.PhoneNumber}"
                             Margin="20,0,0,0"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                                 FontSize="14" Foreground="White">
-                        </Label>
-                        <Label Content="{Binding CurrentBusiness.Email}"
+                            </Label>
+                            <Label Content="{Binding CurrentBusiness.Email}"
                              Margin="20,0,0,0"
                              HorizontalAlignment="Left"
                              VerticalAlignment="Top"
                                    FontSize="14" Foreground="White">
-                        </Label>
-                    </StackPanel>
-                </Border>
-            </Grid>
-            <Grid Grid.RowSpan="2">
-                <Button VerticalAlignment="Bottom" Content="Add a new FAQ" Height="80" Width="200"
+                            </Label>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+                <Grid Grid.RowSpan="2">
+                    <Button VerticalAlignment="Bottom" Content="Add a new FAQ" Height="80" Width="200"
                         Visibility="{Binding IsCurrentUserManager, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                </Grid>
             </Grid>
         </Grid>
-                
     </ScrollViewer>
-        </Grid>
-
 </UserControl>
