@@ -12,32 +12,32 @@
              >
 
     <UserControl.Resources>
-      <!-- Style for Label -->
-      <Style TargetType="Label">
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="Margin" Value="0,10,0,0"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-      </Style>
+        <!-- Style for Label -->
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
 
-      <!-- Style for TextBox -->
-      <Style TargetType="TextBox">
-        <Setter Property="Width" Value="200"/>
-        <Setter Property="Height" Value="20"/>
-        <Setter Property="Margin" Value="0,0,0,10"/>
-      </Style>
+        <!-- Style for TextBox -->
+        <Style TargetType="TextBox">
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+        </Style>
 
-      <!-- Style for Button -->
-      <Style TargetType="Button">
-        <Setter Property="Height" Value="20"/>
-        <Setter Property="Margin" Value="0,10,0,0"/>
-        <Setter Property="Background" Value="#65B1C1"/>
-        <Setter Property="Foreground" Value="White"/>
-      </Style>
-      <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <!-- Style for Button -->
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+            <Setter Property="Background" Value="#65B1C1"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-	<Grid>
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -68,53 +68,66 @@
             </TabPanel>
 
 
-            <Grid
-            Grid.Row="1">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="200"/>
-				<RowDefinition Height="100"/>
-				<RowDefinition Height="500"/>
-				<RowDefinition Height="500"/>
-			</Grid.RowDefinitions>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-			<Image Grid.Row="0" Source="{Binding CurrentBusiness.Banner}" Stretch="Fill"/>
-			<Image Grid.Row="0" Margin="20,20,0,0" Source="{Binding CurrentBusiness.Logo}" Width="100" Height="100" VerticalAlignment="Top"/>
-			<Grid Grid.Row="1" Margin="20,20,20,20">
-				<Label Content="{Binding CurrentBusiness.Name}"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-					   FontSize="30"
-		          >
-				</Label>
-			</Grid>
-                <Grid Grid.Row="2" Visibility="{Binding IsCurrentUserManager, Converter={StaticResource BooleanToVisibilityConverter}}">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					
-				</Grid.RowDefinitions>
+                <!-- Business Banner and Logo -->
+                <Image Grid.Row="0" Source="{Binding CurrentBusiness.Banner}" Stretch="Fill"/>
+                <Image Grid.Row="0" Margin="20,20,0,0" Source="{Binding CurrentBusiness.Logo}" Width="100" Height="100" VerticalAlignment="Top"/>
 
-				<Label Grid.Row="0" Content="Rating:" Foreground="Black"/>
-				<TextBox Grid.Row="0" Width="200" Height="20" Text="{Binding Rating, Mode=TwoWay}"/>
+                <!-- Business Name -->
+                <Grid Grid.Row="1" Margin="20,20,20,20">
+                    <Label Content="{Binding CurrentBusiness.Name}" FontSize="30"/>
+                </Grid>
 
-				<Label Grid.Row="1" Content="Title:" Foreground="Black"/>
-				<TextBox Grid.Row="1" Width="200" Height="20" Text="{Binding Title, Mode=TwoWay}" />
+                <!-- Review Entry Section -->
+                <Grid Grid.Row="2" Visibility="{Binding IsCurrentUserManager, Converter={StaticResource BooleanToVisibilityConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-				<Label Grid.Row="2" Content="Description:" Foreground="Black"/>
-				<TextBox Grid.Row="2" Width="200" Height="80" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Description, Mode=TwoWay}"/>
-				<Button  Grid.Row="3" Content="Add image" Width="120" Command="{Binding AddImageCommand}"/>
-				<Button Grid.Row="4" Content="Leave Review" Command="{Binding LeaveReviewCommand}"  Height="30" Width="120"/>
-			</Grid>
+                    <!-- Rating -->
+                    <Label Grid.Row="0" Content="Rating:" Foreground="White" Margin="0,0,0,50"/>
+                    <ComboBox Grid.Row="0" Width="200" Height="20" SelectedValue="{Binding Rating, Mode=TwoWay}">
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="2"/>
+                        <ComboBoxItem Content="3"/>
+                        <ComboBoxItem Content="4"/>
+                        <ComboBoxItem Content="5"/>
+                    </ComboBox>
 
-			<Grid Grid.Row="3">
-				
-			</Grid>
-				
-		</Grid>
+                    <!-- Title -->
+                    <Label Grid.Row="1" Content="Title:" Foreground="White" Margin="0,0,0,50"/>
+                    <TextBox Grid.Row="1" Width="200" Height="20" Text="{Binding Title, Mode=TwoWay}" />
 
-	</Grid>
-	</ScrollViewer>
+                    <!-- Description -->
+                    <Label Grid.Row="2" Content="Description:" Foreground="White" VerticalAlignment="Top" Margin="0,0,0,120"/>
+                    <TextBox Grid.Row="2" Width="200" Height="80" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding Description, Mode=TwoWay}"/>
+
+                    <!-- Add Image Button -->
+                    <Button Grid.Row="3" Content="Add Image" Width="120" Command="{Binding AddImageCommand}"/>
+
+                    <!-- Leave Review Button -->
+                    <Button Grid.Row="4" Content="Leave Review" Command="{Binding LeaveReviewCommand}" Height="30" Width="120"/>
+                </Grid>
+
+                <!-- Placeholder Grid for Future Content -->
+                <Grid Grid.Row="3">
+                    <!-- Add your content here -->
+                </Grid>
+            </Grid>
+
+
+        </Grid>
+    </ScrollViewer>
 </UserControl>

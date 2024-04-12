@@ -34,7 +34,7 @@
     </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid>
-        <Grid>
+            <Grid>
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -69,45 +69,30 @@
                 <Grid
                      Grid.Row="1">
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="200"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="200"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                <Image Grid.Row="0" Source="{Binding CurrentBusiness.Banner}" Stretch="Fill"/>
-                <Image Grid.Row="0" Margin="20,20,0,0" Source="{Binding CurrentBusiness.Logo}" Width="100" Height="100" VerticalAlignment="Top"/>
-                <Grid Grid.Row="1" Margin="20,20,20,20">
-                    <Label Content="{Binding CurrentBusiness.Name}"
+                    <Image Grid.Row="0" Source="{Binding CurrentBusiness.Banner}" Stretch="Fill"/>
+                    <Image Grid.Row="0" Margin="20,20,0,0" Source="{Binding CurrentBusiness.Logo}" Width="100" Height="100" VerticalAlignment="Top"/>
+                    <Grid Grid.Row="1" Margin="20,20,20,20">
+                        <Label Content="{Binding CurrentBusiness.Name}"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
 			   FontSize="30"
           >
-                    </Label>
+                        </Label>
+                        <Label Content="Frequently Asked Questions"
+                            Margin="20,100,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+		                    FontSize="26">
+                        </Label>
+                    </Grid>
                 </Grid>
-            </Grid>
-                
 
-            </Grid>
-            <Grid>
-                <Label Content="Frequently Asked Questions"
-                       Margin="20,300,0,0"
-     HorizontalAlignment="Left"
-     VerticalAlignment="Top"
-		   FontSize="20"
->
-                </Label>
-                
-            </Grid>
-            <Grid >
-               
-                <Label Content="Frequently Asked Questions"
-                       Margin="20,300,0,0"
-     HorizontalAlignment="Left"
-     VerticalAlignment="Top"
-		   FontSize="20"
->
-                </Label>
-            
+
             </Grid>
             <Grid Margin="400,300,0,0" Width="300" Height="300">
                 <Border BorderBrush="#65B1C1" BorderThickness="1" CornerRadius="10" Background="#65B1C1">
